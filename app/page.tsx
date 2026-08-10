@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import ContactForm from "@/components/ContactForm";
 import { site } from "@/lib/site";
 import {
@@ -98,13 +101,26 @@ const services = [
     title: "Tarot Reading",
     hindi: "टैरो कार्ड रीडिंग",
     text: "Special Tarot card reading for personal guidance.",
-  }
+  },
+  {
+    no: "12",
+    icon: "☤",
+    title: "Medical Astrology",
+    hindi: "चिकित्सा ज्योतिष",
+    text: "Traditional astrological guidance concerning wellbeing and health-related planetary influences.",
+  },
 ];
 
 export default function Home() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   const whatsappUrl =
     `https://wa.me/${site.whatsapp}?text=` +
     encodeURIComponent(site.whatsappMessage);
+
+  const closeMobileMenu = () => {
+    setMobileOpen(false);
+  };
 
   return (
     <main
@@ -114,7 +130,13 @@ export default function Home() {
 
       <nav className="astro-nav">
         <div className="nav-inner">
-          <a href="#" className="brand">
+          {/* BRAND */}
+
+          <a
+            href="#top"
+            className="brand"
+            onClick={closeMobileMenu}
+          >
             <span className="brand-symbol">✦</span>
 
             <span>
@@ -123,26 +145,92 @@ export default function Home() {
             </span>
           </a>
 
+          {/* DESKTOP NAV */}
+
           <div className="nav-links">
             <a href="#services">Services</a>
             <a href="#about">Our Philosophy</a>
             <a href="#contact">Consultation</a>
           </div>
 
+          {/* NAV ACTIONS */}
+
+          <div className="nav-actions">
+            {/* MOBILE MENU BUTTON */}
+
+            <button
+              type="button"
+              className="mobile-menu-button"
+              aria-label={
+                mobileOpen
+                  ? "Close navigation menu"
+                  : "Open navigation menu"
+              }
+              aria-expanded={mobileOpen}
+              onClick={() =>
+                setMobileOpen((current) => !current)
+              }
+            >
+              <span>MENU</span>
+
+              <span
+                className={`menu-icon ${
+                  mobileOpen ? "menu-open" : ""
+                }`}
+                aria-hidden="true"
+              >
+                <i />
+                <i />
+                <i />
+              </span>
+            </button>
+
+            {/* WHATSAPP */}
+
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-cta"
+            >
+              WhatsApp <span>↗</span>
+            </a>
+          </div>
+        </div>
+
+        {/* MOBILE NAVIGATION */}
+
+        <div
+          className={`mobile-nav ${
+            mobileOpen ? "mobile-nav-open" : ""
+          }`}
+        >
           <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="nav-cta"
+            href="#services"
+            onClick={closeMobileMenu}
           >
-            WhatsApp <span>↗</span>
+            Services
+          </a>
+
+          <a
+            href="#about"
+            onClick={closeMobileMenu}
+          >
+            Our Philosophy
+          </a>
+
+          <a
+            href="#contact"
+            onClick={closeMobileMenu}
+          >
+            Consultation
           </a>
         </div>
       </nav>
 
       {/* ================= HERO ================= */}
 
-      <section className="hero">
+      <section id="top" className="hero">
         <div className="hero-stars">
           <span>✦</span>
           <span>·</span>
@@ -191,7 +279,10 @@ export default function Home() {
           </p>
 
           <div className="hero-actions">
-            <a href="#contact" className="gold-button">
+            <a
+              href="#contact"
+              className="gold-button"
+            >
               Begin Your Consultation
               <span>→</span>
             </a>
@@ -229,7 +320,7 @@ export default function Home() {
         </div>
 
         <div className="hero-bottom">
-          <span>SCROLL TO EXPLORE</span>
+          <span>EXPLORE</span>
           <div className="scroll-line" />
         </div>
       </section>
@@ -241,7 +332,9 @@ export default function Home() {
 
         <div className="intro-grid">
           <div>
-            <p className="section-label">THE JOURNEY</p>
+            <p className="section-label">
+              THE JOURNEY
+            </p>
 
             <h2>
               Ancient wisdom.
@@ -265,7 +358,10 @@ export default function Home() {
               the journey you are about to undertake.
             </p>
 
-            <a href="#contact" className="text-link">
+            <a
+              href="#contact"
+              className="text-link"
+            >
               Start your journey <span>↗</span>
             </a>
           </div>
@@ -274,10 +370,15 @@ export default function Home() {
 
       {/* ================= SERVICES ================= */}
 
-      <section id="services" className="services-section">
+      <section
+        id="services"
+        className="services-section"
+      >
         <div className="services-heading">
           <div>
-            <p className="section-label">WHAT WE OFFER</p>
+            <p className="section-label">
+              WHAT WE OFFER
+            </p>
 
             <h2>
               Guidance for
@@ -298,7 +399,9 @@ export default function Home() {
             <article
               key={service.no}
               className={`service-card ${
-                index === 0 ? "featured-service" : ""
+                index === 0
+                  ? "featured-service"
+                  : ""
               }`}
             >
               <div className="service-top">
@@ -321,7 +424,9 @@ export default function Home() {
                 <small>{service.text}</small>
               </div>
 
-              <span className="service-arrow">↗</span>
+              <span className="service-arrow">
+                ↗
+              </span>
             </article>
           ))}
         </div>
@@ -329,7 +434,10 @@ export default function Home() {
 
       {/* ================= PHILOSOPHY ================= */}
 
-      <section id="about" className="philosophy">
+      <section
+        id="about"
+        className="philosophy"
+      >
         <div className="philosophy-pattern" />
 
         <div className="philosophy-inner">
@@ -380,7 +488,10 @@ export default function Home() {
 
       {/* ================= CONSULTATION ================= */}
 
-      <section id="contact" className="contact-section">
+      <section
+        id="contact"
+        className="contact-section"
+      >
         <div className="contact-heading">
           <p className="section-label">
             YOUR NEXT CHAPTER
@@ -400,7 +511,9 @@ export default function Home() {
 
         <div className="contact-box">
           <div className="contact-side">
-            <span className="contact-symbol">✦</span>
+            <span className="contact-symbol">
+              ✦
+            </span>
 
             <p className="section-label gold">
               CONSULTATION
@@ -419,6 +532,7 @@ export default function Home() {
             <div className="contact-details">
               <div>
                 <span>CALL</span>
+
                 <a href={`tel:${site.phone}`}>
                   {site.phone}
                 </a>
@@ -426,6 +540,7 @@ export default function Home() {
 
               <div>
                 <span>HOURS</span>
+
                 <strong>{site.timings}</strong>
               </div>
             </div>
@@ -466,8 +581,12 @@ export default function Home() {
 
           <div className="footer-links">
             <a href="#services">Services</a>
+
             <a href="#about">Philosophy</a>
-            <a href="#contact">Consultation</a>
+
+            <a href="#contact">
+              Consultation
+            </a>
           </div>
 
           <a
@@ -480,15 +599,17 @@ export default function Home() {
 
         <div className="footer-bottom">
           <span>
-            © {new Date().getFullYear()} Shree Nakshatralok
-            Jyotish Sansthan
+            © {new Date().getFullYear()} Shree
+            Nakshatralok Jyotish Sansthan
           </span>
 
-          <span>सत्य · सेवा · विश्वास</span>
+          <span>
+            सत्य · सेवा · विश्वास
+          </span>
         </div>
       </footer>
 
-      {/* FLOATING WHATSAPP */}
+      {/* ================= FLOATING WHATSAPP ================= */}
 
       <a
         href={whatsappUrl}

@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
 :root {
   --wine: #350907;
   --wine-2: #4d0d09;
@@ -1144,4 +1155,361 @@ a {
     right: 17px;
     bottom: 17px;
   }
+  
+}
+/* =========================================
+   PREMIUM POLISH
+========================================= */
+
+@keyframes orbitSlow {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes orbitReverse {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+@keyframes mandalaSlow {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes starPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.35);
+  }
+}
+
+.orbit-one {
+  animation: orbitSlow 80s linear infinite;
+}
+
+.orbit-two {
+  animation: orbitReverse 110s linear infinite;
+}
+
+.orbit-three {
+  animation: orbitSlow 140s linear infinite;
+}
+
+.hero-mandala {
+  animation: mandalaSlow 100s linear infinite;
+}
+
+.hero-stars span:nth-child(odd) {
+  animation: starPulse 4s ease-in-out infinite;
+}
+
+.hero-stars span:nth-child(even) {
+  animation: starPulse 5s ease-in-out infinite;
+}
+
+/* Premium navigation */
+
+.astro-nav {
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 2, 1, 0.55),
+    transparent
+  );
+}
+
+.nav-inner {
+  backdrop-filter: blur(2px);
+}
+
+/* Better buttons */
+
+.gold-button {
+  box-shadow:
+    0 8px 25px rgba(229, 198, 125, 0.08),
+    inset 0 1px rgba(255, 255, 255, 0.25);
+}
+
+.gold-button:hover {
+  transform: translateY(-3px) scale(1.015);
+  box-shadow:
+    0 15px 40px rgba(229, 198, 125, 0.2),
+    inset 0 1px rgba(255, 255, 255, 0.3);
+}
+
+.outline-button:hover {
+  transform: translateY(-2px);
+}
+
+/* Service card refinement */
+
+.service-card {
+  isolation: isolate;
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(199, 154, 69, 0.12),
+      transparent 35%
+    );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+.service-line {
+  transition: width 0.4s ease;
+}
+
+.service-card:hover .service-line {
+  width: 55px;
+}
+
+/* Featured card gets a subtle inner highlight */
+
+.featured-service::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(229, 198, 125, 0.12);
+}
+
+/* Philosophy */
+
+.big-mandala {
+  box-shadow:
+    0 0 80px rgba(199, 154, 69, 0.04),
+    inset 0 0 60px rgba(199, 154, 69, 0.025);
+}
+
+/* Contact section */
+
+.contact-box {
+  border: 1px solid rgba(199, 154, 69, 0.12);
+}
+
+.contact-form-wrap {
+  position: relative;
+}
+
+.contact-form-wrap::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(199, 154, 69, 0.25),
+    transparent
+  );
+}
+
+/* WhatsApp */
+
+.floating-whatsapp {
+  animation: whatsappGlow 3.5s ease-in-out infinite;
+}
+
+@keyframes whatsappGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 12px 30px rgba(0, 0, 0, 0.25),
+      0 0 0 rgba(23, 107, 58, 0);
+  }
+
+  50% {
+    box-shadow:
+      0 12px 30px rgba(0, 0, 0, 0.25),
+      0 0 22px rgba(23, 107, 58, 0.28);
+  }
+}
+
+/* Better keyboard accessibility */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}
+
+/* Respect users who disable animation */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================
+   MOBILE NAVIGATION
+========================================= */
+
+.mobile-menu-button {
+  display: none;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid rgba(229, 198, 125, 0.25);
+  border-radius: 999px;
+  padding: 9px 13px;
+  background: rgba(53, 9, 7, 0.45);
+  color: var(--gold-light);
+  font-family: var(--font-cinzel);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.mobile-menu-button:hover {
+  background: rgba(199, 154, 69, 0.12);
+  border-color: rgba(229, 198, 125, 0.5);
+}
+
+.mobile-menu-button:active {
+  transform: scale(0.96);
+}
+
+.menu-icon {
+  display: flex;
+  width: 16px;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.menu-icon i {
+  display: block;
+  width: 16px;
+  height: 1px;
+  background: var(--gold-light);
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.menu-open i:nth-child(1) {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.menu-open i:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-open i:nth-child(3) {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+.mobile-nav {
+  display: none;
+}
+
+@media (max-width: 900px) {
+
+  .mobile-menu-button {
+    display: inline-flex;
+  }
+
+  .mobile-nav {
+    display: flex;
+    max-height: 0;
+    overflow: hidden;
+    flex-direction: column;
+    border-top: 1px solid transparent;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(53, 9, 7, 0.98),
+        rgba(35, 5, 4, 0.98)
+      );
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      max-height 0.35s ease,
+      opacity 0.25s ease,
+      transform 0.35s ease,
+      border-color 0.35s ease;
+  }
+
+  .mobile-nav-open {
+    max-height: 320px;
+    border-top-color: rgba(229, 198, 125, 0.12);
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-nav a {
+    padding: 17px 24px;
+    border-bottom: 1px solid rgba(229, 198, 125, 0.08);
+    color: rgba(255, 255, 255, 0.82);
+    font-family: var(--font-cinzel);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition:
+      color 0.25s ease,
+      background 0.25s ease,
+      padding-left 0.25s ease;
+  }
+
+  .mobile-nav a:hover {
+    padding-left: 30px;
+    background: rgba(199, 154, 69, 0.07);
+    color: var(--gold-light);
+  }
+
+}
+
+@media (max-width: 560px) {
+
+  .nav-whatsapp {
+    display: none;
+  }
+
+  .mobile-menu-button {
+    padding: 9px 12px;
+  }
+
 }
