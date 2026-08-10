@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✦ Shree Nakshatralok Jyotish Sansthan
 
-## Getting Started
+<p align="center">
+  <strong>श्री नक्षत्रलोक ज्योतिष संस्थान</strong>
+</p>
 
-First, run the development server:
+<p align="center">
+  सत्य · सेवा · विश्वास
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<p align="center">
+  A modern astrology consultation platform with a secure admin dashboard,
+  consultation management, email notifications, and MongoDB persistence.
+</p>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<p align="center">
+  <a href="#-features">Features</a> •
+  <a href="#-tech-stack">Tech Stack</a> •
+  <a href="#-project-structure">Structure</a> •
+  <a href="#-getting-started">Getting Started</a> •
+  <a href="#-environment-variables">Environment</a> •
+  <a href="#-deployment">Deployment</a>
+</p>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Overview
 
-## Learn More
+**Shree Nakshatralok Jyotish Sansthan** is a full-stack astrology consultation website designed to provide a polished digital presence while making consultation management simple for the astrologer.
 
-To learn more about Next.js, take a look at the following resources:
+Visitors can explore astrology services and submit their birth details and questions through the website.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Every consultation request is:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Stored securely in MongoDB
+- Forwarded to the client's email
+- Available inside a protected admin dashboard
+- Searchable and manageable
+- Assignable with a consultation status
+- Exportable as CSV
 
-## Deploy on Vercel
+The project is built with a modern **Next.js App Router architecture** and designed for deployment on **Vercel**.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🌙 What The Website Offers
+
+### Public Website
+
+Visitors can explore:
+
+- 🔮 Vedic Astrology Consultation
+- 📜 Birth Chart / Janam Kundali
+- 💍 Marriage Matching / Kundali Milan
+- 🪔 Naming Ceremony & Muhurat
+- 🪐 Graha Dosh Remedies
+- 🏡 Vastu Consultation
+- 💎 Gemstone Consultation
+- 🎓 Career, Education & Business Guidance
+- ❤️ Family & Marital Counseling
+- 🌐 Online & Offline Consultation
+- 🃏 Tarot Card Reading
+
+### Consultation Form
+
+Visitors can submit:
+
+| Field | Description |
+|---|---|
+| Name | Visitor's name |
+| Date of Birth | Birth date |
+| Time of Birth | Birth time |
+| Address | Location/address |
+| Question | Consultation query |
+
+---
+
+# 🛡️ Admin Dashboard
+
+A private dashboard allows the astrologer to manage incoming consultations.
+
+### Dashboard Features
+
+- 📊 Total consultation statistics
+- 📅 Today's requests
+- 🗓️ Weekly request count
+- 🆕 New requests
+- 📞 Contacted requests
+- ✅ Completed consultations
+- 🔎 Search and filtering
+- 🗑️ Delete submissions
+- 📥 CSV export
+- 🔄 Persistent consultation status
+
+### Consultation Status
+
+Each request can move through:
+
+```text
+NEW
+  ↓
+CONTACTED
+  ↓
+COMPLETED
