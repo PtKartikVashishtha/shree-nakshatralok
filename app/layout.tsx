@@ -84,6 +84,11 @@ export const metadata: Metadata = {
     },
   },
 
+  verification: {
+    google:
+      "pERzjxk8Qjby2pR-AaIIGtJc7uPreDk3vDEkDDdLMMA",
+  },
+
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
@@ -92,10 +97,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-
-    url:
-      "https://shree-nakshatralok.vercel.app",
-
+    url: "https://shree-nakshatralok.vercel.app",
     siteName:
       "Shree Nakshatralok Jyotish Sansthan",
 
