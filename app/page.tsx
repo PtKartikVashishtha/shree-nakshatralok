@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import ContactForm from "@/components/ContactForm";
+import AstrologerSection from "@/components/AstrologerSection";
 import { site } from "@/lib/site";
 import {
   Cinzel,
@@ -126,10 +127,13 @@ export default function Home() {
     <main
       className={`${cinzel.variable} ${cormorant.variable} ${inter.variable} astro-page`}
     >
-      {/* ================= NAVBAR ================= */}
+      {/* =====================================================
+          NAVIGATION
+      ===================================================== */}
 
       <nav className="astro-nav">
         <div className="nav-inner">
+
           {/* BRAND */}
 
           <a
@@ -148,15 +152,29 @@ export default function Home() {
           {/* DESKTOP NAV */}
 
           <div className="nav-links">
+            <a href="#astrologer">Astrologer</a>
             <a href="#services">Services</a>
-            <a href="#about">Our Philosophy</a>
+            <a href="#about">Philosophy</a>
             <a href="#contact">Consultation</a>
           </div>
 
           {/* NAV ACTIONS */}
 
           <div className="nav-actions">
-            {/* MOBILE MENU BUTTON */}
+
+            {/* WHATSAPP */}
+
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-cta"
+            >
+              WhatsApp
+              <span>↗</span>
+            </a>
+
+            {/* MOBILE MENU */}
 
             <button
               type="button"
@@ -184,17 +202,6 @@ export default function Home() {
                 <i />
               </span>
             </button>
-
-            {/* WHATSAPP */}
-
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="nav-cta"
-            >
-              WhatsApp <span>↗</span>
-            </a>
           </div>
         </div>
 
@@ -206,6 +213,13 @@ export default function Home() {
           }`}
         >
           <a
+            href="#astrologer"
+            onClick={closeMobileMenu}
+          >
+            Astrologer
+          </a>
+
+          <a
             href="#services"
             onClick={closeMobileMenu}
           >
@@ -216,7 +230,7 @@ export default function Home() {
             href="#about"
             onClick={closeMobileMenu}
           >
-            Our Philosophy
+            Philosophy
           </a>
 
           <a
@@ -228,9 +242,12 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* ================= HERO ================= */}
+      {/* =====================================================
+          HERO
+      ===================================================== */}
 
       <section id="top" className="hero">
+
         <div className="hero-stars">
           <span>✦</span>
           <span>·</span>
@@ -252,10 +269,14 @@ export default function Home() {
           <div className="mandala-ring ring-a" />
           <div className="mandala-ring ring-b" />
           <div className="mandala-ring ring-c" />
-          <div className="mandala-center">ॐ</div>
+
+          <div className="mandala-center">
+            ॐ
+          </div>
         </div>
 
         <div className="hero-content">
+
           <div className="eyebrow">
             <span />
             वैदिक ज्योतिष परामर्श
@@ -266,19 +287,28 @@ export default function Home() {
             SHREE NAKSHATRALOK
           </p>
 
-          <h1>
-            Read the wisdom
-            <br />
-            <em>written in your stars.</em>
+          <h1 className="hero-name">
+            Shri Radhey Shyam Sharma Ji
           </h1>
 
-          <p className="hero-hindi">
-            आपकी जन्म कुंडली में छिपी संभावनाओं,
-            प्रश्नों और जीवन के महत्वपूर्ण पड़ावों
-            को समझने की एक व्यक्तिगत यात्रा।
+          <p className="hero-name-hindi">
+            श्री राधे श्याम शर्मा जी
+          </p>
+
+          <div className="hero-experience">
+            <span>55+ Years</span>
+
+            <i />
+
+            <span>Vedic Astrology</span>
+          </div>
+
+          <p className="hero-short-intro">
+            Traditional Jyotish guidance for life's important questions.
           </p>
 
           <div className="hero-actions">
+
             <a
               href="#contact"
               className="gold-button"
@@ -295,9 +325,11 @@ export default function Home() {
             >
               Chat on WhatsApp
             </a>
+
           </div>
 
           <div className="hero-meta">
+
             <div>
               <strong>सत्य</strong>
               <span>Truth</span>
@@ -316,6 +348,7 @@ export default function Home() {
               <strong>विश्वास</strong>
               <span>Trust</span>
             </div>
+
           </div>
         </div>
 
@@ -325,12 +358,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= INTRO ================= */}
+      {/* =====================================================
+          INTRO
+      ===================================================== */}
 
       <section className="intro-section">
+
         <div className="section-glow" />
 
         <div className="intro-grid">
+
           <div>
             <p className="section-label">
               THE JOURNEY
@@ -344,6 +381,7 @@ export default function Home() {
           </div>
 
           <div className="intro-copy">
+
             <p>
               Astrology is more than predicting what may
               happen tomorrow. It is a traditional way of
@@ -359,23 +397,36 @@ export default function Home() {
             </p>
 
             <a
-              href="#contact"
+              href="#astrologer"
               className="text-link"
             >
-              Start your journey <span>↗</span>
+              Meet the Astrologer
+              <span>↗</span>
             </a>
+
           </div>
         </div>
       </section>
 
-      {/* ================= SERVICES ================= */}
+      {/* =====================================================
+          ASTROLOGER
+      ===================================================== */}
+
+      <AstrologerSection />
+
+      {/* =====================================================
+          SERVICES
+      ===================================================== */}
 
       <section
         id="services"
         className="services-section"
       >
+
         <div className="services-heading">
+
           <div>
+
             <p className="section-label">
               WHAT WE OFFER
             </p>
@@ -385,16 +436,20 @@ export default function Home() {
               <br />
               <em>every chapter.</em>
             </h2>
+
           </div>
 
           <p>
             From Janam Kundali and marriage matching to
-            career, Vastu and Tarot, explore personalized
-            consultation for the questions that matter.
+            career, Vastu, Tarot and Medical Astrology,
+            explore personalized consultation for the
+            questions that matter.
           </p>
+
         </div>
 
         <div className="services-grid">
+
           {services.map((service, index) => (
             <article
               key={service.no}
@@ -404,7 +459,9 @@ export default function Home() {
                   : ""
               }`}
             >
+
               <div className="service-top">
+
                 <span className="service-number">
                   {service.no}
                 </span>
@@ -412,42 +469,60 @@ export default function Home() {
                 <span className="service-icon">
                   {service.icon}
                 </span>
+
               </div>
 
               <div className="service-body">
-                <p>{service.hindi}</p>
 
-                <h3>{service.title}</h3>
+                <p>
+                  {service.hindi}
+                </p>
+
+                <h3>
+                  {service.title}
+                </h3>
 
                 <span className="service-line" />
 
-                <small>{service.text}</small>
+                <small>
+                  {service.text}
+                </small>
+
               </div>
 
               <span className="service-arrow">
                 ↗
               </span>
+
             </article>
           ))}
+
         </div>
       </section>
 
-      {/* ================= PHILOSOPHY ================= */}
+      {/* =====================================================
+          PHILOSOPHY
+      ===================================================== */}
 
       <section
         id="about"
         className="philosophy"
       >
+
         <div className="philosophy-pattern" />
 
         <div className="philosophy-inner">
+
           <div className="philosophy-symbol">
+
             <div className="big-mandala">
               <span>ॐ</span>
             </div>
+
           </div>
 
           <div className="philosophy-content">
+
             <p className="section-label gold">
               OUR PHILOSOPHY
             </p>
@@ -467,6 +542,7 @@ export default function Home() {
             </p>
 
             <div className="philosophy-values">
+
               <div>
                 <strong>सत्य</strong>
                 <span>Truth in guidance</span>
@@ -481,18 +557,23 @@ export default function Home() {
                 <strong>विश्वास</strong>
                 <span>Trust through understanding</span>
               </div>
+
             </div>
           </div>
         </div>
       </section>
 
-      {/* ================= CONSULTATION ================= */}
+      {/* =====================================================
+          CONSULTATION
+      ===================================================== */}
 
       <section
         id="contact"
         className="contact-section"
       >
+
         <div className="contact-heading">
+
           <p className="section-label">
             YOUR NEXT CHAPTER
           </p>
@@ -507,10 +588,13 @@ export default function Home() {
             Share your birth details and your question.
             We will get back to you for the consultation.
           </p>
+
         </div>
 
         <div className="contact-box">
+
           <div className="contact-side">
+
             <span className="contact-symbol">
               ✦
             </span>
@@ -530,6 +614,7 @@ export default function Home() {
             </p>
 
             <div className="contact-details">
+
               <div>
                 <span>CALL</span>
 
@@ -541,8 +626,11 @@ export default function Home() {
               <div>
                 <span>HOURS</span>
 
-                <strong>{site.timings}</strong>
+                <strong>
+                  {site.timings}
+                </strong>
               </div>
+
             </div>
 
             <a
@@ -553,22 +641,30 @@ export default function Home() {
             >
               WhatsApp Consultation →
             </a>
+
           </div>
 
           <div className="contact-form-wrap">
             <ContactForm />
           </div>
+
         </div>
       </section>
 
-      {/* ================= FOOTER ================= */}
+      {/* =====================================================
+          FOOTER
+      ===================================================== */}
 
       <footer className="astro-footer">
+
         <div className="footer-top">
+
           <div className="footer-brand">
+
             <span>✦</span>
 
             <div>
+
               <strong>
                 श्री नक्षत्रलोक ज्योतिष संस्थान
               </strong>
@@ -576,17 +672,29 @@ export default function Home() {
               <small>
                 SHREE NAKSHATRALOK JYOTISH SANSTHAN
               </small>
+
             </div>
+
           </div>
 
           <div className="footer-links">
-            <a href="#services">Services</a>
 
-            <a href="#about">Philosophy</a>
+            <a href="#astrologer">
+              Astrologer
+            </a>
+
+            <a href="#services">
+              Services
+            </a>
+
+            <a href="#about">
+              Philosophy
+            </a>
 
             <a href="#contact">
               Consultation
             </a>
+
           </div>
 
           <a
@@ -595,9 +703,11 @@ export default function Home() {
           >
             {site.phone}
           </a>
+
         </div>
 
         <div className="footer-bottom">
+
           <span>
             © {new Date().getFullYear()} Shree
             Nakshatralok Jyotish Sansthan
@@ -606,10 +716,14 @@ export default function Home() {
           <span>
             सत्य · सेवा · विश्वास
           </span>
+
         </div>
+
       </footer>
 
-      {/* ================= FLOATING WHATSAPP ================= */}
+      {/* =====================================================
+          FLOATING WHATSAPP
+      ===================================================== */}
 
       <a
         href={whatsappUrl}
@@ -620,6 +734,7 @@ export default function Home() {
       >
         <span>◔</span>
       </a>
+
     </main>
   );
 }
