@@ -288,11 +288,11 @@ export default function Home() {
           </p>
 
           <h1 className="hero-name">
-            Shri Radhey Shyam Sharma Ji
+            Radhey Shyam Sharma
           </h1>
 
           <p className="hero-name-hindi">
-            श्री राधे श्याम शर्मा जी
+            राधे श्याम शर्मा
           </p>
 
           <div className="hero-experience">

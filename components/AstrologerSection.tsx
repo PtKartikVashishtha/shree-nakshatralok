@@ -6,19 +6,19 @@ import Image from "next/image";
 const photos = [
   {
     src: "/astrologer/radhey-shyam-01.jpg",
-    alt: "Shri Radhey Shyam Sharma Ji",
+    alt: "Radhey Shyam Sharma",
   },
   {
     src: "/astrologer/radhey-shyam-02.jpg",
-    alt: "Shri Radhey Shyam Sharma Ji during a public consultation",
+    alt: "Radhey Shyam Sharma during a public consultation",
   },
   {
     src: "/astrologer/radhey-shyam-03.jpg",
-    alt: "Shri Radhey Shyam Sharma Ji addressing a gathering",
+    alt: "Radhey Shyam Sharma addressing a gathering",
   },
   {
     src: "/astrologer/radhey-shyam-04.jpg",
-    alt: "Shri Radhey Shyam Sharma Ji in a traditional spiritual setting",
+    alt: "Radhey Shyam Sharma in a traditional spiritual setting",
   },
 ];
 
@@ -99,11 +99,11 @@ export default function AstrologerSection() {
           </div>
 
           <h2>
-            Shri Radhey Shyam Sharma Ji
+            Radhey Shyam Sharma
           </h2>
 
           <p>
-            श्री राधे श्याम शर्मा जी
+            राधे श्याम शर्मा
           </p>
 
         </div>
@@ -229,7 +229,7 @@ export default function AstrologerSection() {
               </p>
 
               <p>
-                श्री राधे श्याम शर्मा जी को ज्योतिष के
+                राधे श्याम शर्मा को ज्योतिष के
                 क्षेत्र में 55 से अधिक वर्षों का अनुभव है।
                 जन्म कुंडली, ग्रहों के प्रभाव और जीवन के
                 महत्वपूर्ण निर्णयों के संबंध में वे
@@ -256,7 +256,7 @@ export default function AstrologerSection() {
               </p>
 
               <p>
-                Shri Radhey Shyam Sharma Ji brings over
+                Radhey Shyam Sharma brings over
                 55 years of experience in the field of
                 astrology. His consultations draw upon
                 traditional principles of Vedic astrology

@@ -16,6 +16,8 @@
 # next.js
 /.next/
 /out/
+# Local admin utility
+prisma/add-admin.ts
 
 # production
 /build
