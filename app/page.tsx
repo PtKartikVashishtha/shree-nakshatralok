@@ -452,14 +452,19 @@ export default function Home() {
         <div className="services-grid">
 
           {services.map((service, index) => (
-            <article
-              key={service.no}
-              className={`service-card ${
-                index === 0
-                  ? "featured-service"
-                  : ""
-              }`}
-            >
+            <a
+            key={service.no}
+            href={
+              service.title === "Marriage Matching"
+                ? "/services/kundali-milan"
+                : "#"
+            }
+            className={`service-card ${
+              index === 0
+                ? "featured-service"
+                : ""
+            }`}
+          >
 
               <div className="service-top">
 
@@ -495,7 +500,7 @@ export default function Home() {
                 ↗
               </span>
 
-            </article>
+            </a>
           ))}
 
         </div>
