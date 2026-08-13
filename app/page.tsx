@@ -453,18 +453,31 @@ export default function Home() {
 
           {services.map((service, index) => (
             <a
-            key={service.no}
-            href={
-              service.title === "Marriage Matching"
-                ? "/services/kundali-milan"
-                : "#"
-            }
-            className={`service-card ${
-              index === 0
-                ? "featured-service"
-                : ""
-            }`}
-          >
+              key={service.no}
+              href={
+                {
+                  "Vedic Astrology": "/services/vedic-astrology",
+                  "Birth Chart": "/services/janam-kundli",
+                  "Marriage Matching": "/services/kundali-milan",
+                  "Muhurat & Naming": "/services/muhurat-namkaran",
+                  "Graha Dosh": "/services/graha-dosh",
+                  Vastu: "/services/vastu",
+                  Gemstones: "/services/gemstone-consultation",
+                  "Career & Education": "#",
+                  "Family & Marriage": "#",
+                  "Online & Offline": "#",
+                  "Tarot Reading": "/services/tarot-reading",
+                  "Medical Astrology": "/services/medical-astrology",
+                  Numerology: "/services/numerology",
+                  Palmistry: "/services/palmistry",
+                }[service.title] ?? "#"
+              }
+              className={`service-card ${
+                index === 0
+                  ? "featured-service"
+                  : ""
+              }`}
+            >
 
               <div className="service-top">
 
