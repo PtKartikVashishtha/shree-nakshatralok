@@ -715,7 +715,7 @@ export default function Home() {
           </span>
 
           <span>
-            सत्य · सेवा · विश्वास
+            Made by Kartik Vashishtha <span className="made-heart">♥</span>
           </span>
 
         </div>

@@ -3277,3 +3277,468 @@ textarea:focus-visible {
   }
 
 }
+.made-heart {
+  color: #c79a45;
+  margin-left: 4px;
+  font-size: 11px;
+}
+/* =========================================
+   SERVICE PAGES
+========================================= */
+
+.service-page {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.service-hero {
+  position: relative;
+  min-height: 620px;
+  padding: 170px 7% 110px;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 75% 40%,
+      rgba(152, 89, 37, 0.2),
+      transparent 28%
+    ),
+    linear-gradient(
+      135deg,
+      #260604,
+      #4a0c08 55%,
+      #230403
+    );
+
+  color: white;
+}
+
+.service-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.25;
+
+  background-image:
+    radial-gradient(
+      #e5c67d 0.7px,
+      transparent 0.7px
+    );
+
+  background-size: 70px 70px;
+}
+
+.service-hero-inner {
+  position: relative;
+  z-index: 2;
+
+  width: min(900px, 100%);
+  margin: auto;
+
+  text-align: center;
+}
+
+.service-hero h1 {
+  margin: 24px 0;
+
+  font-family: var(--font-cinzel), serif;
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 1.08;
+  font-weight: 500;
+}
+
+.service-hero h1 em {
+  color: var(--gold-light);
+
+  font-family: var(--font-cormorant), serif;
+  font-size: 1.08em;
+  font-weight: 400;
+}
+
+.service-hero-intro {
+  max-width: 650px;
+  margin: auto;
+
+  color: #cbb9ad;
+
+  font-family: var(--font-cormorant), serif;
+  font-size: 21px;
+  line-height: 1.7;
+}
+
+.service-hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+
+  margin-top: 35px;
+}
+
+
+/* =========================================
+   SERVICE INTRO
+========================================= */
+
+.service-content-section {
+  padding: 130px 7%;
+  background: var(--paper);
+}
+
+.service-content-grid {
+  max-width: 1180px;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: 0.8fr 1fr;
+  gap: 110px;
+}
+
+.service-content-grid h2,
+.service-note h2,
+.service-location-inner h2,
+.related-services h2 {
+  margin: 20px 0;
+
+  color: var(--wine-3);
+
+  font-family: var(--font-cinzel), serif;
+  font-size: clamp(38px, 5vw, 60px);
+  line-height: 1.1;
+  font-weight: 500;
+}
+
+.service-content-grid h2 em,
+.service-note h2 em,
+.service-location-inner h2 em,
+.related-services h2 em {
+  color: var(--gold);
+
+  font-family: var(--font-cormorant), serif;
+  font-size: 1.15em;
+}
+
+.service-copy {
+  color: var(--muted);
+
+  font-family: var(--font-cormorant), serif;
+  font-size: 20px;
+  line-height: 1.7;
+}
+
+.service-copy p {
+  margin: 0 0 24px;
+}
+
+
+/* =========================================
+   ASHTAKOOTA
+========================================= */
+
+.matching-section {
+  padding: 130px 7%;
+
+  background:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(199, 154, 69, 0.08),
+      transparent 25%
+    ),
+    #f3ecdf;
+}
+
+.matching-inner {
+  max-width: 1180px;
+  margin: auto;
+}
+
+.matching-heading {
+  max-width: 700px;
+}
+
+.matching-heading h2 {
+  margin: 20px 0;
+
+  font-family: var(--font-cinzel), serif;
+  font-size: clamp(38px, 5vw, 60px);
+  line-height: 1.1;
+  font-weight: 500;
+}
+
+.matching-heading h2 em {
+  color: var(--gold);
+
+  font-family: var(--font-cormorant), serif;
+}
+
+.matching-heading > p:last-child {
+  max-width: 600px;
+
+  color: var(--muted);
+
+  font-family: var(--font-cormorant), serif;
+  font-size: 19px;
+  line-height: 1.7;
+}
+
+.matching-grid {
+  margin-top: 65px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  border-top: 1px solid rgba(112, 67, 35, 0.14);
+  border-left: 1px solid rgba(112, 67, 35, 0.14);
+}
+
+.matching-grid > div {
+  min-height: 230px;
+  padding: 28px;
+
+  border-right: 1px solid rgba(112, 67, 35, 0.14);
+  border-bottom: 1px solid rgba(112, 67, 35, 0.14);
+
+  transition: background 0.3s ease;
+}
+
+.matching-grid > div:hover {
+  background: rgba(255, 253, 248, 0.65);
+}
+
+.matching-grid span {
+  color: var(--gold);
+
+  font-size: 9px;
+  letter-spacing: 3px;
+}
+
+.matching-grid h3 {
+  margin: 25px 0 10px;
+
+  color: var(--wine-3);
+
+  font-family: var(--font-cinzel), serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.matching-grid p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-family: var(--font-cormorant), serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   SERVICE NOTE
+========================================= */
+
+.service-note-section {
+  padding: 120px 7%;
+  background: var(--paper);
+}
+
+.service-note {
+  max-width: 850px;
+  margin: auto;
+
+  text-align: center;
+}
+
+.service-note h2 {
+  margin-bottom: 25px;
+}
+
+.service-note > p:last-child {
+  max-width: 700px;
+  margin: auto;
+
+  color: var(--muted);
+
+  font-family: var(--font-cormorant), serif;
+  font-size: 20px;
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   SERVICE LOCATION
+========================================= */
+
+.service-location-section {
+  padding: 130px 7%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #300705,
+      #4a0c08 55%,
+      #270403
+    );
+
+  color: white;
+}
+
+.service-location-inner {
+  max-width: 1180px;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  gap: 100px;
+
+  align-items: center;
+}
+
+.service-location-inner h2 {
+  color: white;
+}
+
+.service-location-inner h2 em {
+  color: var(--gold-light);
+}
+
+.service-location-copy {
+  color: #c9b5a8;
+
+  font-family: var(--font-cormorant), serif;
+  font-size: 19px;
+  line-height: 1.7;
+}
+
+.service-location-copy p {
+  margin: 0 0 20px;
+}
+
+.service-location-copy .text-link {
+  color: var(--gold-light);
+}
+
+
+/* =========================================
+   RELATED SERVICES
+========================================= */
+
+.related-services {
+  max-width: 1180px;
+  margin: auto;
+
+  padding: 110px 7%;
+
+  display: grid;
+  grid-template-columns: 1fr 0.7fr;
+  gap: 80px;
+
+  align-items: center;
+}
+
+.related-links {
+  display: grid;
+  gap: 0;
+
+  border-top: 1px solid rgba(112, 67, 35, 0.15);
+}
+
+.related-links a {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 20px 0;
+
+  border-bottom: 1px solid rgba(112, 67, 35, 0.15);
+
+  color: var(--wine-3);
+
+  font-family: var(--font-cinzel), serif;
+  font-size: 13px;
+
+  transition:
+    color 0.25s ease,
+    padding-left 0.25s ease;
+}
+
+.related-links a:hover {
+  padding-left: 8px;
+  color: var(--gold);
+}
+
+.related-links span {
+  color: var(--gold);
+}
+
+
+/* =========================================
+   SERVICE MOBILE
+========================================= */
+
+@media (max-width: 900px) {
+
+  .service-content-grid,
+  .service-location-inner,
+  .related-services {
+    grid-template-columns: 1fr;
+    gap: 55px;
+  }
+
+  .matching-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .service-hero {
+    min-height: 650px;
+    padding: 140px 20px 90px;
+  }
+
+  .service-hero h1 {
+    font-size: 42px;
+  }
+
+  .service-hero-intro {
+    font-size: 18px;
+  }
+
+  .service-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .service-content-section,
+  .matching-section,
+  .service-note-section,
+  .service-location-section {
+    padding: 90px 20px;
+  }
+
+  .service-content-grid h2,
+  .service-note h2,
+  .service-location-inner h2,
+  .related-services h2 {
+    font-size: 40px;
+  }
+
+  .matching-grid {
+    grid-template-columns: 1fr;
+    margin-top: 45px;
+  }
+
+  .matching-grid > div {
+    min-height: auto;
+  }
+
+  .related-services {
+    padding: 80px 20px;
+  }
+
+}

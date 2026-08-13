@@ -173,7 +173,7 @@ export default function ContactForm() {
           htmlFor="address"
           className="mb-2 block text-sm font-medium"
         >
-          Address
+          Birth Place
         </label>
 
         <textarea
@@ -185,7 +185,7 @@ export default function ContactForm() {
           disabled={loading}
           autoComplete="street-address"
           className="w-full resize-none rounded-xl border border-gray-200 p-3 outline-none focus:border-amber-600 disabled:bg-gray-100"
-          placeholder="Your address"
+          placeholder="City / Place of birth"
         />
       </div>
 

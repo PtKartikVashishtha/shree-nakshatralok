@@ -16,16 +16,33 @@ model User {
 }
 
 model Submission {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  name       String
-  dob        String
-  birthTime  String
-  address    String
-  question   String
-  status     String   @default("NEW")
-  createdAt  DateTime @default(now())
-}
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
 
+  // GENERAL or KUNDALI_MILAN
+  type      String   @default("GENERAL")
+
+  // Existing/general consultation fields
+  name      String?
+  dob       String?
+  birthTime String?
+  address   String?
+  question  String?
+
+  // Kundali Milan - Person 1
+  person1Name      String?
+  person1Dob       String?
+  person1BirthTime String?
+  person1BirthPlace String?
+
+  // Kundali Milan - Person 2
+  person2Name      String?
+  person2Dob       String?
+  person2BirthTime String?
+  person2BirthPlace String?
+
+  status    String   @default("NEW")
+  createdAt DateTime @default(now())
+}
 model RateLimit {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   key       String   @unique

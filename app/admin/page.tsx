@@ -9,6 +9,10 @@ type SubmissionStatus =
   | "CONTACTED"
   | "COMPLETED";
 
+type SubmissionType =
+  | "GENERAL"
+  | "KUNDALI_MILAN";
+
 export default async function AdminPage() {
   const session = await auth();
 
@@ -32,11 +36,32 @@ export default async function AdminPage() {
 
   const data = submissions.map((item) => ({
     id: item.id,
-    name: item.name,
-    dob: item.dob,
-    birthTime: item.birthTime,
-    address: item.address,
-    question: item.question,
+
+    // Submission type
+    type: (item.type || "GENERAL") as SubmissionType,
+
+    // General consultation
+    name: item.name ?? undefined,
+    dob: item.dob ?? undefined,
+    birthTime: item.birthTime ?? undefined,
+    address: item.address ?? undefined,
+    question: item.question ?? undefined,
+
+    // Kundali Milan - Person 1
+    person1Name: item.person1Name ?? undefined,
+    person1Dob: item.person1Dob ?? undefined,
+    person1BirthTime:
+      item.person1BirthTime ?? undefined,
+    person1BirthPlace:
+      item.person1BirthPlace ?? undefined,
+
+    // Kundali Milan - Person 2
+    person2Name: item.person2Name ?? undefined,
+    person2Dob: item.person2Dob ?? undefined,
+    person2BirthTime:
+      item.person2BirthTime ?? undefined,
+    person2BirthPlace:
+      item.person2BirthPlace ?? undefined,
 
     status: item.status as SubmissionStatus,
 
@@ -165,6 +190,7 @@ export default async function AdminPage() {
           </div>
 
         </div>
+
 
         <AdminDashboard submissions={data} />
 

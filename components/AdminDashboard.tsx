@@ -7,13 +7,31 @@ type SubmissionStatus =
   | "CONTACTED"
   | "COMPLETED";
 
+type SubmissionType =
+  | "GENERAL"
+  | "KUNDALI_MILAN";
+
 type Submission = {
   id: string;
-  name: string;
-  dob: string;
-  birthTime: string;
-  address: string;
-  question: string;
+
+  type?: SubmissionType;
+
+  name?: string;
+  dob?: string;
+  birthTime?: string;
+  address?: string;
+  question?: string;
+
+  person1Name?: string;
+  person1Dob?: string;
+  person1BirthTime?: string;
+  person1BirthPlace?: string;
+
+  person2Name?: string;
+  person2Dob?: string;
+  person2BirthTime?: string;
+  person2BirthPlace?: string;
+
   status: SubmissionStatus;
   createdAt: string;
 };
@@ -41,13 +59,26 @@ export default function AdminDashboard({
 
     return submissions.filter((item) =>
       [
+        item.type,
         item.name,
         item.dob,
         item.birthTime,
         item.address,
         item.question,
+
+        item.person1Name,
+        item.person1Dob,
+        item.person1BirthTime,
+        item.person1BirthPlace,
+
+        item.person2Name,
+        item.person2Dob,
+        item.person2BirthTime,
+        item.person2BirthPlace,
+
         item.status,
       ]
+        .filter(Boolean)
         .join(" ")
         .toLowerCase()
         .includes(q)
@@ -80,10 +111,6 @@ export default function AdminDashboard({
 
   const newCount = submissions.filter(
     (item) => item.status === "NEW"
-  ).length;
-
-  const contactedCount = submissions.filter(
-    (item) => item.status === "CONTACTED"
   ).length;
 
   const completedCount = submissions.filter(
@@ -424,182 +451,404 @@ export default function AdminDashboard({
 
       <div className="mt-6 space-y-5">
 
-        {filtered.map((item, index) => (
+        {filtered.map((item, index) => {
 
-          <article
-            key={item.id}
-            className="overflow-hidden rounded-2xl border border-[#ded1be] bg-[#fffdf8] shadow-sm transition hover:border-[#c9a15d]/60 hover:shadow-lg"
-          >
+          const isKundali =
+            item.type === "KUNDALI_MILAN";
 
-            {/* CARD HEADER */}
+          const displayName =
+            isKundali
+              ? `${item.person1Name || "Person 1"} & ${item.person2Name || "Person 2"}`
+              : item.name || "Unnamed";
 
-            <div className="flex flex-col gap-4 border-b border-[#e7dccd] bg-[#faf5eb] px-6 py-5 md:flex-row md:items-center md:justify-between">
+          const initial =
+            displayName
+              .charAt(0)
+              .toUpperCase();
 
-              <div className="flex items-center gap-4">
+          return (
+            <article
+              key={item.id}
+              className={`overflow-hidden rounded-2xl border bg-[#fffdf8] shadow-sm transition hover:shadow-lg ${
+                isKundali
+                  ? "border-[#c9a15d]/70"
+                  : "border-[#ded1be] hover:border-[#c9a15d]/60"
+              }`}
+            >
 
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#5b130d] font-serif text-lg text-[#e7c77d]">
-                  {item.name.charAt(0).toUpperCase()}
-                </div>
+              {/* CARD HEADER */}
 
-                <div>
+              <div className="flex flex-col gap-4 border-b border-[#e7dccd] bg-[#faf5eb] px-6 py-5 md:flex-row md:items-center md:justify-between">
 
-                  <div className="flex flex-wrap items-center gap-2">
+                <div className="flex items-center gap-4">
 
-                    <h3 className="font-serif text-2xl text-[#57120d]">
-                      {item.name}
-                    </h3>
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#5b130d] font-serif text-lg text-[#e7c77d]">
+                    {initial}
+                  </div>
 
-                    {index === 0 && (
-                      <span className="rounded-full bg-[#f0dfb9] px-2.5 py-1 text-[8px] font-bold uppercase tracking-[1px] text-[#805819]">
-                        Latest
+                  <div>
+
+                    <div className="flex flex-wrap items-center gap-2">
+
+                      <h3 className="font-serif text-2xl text-[#57120d]">
+                        {displayName}
+                      </h3>
+
+                      <span
+                        className={`rounded-full px-2.5 py-1 text-[8px] font-bold uppercase tracking-[1px] ${
+                          isKundali
+                            ? "bg-[#ead6a7] text-[#704b0d]"
+                            : "bg-[#eee5d7] text-[#735e51]"
+                        }`}
+                      >
+                        {isKundali
+                          ? "Kundali Milan"
+                          : "General Consultation"}
                       </span>
-                    )}
+
+                      {index === 0 && (
+                        <span className="rounded-full bg-[#f0dfb9] px-2.5 py-1 text-[8px] font-bold uppercase tracking-[1px] text-[#805819]">
+                          Latest
+                        </span>
+                      )}
+
+                    </div>
+
+                    <p className="mt-1 text-[10px] text-[#958275]">
+                      Received{" "}
+                      {new Date(
+                        item.createdAt
+                      ).toLocaleString("en-IN")}
+                    </p>
 
                   </div>
 
-                  <p className="mt-1 text-[10px] text-[#958275]">
-                    Received{" "}
-                    {new Date(
-                      item.createdAt
-                    ).toLocaleString("en-IN")}
-                  </p>
+                </div>
+
+
+                {/* ACTIONS */}
+
+                <div className="flex flex-wrap items-center gap-2">
+
+                  <select
+                    value={item.status}
+                    onChange={(e) =>
+                      updateStatus(
+                        item.id,
+                        e.target.value as SubmissionStatus
+                      )
+                    }
+                    className={`rounded-xl border px-3 py-2.5 text-xs font-semibold outline-none transition ${
+                      item.status === "NEW"
+                        ? "border-amber-200 bg-amber-50 text-amber-700"
+                        : item.status === "CONTACTED"
+                        ? "border-blue-200 bg-blue-50 text-blue-700"
+                        : "border-green-200 bg-green-50 text-green-700"
+                    }`}
+                  >
+
+                    <option value="NEW">
+                      New
+                    </option>
+
+                    <option value="CONTACTED">
+                      Contacted
+                    </option>
+
+                    <option value="COMPLETED">
+                      Completed
+                    </option>
+
+                  </select>
+
+                  <button
+                    onClick={() =>
+                      deleteSubmission(item.id)
+                    }
+                    disabled={
+                      deleting === item.id
+                    }
+                    className="rounded-xl border border-[#e5caca] px-4 py-2.5 text-xs font-semibold text-[#a03930] transition hover:border-red-300 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    {deleting === item.id
+                      ? "Deleting..."
+                      : "Delete Request"}
+                  </button>
 
                 </div>
 
               </div>
 
 
-              {/* ACTIONS */}
+              {/* ================= KUNDALI MILAN ================= */}
 
-              <div className="flex flex-wrap items-center gap-2">
+              {isKundali ? (
 
-                <select
-                  value={item.status}
-                  onChange={(e) =>
-                    updateStatus(
-                      item.id,
-                      e.target.value as SubmissionStatus
-                    )
-                  }
-                  className={`rounded-xl border px-3 py-2.5 text-xs font-semibold outline-none transition ${
-                    item.status === "NEW"
-                      ? "border-amber-200 bg-amber-50 text-amber-700"
-                      : item.status === "CONTACTED"
-                      ? "border-blue-200 bg-blue-50 text-blue-700"
-                      : "border-green-200 bg-green-50 text-green-700"
-                  }`}
-                >
-                  <option value="NEW">
-                    New
-                  </option>
+                <div className="px-6 py-7">
 
-                  <option value="CONTACTED">
-                    Contacted
-                  </option>
+                  <div className="grid gap-5 md:grid-cols-2">
 
-                  <option value="COMPLETED">
-                    Completed
-                  </option>
-                </select>
+                    {/* PERSON 1 */}
 
+                    <div className="rounded-2xl border border-[#eadfcf] bg-[#fbf7ef] p-5">
 
-                <button
-                  onClick={() =>
-                    deleteSubmission(item.id)
-                  }
-                  disabled={deleting === item.id}
-                  className="rounded-xl border border-[#e5caca] px-4 py-2.5 text-xs font-semibold text-[#a03930] transition hover:border-red-300 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  {deleting === item.id
-                    ? "Deleting..."
-                    : "Delete Request"}
-                </button>
+                      <div className="mb-5 flex items-center justify-between">
 
-              </div>
+                        <div>
 
-            </div>
+                          <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                            Person 1
+                          </p>
 
+                          <h4 className="mt-1 font-serif text-2xl text-[#57120d]">
+                            {item.person1Name ||
+                              "Not provided"}
+                          </h4>
 
-            {/* CARD BODY */}
+                        </div>
 
-            <div className="grid gap-7 px-6 py-7 md:grid-cols-2">
+                        <span className="text-xl text-[#c49a50]">
+                          01
+                        </span>
 
-              {/* DOB */}
+                      </div>
 
-              <div>
+                      <div className="space-y-4">
 
-                <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
-                  Date of Birth
-                </p>
+                        <div>
 
-                <p className="mt-2 text-sm font-semibold text-[#39251f]">
-                  {item.dob}
-                </p>
+                          <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                            Date of Birth
+                          </p>
 
-              </div>
+                          <p className="mt-1 text-sm font-semibold text-[#39251f]">
+                            {item.person1Dob ||
+                              "Not provided"}
+                          </p>
 
+                        </div>
 
-              {/* TIME */}
+                        <div>
 
-              <div>
+                          <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                            Birth Time
+                          </p>
 
-                <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
-                  Birth Time
-                </p>
+                          <p className="mt-1 text-sm font-semibold text-[#39251f]">
+                            {item.person1BirthTime ||
+                              "Not provided"}
+                          </p>
 
-                <p className="mt-2 text-sm font-semibold text-[#39251f]">
-                  {item.birthTime}
-                </p>
+                        </div>
 
-              </div>
+                        <div>
+
+                          <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                            Birth Place
+                          </p>
+
+                          <p className="mt-1 text-sm leading-6 text-[#64524a]">
+                            {item.person1BirthPlace ||
+                              "Not provided"}
+                          </p>
+
+                        </div>
+
+                      </div>
+
+                    </div>
 
 
-              {/* ADDRESS */}
+                    {/* PERSON 2 */}
 
-              <div className="md:col-span-2">
+                    <div className="rounded-2xl border border-[#eadfcf] bg-[#fbf7ef] p-5">
 
-                <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
-                  Address
-                </p>
+                      <div className="mb-5 flex items-center justify-between">
 
-                <p className="mt-2 text-sm leading-6 text-[#64524a]">
-                  {item.address}
-                </p>
+                        <div>
 
-              </div>
+                          <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                            Person 2
+                          </p>
+
+                          <h4 className="mt-1 font-serif text-2xl text-[#57120d]">
+                            {item.person2Name ||
+                              "Not provided"}
+                          </h4>
+
+                        </div>
+
+                        <span className="text-xl text-[#c49a50]">
+                          02
+                        </span>
+
+                      </div>
+
+                      <div className="space-y-4">
+
+                        <div>
+
+                          <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                            Date of Birth
+                          </p>
+
+                          <p className="mt-1 text-sm font-semibold text-[#39251f]">
+                            {item.person2Dob ||
+                              "Not provided"}
+                          </p>
+
+                        </div>
+
+                        <div>
+
+                          <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                            Birth Time
+                          </p>
+
+                          <p className="mt-1 text-sm font-semibold text-[#39251f]">
+                            {item.person2BirthTime ||
+                              "Not provided"}
+                          </p>
+
+                        </div>
+
+                        <div>
+
+                          <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                            Birth Place
+                          </p>
+
+                          <p className="mt-1 text-sm leading-6 text-[#64524a]">
+                            {item.person2BirthPlace ||
+                              "Not provided"}
+                          </p>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
 
 
-              {/* QUESTION */}
+                  {/* QUESTION */}
 
-              <div className="md:col-span-2">
+                  {item.question && (
+                    <div className="mt-6">
 
-                <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between">
 
-                  <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
-                    Question
-                  </p>
+                        <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                          Additional Question
+                        </p>
 
-                  <span className="text-[#c49a50]">
-                    ✦
-                  </span>
+                        <span className="text-[#c49a50]">
+                          ✦
+                        </span>
+
+                      </div>
+
+                      <div className="mt-3 rounded-xl border border-[#eadfcf] bg-[#fbf7ef] px-5 py-4">
+
+                        <p className="whitespace-pre-wrap text-sm leading-7 text-[#56443d]">
+                          {item.question}
+                        </p>
+
+                      </div>
+
+                    </div>
+                  )}
 
                 </div>
 
-                <div className="mt-3 rounded-xl border border-[#eadfcf] bg-[#fbf7ef] px-5 py-4">
+              ) : (
 
-                  <p className="whitespace-pre-wrap text-sm leading-7 text-[#56443d]">
-                    {item.question}
-                  </p>
+                /* ================= GENERAL ================= */
+
+                <div className="grid gap-7 px-6 py-7 md:grid-cols-2">
+
+                  {/* DOB */}
+
+                  <div>
+
+                    <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                      Date of Birth
+                    </p>
+
+                    <p className="mt-2 text-sm font-semibold text-[#39251f]">
+                      {item.dob || "Not provided"}
+                    </p>
+
+                  </div>
+
+
+                  {/* TIME */}
+
+                  <div>
+
+                    <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                      Birth Time
+                    </p>
+
+                    <p className="mt-2 text-sm font-semibold text-[#39251f]">
+                      {item.birthTime ||
+                        "Not provided"}
+                    </p>
+
+                  </div>
+
+
+                  {/* ADDRESS */}
+
+                  <div className="md:col-span-2">
+
+                    <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                      Address
+                    </p>
+
+                    <p className="mt-2 text-sm leading-6 text-[#64524a]">
+                      {item.address ||
+                        "Not provided"}
+                    </p>
+
+                  </div>
+
+
+                  {/* QUESTION */}
+
+                  <div className="md:col-span-2">
+
+                    <div className="flex items-center justify-between">
+
+                      <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                        Question
+                      </p>
+
+                      <span className="text-[#c49a50]">
+                        ✦
+                      </span>
+
+                    </div>
+
+                    <div className="mt-3 rounded-xl border border-[#eadfcf] bg-[#fbf7ef] px-5 py-4">
+
+                      <p className="whitespace-pre-wrap text-sm leading-7 text-[#56443d]">
+                        {item.question ||
+                          "Not provided"}
+                      </p>
+
+                    </div>
+
+                  </div>
 
                 </div>
 
-              </div>
+              )}
 
-            </div>
-
-          </article>
-
-        ))}
+            </article>
+          );
+        })}
 
       </div>
 

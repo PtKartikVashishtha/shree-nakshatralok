@@ -9,16 +9,13 @@ const resend = new Resend(
 );
 
 const schema = z.object({
-  name: z
+  person1Name: z
     .string()
     .trim()
-    .min(1, "Name is required.")
-    .max(
-      100,
-      "Name must be 100 characters or less."
-    ),
+    .min(1, "Person 1 name is required.")
+    .max(100),
 
-  dob: z
+  person1Dob: z
     .string()
     .trim()
     .regex(
@@ -26,7 +23,7 @@ const schema = z.object({
       "Please enter a valid date of birth."
     ),
 
-  birthTime: z
+  person1BirthTime: z
     .string()
     .trim()
     .regex(
@@ -34,23 +31,45 @@ const schema = z.object({
       "Please enter a valid birth time."
     ),
 
-  address: z
+  person1BirthPlace: z
     .string()
     .trim()
-    .min(1, "Address is required.")
-    .max(
-      500,
-      "Address must be 500 characters or less."
+    .min(1, "Person 1 birth place is required.")
+    .max(200),
+
+  person2Name: z
+    .string()
+    .trim()
+    .min(1, "Person 2 name is required.")
+    .max(100),
+
+  person2Dob: z
+    .string()
+    .trim()
+    .regex(
+      /^\d{4}-\d{2}-\d{2}$/,
+      "Please enter a valid date of birth."
     ),
+
+  person2BirthTime: z
+    .string()
+    .trim()
+    .regex(
+      /^([01]\d|2[0-3]):[0-5]\d$/,
+      "Please enter a valid birth time."
+    ),
+
+  person2BirthPlace: z
+    .string()
+    .trim()
+    .min(1, "Person 2 birth place is required.")
+    .max(200),
 
   question: z
     .string()
     .trim()
-    .min(1, "Question is required.")
-    .max(
-      2000,
-      "Question must be 2000 characters or less."
-    ),
+    .max(2000)
+    .optional(),
 
   website: z
     .string()
@@ -80,7 +99,7 @@ export async function POST(req: Request) {
     // -----------------------------
 
     const rate = await checkRateLimit(
-      `contact:${ip}`
+      `kundali:${ip}`
     );
 
     if (!rate.allowed) {
@@ -128,10 +147,14 @@ export async function POST(req: Request) {
     }
 
     const {
-      name,
-      dob,
-      birthTime,
-      address,
+      person1Name,
+      person1Dob,
+      person1BirthTime,
+      person1BirthPlace,
+      person2Name,
+      person2Dob,
+      person2BirthTime,
+      person2BirthPlace,
       question,
       website,
     } = parsed.data;
@@ -145,7 +168,7 @@ export async function POST(req: Request) {
         {
           success: true,
           message:
-            "Your consultation request has been submitted successfully.",
+            "Your Kundali Milan request has been submitted successfully.",
         },
         {
           status: 201,
@@ -157,19 +180,25 @@ export async function POST(req: Request) {
     // DOB VALIDATION
     // -----------------------------
 
-    const birthDate = new Date(
-      `${dob}T00:00:00`
+    const d1 = new Date(
+      `${person1Dob}T00:00:00`
+    );
+
+    const d2 = new Date(
+      `${person2Dob}T00:00:00`
     );
 
     if (
-      Number.isNaN(birthDate.getTime()) ||
-      birthDate > new Date()
+      Number.isNaN(d1.getTime()) ||
+      Number.isNaN(d2.getTime()) ||
+      d1 > new Date() ||
+      d2 > new Date()
     ) {
       return NextResponse.json(
         {
           success: false,
           error:
-            "Please enter a valid date of birth.",
+            "Please enter valid dates of birth.",
         },
         {
           status: 400,
@@ -178,23 +207,30 @@ export async function POST(req: Request) {
     }
 
     // -----------------------------
-    // SAVE TO DATABASE
+    // SAVE
     // -----------------------------
 
     const submission =
       await prisma.submission.create({
         data: {
-          type: "GENERAL",
-          name,
-          dob,
-          birthTime,
-          address,
-          question,
+          type: "KUNDALI_MILAN",
+
+          person1Name,
+          person1Dob,
+          person1BirthTime,
+          person1BirthPlace,
+
+          person2Name,
+          person2Dob,
+          person2BirthTime,
+          person2BirthPlace,
+
+          question: question || "",
         },
       });
 
     // -----------------------------
-    // SEND EMAIL
+    // EMAIL
     // -----------------------------
 
     const { data, error } =
@@ -206,43 +242,69 @@ export async function POST(req: Request) {
         to: [process.env.CLIENT_EMAIL!],
 
         subject:
-          `New Consultation Request - ${name}`,
+          `New Kundali Milan Request - ${person1Name} & ${person2Name}`,
 
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 700px; margin: auto; color: #333;">
 
             <h2 style="color: #68170f;">
-              New Consultation Request
+              New Kundali Milan Request
             </h2>
 
             <hr />
 
-            <h3>Customer Details</h3>
+            <h3>Person 1</h3>
 
             <p>
               <strong>Name:</strong>
-              ${escapeHtml(name)}
+              ${escapeHtml(person1Name)}
             </p>
 
             <p>
               <strong>Date of Birth:</strong>
-              ${escapeHtml(dob)}
+              ${escapeHtml(person1Dob)}
             </p>
 
             <p>
               <strong>Time of Birth:</strong>
-              ${escapeHtml(birthTime)}
+              ${escapeHtml(person1BirthTime)}
             </p>
 
             <p>
-              <strong>Address:</strong>
-              ${escapeHtml(address)}
+              <strong>Birth Place:</strong>
+              ${escapeHtml(person1BirthPlace)}
             </p>
+
+            <hr />
+
+            <h3>Person 2</h3>
+
+            <p>
+              <strong>Name:</strong>
+              ${escapeHtml(person2Name)}
+            </p>
+
+            <p>
+              <strong>Date of Birth:</strong>
+              ${escapeHtml(person2Dob)}
+            </p>
+
+            <p>
+              <strong>Time of Birth:</strong>
+              ${escapeHtml(person2BirthTime)}
+            </p>
+
+            <p>
+              <strong>Birth Place:</strong>
+              ${escapeHtml(person2BirthPlace)}
+            </p>
+
+            <hr />
 
             <h3>Question</h3>
 
             <p style="white-space: pre-wrap;">
-              ${escapeHtml(question)}
+              ${escapeHtml(question || "No additional question")}
             </p>
 
             <hr />
@@ -256,24 +318,27 @@ export async function POST(req: Request) {
         `,
 
         text: `
-New Consultation Request
+New Kundali Milan Request
 
-Name: ${name}
-Date of Birth: ${dob}
-Time of Birth: ${birthTime}
-Address: ${address}
+PERSON 1
+Name: ${person1Name}
+Date of Birth: ${person1Dob}
+Time of Birth: ${person1BirthTime}
+Birth Place: ${person1BirthPlace}
+
+PERSON 2
+Name: ${person2Name}
+Date of Birth: ${person2Dob}
+Time of Birth: ${person2BirthTime}
+Birth Place: ${person2BirthPlace}
 
 Question:
-${question}
+${question || "No additional question"}
 
 This request has also been saved
 in the admin dashboard.
         `,
       });
-
-    // -----------------------------
-    // EMAIL FAILED
-    // -----------------------------
 
     if (error) {
       console.error(
@@ -295,12 +360,8 @@ in the admin dashboard.
       );
     }
 
-    // -----------------------------
-    // SUCCESS
-    // -----------------------------
-
     console.log(
-      "Email sent:",
+      "Kundali Milan email sent:",
       data?.id
     );
 
@@ -309,17 +370,16 @@ in the admin dashboard.
         success: true,
         emailSent: true,
         message:
-          "Your consultation request has been submitted successfully. We will contact you soon.",
+          "Your Kundali Milan request has been submitted successfully. We will contact you soon.",
         id: submission.id,
       },
       {
         status: 201,
       }
     );
-
   } catch (error) {
     console.error(
-      "Contact submission error:",
+      "Kundali Milan submission error:",
       error
     );
 
