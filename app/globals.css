@@ -3111,3 +3111,169 @@ textarea:focus-visible {
     padding-top: 60px !important;
   }
 }
+/* =========================================
+   LOCAL SEO / MUZAFFARNAGAR
+========================================= */
+
+.local-seo-section {
+  padding: 130px 7%;
+  background: var(--paper);
+}
+
+.local-seo-inner {
+  max-width: 1180px;
+  margin: auto;
+}
+
+.local-seo-heading {
+  max-width: 760px;
+}
+
+.local-seo-heading h2 {
+  margin: 20px 0 18px;
+
+  color: var(--wine-3);
+
+  font-family: var(--font-cinzel), serif;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1.08;
+  font-weight: 500;
+}
+
+.local-seo-heading h2 em {
+  color: var(--gold);
+
+  font-family: var(--font-cormorant), serif;
+  font-size: 1.15em;
+  font-weight: 500;
+}
+
+.local-seo-heading > p:last-child {
+  max-width: 600px;
+
+  color: var(--muted);
+
+  font-family: var(--font-cormorant), serif;
+  font-size: 20px;
+  line-height: 1.7;
+}
+
+.local-seo-content {
+  margin-top: 70px;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  border-top: 1px solid rgba(112, 67, 35, 0.14);
+  border-left: 1px solid rgba(112, 67, 35, 0.14);
+}
+
+.local-seo-content > div {
+  min-height: 220px;
+  padding: 34px;
+
+  border-right: 1px solid rgba(112, 67, 35, 0.14);
+  border-bottom: 1px solid rgba(112, 67, 35, 0.14);
+
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+.local-seo-content > div:hover {
+  background: #f8f2e7;
+}
+
+.local-seo-content span {
+  color: var(--gold);
+
+  font-size: 9px;
+  letter-spacing: 3px;
+}
+
+.local-seo-content h3 {
+  margin: 25px 0 10px;
+
+  color: var(--wine-3);
+
+  font-family: var(--font-cinzel), serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.local-seo-content p {
+  max-width: 420px;
+
+  margin: 0;
+
+  color: var(--muted);
+
+  font-family: var(--font-cormorant), serif;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.local-seo-location {
+  margin-top: 55px;
+  padding-top: 28px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+
+  border-top: 1px solid rgba(112, 67, 35, 0.14);
+}
+
+.local-seo-location div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.local-seo-location span {
+  color: #9a6d2b;
+
+  font-size: 8px;
+  letter-spacing: 3px;
+}
+
+.local-seo-location strong {
+  color: var(--wine-3);
+
+  font-family: var(--font-cormorant), serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+
+/* =========================================
+   LOCAL SEO MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .local-seo-section {
+    padding: 90px 20px;
+  }
+
+  .local-seo-heading h2 {
+    font-size: 40px;
+  }
+
+  .local-seo-content {
+    grid-template-columns: 1fr;
+    margin-top: 50px;
+  }
+
+  .local-seo-content > div {
+    min-height: auto;
+    padding: 28px 24px;
+  }
+
+  .local-seo-location {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-top: 40px;
+  }
+
+}

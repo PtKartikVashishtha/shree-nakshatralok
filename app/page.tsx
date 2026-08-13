@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ContactForm from "@/components/ContactForm";
 import AstrologerSection from "@/components/AstrologerSection";
+import LocalSeoSection from "@/components/LocalSeoSection";
 import { site } from "@/lib/site";
 import {
   Cinzel,
@@ -499,7 +500,7 @@ export default function Home() {
 
         </div>
       </section>
-
+      <LocalSeoSection />
       {/* =====================================================
           PHILOSOPHY
       ===================================================== */}
