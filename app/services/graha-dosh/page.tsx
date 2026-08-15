@@ -2,23 +2,42 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Graha Dosh Consultation in Muzaffarnagar",
+  title: "Graha Dosh Consultation in Muzaffarnagar | Dosh Analysis",
   description:
-    "Traditional Graha Dosh consultation in Muzaffarnagar covering Mangal Dosha, Pitru Dosha and other astrological considerations through birth-chart analysis.",
+    "Traditional Graha Dosh consultation in Muzaffarnagar for Mangal Dosha, Pitru Dosha, Kaal Sarp-related interpretations and other planetary factors through individual birth-chart analysis.",
+
   keywords: [
-    "Graha Dosh",
     "Graha Dosh Muzaffarnagar",
-    "Mangal Dosha",
+    "Graha Dosh Consultation",
+    "Graha Dosh Analysis",
+    "Mangal Dosha Muzaffarnagar",
     "Mangal Dosh",
-    "Pitru Dosha",
+    "Pitru Dosha Muzaffarnagar",
+    "Pitru Dosh",
     "Kaal Sarp Dosha",
+    "Kaal Sarp Yog",
     "Dosh Nivaran",
     "Dosh Analysis",
+    "Planetary Dosha",
     "ग्रह दोष",
+    "ग्रह दोष मुजफ्फरनगर",
     "मंगल दोष",
     "पितृ दोष",
+    "काल सर्प दोष",
     "दोष निवारण",
   ],
+
+  alternates: {
+    canonical: "/services/graha-dosh",
+  },
+
+  openGraph: {
+    title: "Graha Dosh Consultation in Muzaffarnagar | Dosh Analysis",
+    description:
+      "Traditional Graha Dosh analysis based on the individual birth chart, including Mangal Dosha, Pitru Dosha and other planetary considerations.",
+    url: "/services/graha-dosh",
+    type: "website",
+  },
 };
 
 const doshas = [
@@ -519,7 +538,7 @@ export default function GrahaDoshPage() {
           </p>
 
           <Link
-            href="/services/janam-kundali"
+            href="/services/janam-kundli"
             className="mt-7 inline-flex items-center rounded-full border border-[#8b2418] px-7 py-3.5 font-semibold text-[#8b2418] transition hover:bg-[#8b2418] hover:text-white"
           >
             Explore Janam Kundali

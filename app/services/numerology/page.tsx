@@ -4,21 +4,40 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Numerology Consultation in Muzaffarnagar | Ank Jyotish",
   description:
-    "Traditional Numerology and Ank Jyotish consultation in Muzaffarnagar covering Mulank, Bhagyank, name numerology, career, relationships and personal guidance.",
+    "Traditional Ank Jyotish and Numerology consultation in Muzaffarnagar covering Mulank, Bhagyank, name numerology, career, business, relationships and personal guidance.",
+
   keywords: [
-    "Numerology",
-    "Numerology Consultation",
-    "Ank Jyotish",
     "Numerology Muzaffarnagar",
+    "Numerology Consultation Muzaffarnagar",
+    "Numerologist Muzaffarnagar",
+    "Ank Jyotish Muzaffarnagar",
+    "Ank Jyotish",
+    "Numerology",
     "Mulank",
     "Bhagyank",
     "Name Numerology",
-    "Numerology Calculator",
+    "Name Number",
+    "Number Compatibility",
+    "Career Numerology",
+    "Business Numerology",
     "अंक ज्योतिष",
     "मूलांक",
     "भाग्यांक",
+    "नामांक",
     "नाम अंक ज्योतिष",
   ],
+
+  alternates: {
+    canonical: "/services/numerology",
+  },
+
+  openGraph: {
+    title: "Numerology Consultation in Muzaffarnagar | Ank Jyotish",
+    description:
+      "Traditional numerology consultation using birth-date and name-based numbers for personal, career, business and relationship questions.",
+    url: "/services/numerology",
+    type: "website",
+  },
 };
 
 const numbers = [
@@ -627,7 +646,7 @@ export default function NumerologyPage() {
           </p>
 
           <Link
-            href="/services/janam-kundali"
+            href="/services/janam-kundli"
             className="mt-7 inline-flex items-center rounded-full border border-[#8b2418] px-7 py-3.5 font-semibold text-[#8b2418] transition hover:bg-[#8b2418] hover:text-white"
           >
             Explore Janam Kundali

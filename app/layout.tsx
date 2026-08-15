@@ -5,6 +5,7 @@ import {
   Cinzel,
   Cormorant_Garamond,
 } from "next/font/google";
+
 import "./globals.css";
 import { site } from "@/lib/site";
 
@@ -30,20 +31,24 @@ const cormorant = Cormorant_Garamond({
 
 const siteUrl = "https://shree-nakshatralok.vercel.app";
 
+const siteName = "Shree Nakshatralok Jyotish Sansthan";
+
+const siteDescription =
+  "Shree Nakshatralok Jyotish Sansthan provides traditional Vedic astrology consultations including Janam Kundali, Kundali Milan, Muhurat, Vastu, Gemstones, Numerology, Palmistry, Tarot and Medical Jyotish.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default:
-      "Shree Nakshatralok Jyotish Sansthan | Vedic Astrology",
-    template: "%s | Shree Nakshatralok",
+    default: `${siteName} | Vedic Astrology`,
+    template: `%s | Shree Nakshatralok`,
   },
 
-  description:
-    "Shree Nakshatralok Jyotish Sansthan offers personalized Vedic astrology guidance including Janam Kundali, Kundali Milan, marriage matching, career guidance, Vastu, gemstones, Tarot and Medical Astrology.",
+  description: siteDescription,
 
-  applicationName:
-    "Shree Nakshatralok Jyotish Sansthan",
+  applicationName: siteName,
+
+  category: "Astrology",
 
   keywords: [
     "Shree Nakshatralok",
@@ -52,28 +57,42 @@ export const metadata: Metadata = {
     "Jyotish",
     "Astrologer in Muzaffarnagar",
     "Vedic Astrologer in Muzaffarnagar",
+    "Astrology in Muzaffarnagar",
     "Janam Kundali",
+    "Janam Kundli",
     "Kundali Milan",
     "Marriage Matching",
     "Vivah Matching",
+    "Muhurat",
+    "Naamkaran",
+    "Graha Dosh",
     "Vastu",
     "Gemstone Consultation",
-    "Career Astrology",
+    "Numerology",
+    "Ank Jyotish",
+    "Palmistry",
+    "Hast Rekha",
     "Tarot Reading",
+    "Career Astrology",
+    "Education Astrology",
+    "Medical Jyotish",
     "Medical Astrology",
+    "Chikitsa Jyotish",
   ],
 
   authors: [
     {
-      name: "Shree Nakshatralok Jyotish Sansthan",
+      name: siteName,
     },
   ],
 
-  creator:
-    "Shree Nakshatralok Jyotish Sansthan",
+  creator: siteName,
 
-  publisher:
-    "Shree Nakshatralok Jyotish Sansthan",
+  publisher: siteName,
+
+  alternates: {
+    canonical: "/",
+  },
 
   robots: {
     index: true,
@@ -89,35 +108,36 @@ export const metadata: Metadata = {
   },
 
   verification: {
-    google:
-      "pERzjxk8Qjby2pR-AaIIGtJc7uPreDk3vDEkDDdLMMA",
+    google: "pERzjxk8Qjby2pR-AaIIGtJc7uPreDk3vDEkDDdLMMA",
   },
 
   icons: {
     icon: "/icon.svg",
   },
 
+  formatDetection: {
+    telephone: true,
+    email: true,
+    address: true,
+  },
+
   openGraph: {
     type: "website",
     locale: "en_IN",
     url: siteUrl,
+    siteName,
 
-    siteName:
-      "Shree Nakshatralok Jyotish Sansthan",
-
-    title:
-      "Shree Nakshatralok Jyotish Sansthan | Vedic Astrology",
+    title: `${siteName} | Vedic Astrology`,
 
     description:
-      "Personalized Vedic astrology guidance for life's important questions.",
+      "Traditional Vedic astrology guidance including Janam Kundali, Kundali Milan, Muhurat, Vastu, Numerology, Palmistry, Tarot and other Jyotish consultations.",
 
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt:
-          "Shree Nakshatralok Jyotish Sansthan",
+        alt: siteName,
       },
     ],
   },
@@ -125,11 +145,10 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
 
-    title:
-      "Shree Nakshatralok Jyotish Sansthan | Vedic Astrology",
+    title: `${siteName} | Vedic Astrology`,
 
     description:
-      "Personalized Vedic astrology guidance for life's important questions.",
+      "Traditional Vedic astrology guidance from Shree Nakshatralok Jyotish Sansthan.",
 
     images: ["/og-image.jpg"],
   },
@@ -152,11 +171,9 @@ const structuredData = {
 
       url: `${siteUrl}/`,
 
-      name:
-        "Shree Nakshatralok Jyotish Sansthan",
+      name: siteName,
 
-      alternateName:
-        "Shree Nakshatralok",
+      alternateName: "Shree Nakshatralok",
 
       inLanguage: ["en-IN", "hi-IN"],
     },
@@ -168,11 +185,9 @@ const structuredData = {
 
       "@id": `${siteUrl}/#business`,
 
-      name:
-        "Shree Nakshatralok Jyotish Sansthan",
+      name: siteName,
 
-      alternateName:
-        "Shree Nakshatralok",
+      alternateName: "Shree Nakshatralok",
 
       url: `${siteUrl}/`,
 
@@ -187,26 +202,20 @@ const structuredData = {
 
       logo: `${siteUrl}/icon.svg`,
 
-      description:
-        "Shree Nakshatralok Jyotish Sansthan provides traditional Vedic astrology consultations, Janam Kundali, Kundali Milan, Vivah Matching, Vastu, career guidance, gemstones, Tarot and Medical Astrology.",
+      description: siteDescription,
 
       address: {
         "@type": "PostalAddress",
 
-        streetAddress:
-          "Shanti Nagar",
+        streetAddress: "Shanti Nagar",
 
-        addressLocality:
-          "Muzaffarnagar",
+        addressLocality: "Muzaffarnagar",
 
-        addressRegion:
-          "Uttar Pradesh",
+        addressRegion: "Uttar Pradesh",
 
-        postalCode:
-          "251002",
+        postalCode: "251002",
 
-        addressCountry:
-          "IN",
+        addressCountry: "IN",
       },
 
       areaServed: [
@@ -214,10 +223,12 @@ const structuredData = {
           "@type": "City",
           name: "Muzaffarnagar",
         },
+
         {
           "@type": "Country",
           name: "India",
         },
+
         {
           "@type": "Place",
           name: "Worldwide",
@@ -238,13 +249,18 @@ const structuredData = {
         "Kundali Milan",
         "Vivah Matching",
         "Marriage Astrology",
+        "Muhurat",
+        "Naamkaran",
+        "Graha Dosh",
         "Career Astrology",
         "Education Astrology",
         "Business Astrology",
         "Vastu",
         "Gemstone Consultation",
+        "Numerology",
+        "Palmistry",
         "Tarot Reading",
-        "Medical Astrology",
+        "Medical Jyotish",
       ],
     },
 
@@ -255,17 +271,13 @@ const structuredData = {
 
       "@id": `${siteUrl}/#astrologer`,
 
-      name:
-        "Radhey Shyam Sharma",
+      name: "Radhey Shyam Sharma",
 
-      alternateName:
-        "राधे श्याम शर्मा",
+      alternateName: "राधे श्याम शर्मा",
 
-      image:
-        `${siteUrl}/astrologer/radhey-shyam-01.jpg`,
+      image: `${siteUrl}/astrologer/radhey-shyam-01.jpg`,
 
-      jobTitle:
-        "Vedic Astrologer",
+      jobTitle: "Vedic Astrologer",
 
       description:
         "Radhey Shyam Sharma is a Vedic astrologer associated with Shree Nakshatralok Jyotish Sansthan in Muzaffarnagar, Uttar Pradesh, providing traditional astrological consultation and guidance.",
@@ -280,46 +292,50 @@ const structuredData = {
         "Kundali Milan",
         "Vivah Matching",
         "Marriage Astrology",
+        "Muhurat",
+        "Naamkaran",
         "Career Astrology",
         "Education Astrology",
         "Family Astrology",
         "Business Astrology",
         "Vastu",
         "Gemstone Consultation",
+        "Numerology",
+        "Palmistry",
         "Tarot Reading",
-        "Medical Astrology",
+        "Medical Jyotish",
       ],
     },
 
-    /* ================= SERVICES ================= */
+    /* ================= MAIN SERVICE ================= */
 
     {
       "@type": "Service",
 
       "@id": `${siteUrl}/#astrology-consultation`,
 
-      name:
-        "Vedic Astrology Consultation",
+      name: "Vedic Astrology Consultation",
 
       provider: {
         "@id": `${siteUrl}/#business`,
       },
 
-      serviceType:
-        "Vedic Astrology Consultation",
+      serviceType: "Vedic Astrology Consultation",
 
       description:
-        "Personalized Vedic astrology consultation including birth chart analysis, Kundali Milan, Vivah Matching, career guidance, Vastu, gemstones, Tarot and Medical Astrology.",
+        "Traditional Vedic astrology consultation including birth chart analysis, Kundali Milan, Vivah Matching, Muhurat, career guidance, Vastu, gemstones, Numerology, Palmistry, Tarot and Medical Jyotish.",
 
       areaServed: [
         {
           "@type": "City",
           name: "Muzaffarnagar",
         },
+
         {
           "@type": "Country",
           name: "India",
         },
+
         {
           "@type": "Place",
           name: "Worldwide",
@@ -330,51 +346,37 @@ const structuredData = {
         {
           "@type": "ServiceChannel",
 
-          serviceType:
-            "Online Consultation",
+          serviceType: "Online Consultation",
 
-          availableLanguage: [
-            "English",
-            "Hindi",
-          ],
+          availableLanguage: ["English", "Hindi"],
         },
 
         {
           "@type": "ServiceChannel",
 
-          serviceType:
-            "Offline Consultation",
+          serviceType: "Offline Consultation",
 
           serviceLocation: {
             "@type": "Place",
 
-            name:
-              "Shree Nakshatralok Jyotish Sansthan",
+            name: siteName,
 
             address: {
               "@type": "PostalAddress",
 
-              streetAddress:
-                "Shanti Nagar",
+              streetAddress: "Shanti Nagar",
 
-              addressLocality:
-                "Muzaffarnagar",
+              addressLocality: "Muzaffarnagar",
 
-              addressRegion:
-                "Uttar Pradesh",
+              addressRegion: "Uttar Pradesh",
 
-              postalCode:
-                "251002",
+              postalCode: "251002",
 
-              addressCountry:
-                "IN",
+              addressCountry: "IN",
             },
           },
 
-          availableLanguage: [
-            "English",
-            "Hindi",
-          ],
+          availableLanguage: ["English", "Hindi"],
         },
       ],
     },
@@ -401,7 +403,6 @@ export default function RootLayout({
             ),
           }}
         />
-
         {children}
       </body>
     </html>

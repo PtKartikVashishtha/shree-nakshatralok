@@ -2,20 +2,39 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Janam Kundali Analysis in Muzaffarnagar",
+  title: "Janam Kundali Analysis in Muzaffarnagar | Birth Chart",
   description:
-    "Janam Kundali and birth chart consultation based on date, time and place of birth. Explore career, marriage, education, family and life questions with traditional Vedic astrology guidance.",
+    "Janam Kundali and birth chart consultation in Muzaffarnagar based on date, time and place of birth. Explore career, marriage, education, family and important life questions through traditional Vedic astrology.",
+
   keywords: [
     "Janam Kundali",
     "Janam Kundali Muzaffarnagar",
+    "Janam Kundli",
+    "Janam Kundli Muzaffarnagar",
     "Kundali Analysis",
     "Birth Chart Analysis",
+    "Birth Chart Muzaffarnagar",
     "Vedic Birth Chart",
     "Janam Patrika",
     "जन्म कुंडली",
+    "जन्म कुंडली मुजफ्फरनगर",
     "जन्म पत्रिका",
     "कुंडली विश्लेषण",
+    "Kundali Reading",
+    "Vedic Astrology",
   ],
+
+  alternates: {
+    canonical: "/services/janam-kundli",
+  },
+
+  openGraph: {
+    title: "Janam Kundali Analysis in Muzaffarnagar | Birth Chart",
+    description:
+      "Traditional Janam Kundali and birth-chart consultation based on your date, time and place of birth.",
+    url: "/services/janam-kundli",
+    type: "website",
+  },
 };
 
 const topics = [

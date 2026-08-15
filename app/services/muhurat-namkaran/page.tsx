@@ -2,22 +2,42 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Shubh Muhurat & Namkaran Consultation in Muzaffarnagar",
+  title: "Shubh Muhurat & Namkaran in Muzaffarnagar",
   description:
-    "Traditional Shubh Muhurat and Namkaran consultation in Muzaffarnagar for marriage, Griha Pravesh, business, property, vehicle and other important beginnings.",
+    "Traditional Shubh Muhurat and Namkaran consultation in Muzaffarnagar for marriage, Griha Pravesh, business openings, property, vehicles, important beginnings and newborn naming.",
+
   keywords: [
-    "Shubh Muhurat",
-    "Muhurat Muzaffarnagar",
-    "Namkaran",
-    "Namkaran Muhurat",
     "Shubh Muhurat Muzaffarnagar",
-    "Auspicious Time",
-    "Griha Pravesh Muhurat",
+    "Muhurat Consultation Muzaffarnagar",
+    "Muhurat in Muzaffarnagar",
+    "Namkaran Muzaffarnagar",
+    "Namkaran Consultation",
+    "Namkaran Muhurat",
     "Marriage Muhurat",
+    "Griha Pravesh Muhurat",
+    "Business Opening Muhurat",
+    "Property Purchase Muhurat",
+    "Vehicle Purchase Muhurat",
+    "Auspicious Time",
+    "Shubh Muhurat",
     "मुहूर्त",
     "शुभ मुहूर्त",
     "नामकरण",
+    "नामकरण मुहूर्त",
+    "गृह प्रवेश मुहूर्त",
   ],
+
+  alternates: {
+    canonical: "/services/muhurat-namkaran",
+  },
+
+  openGraph: {
+    title: "Shubh Muhurat & Namkaran in Muzaffarnagar",
+    description:
+      "Traditional Muhurat consultation for important beginnings and Namkaran guidance for newborns.",
+    url: "/services/muhurat-namkaran",
+    type: "website",
+  },
 };
 
 const occasions = [
@@ -506,7 +526,7 @@ export default function MuhuratNamkaranPage() {
           </p>
 
           <Link
-            href="/services/janam-kundali"
+            href="/services/janam-kundli"
             className="mt-7 inline-flex items-center rounded-full border border-[#8b2418] px-7 py-3.5 font-semibold text-[#8b2418] transition hover:bg-[#8b2418] hover:text-white"
           >
             Explore Janam Kundali

@@ -4,19 +4,34 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Tarot Reading in Muzaffarnagar | Tarot Consultation",
   description:
-    "Tarot reading consultation in Muzaffarnagar for relationships, career decisions, personal questions and situations where you are seeking clarity and perspective.",
+    "Tarot consultation in Muzaffarnagar for relationships, career decisions, personal questions and situations where you want clarity, reflection and a different perspective.",
+
   keywords: [
-    "Tarot Reading",
     "Tarot Reading Muzaffarnagar",
-    "Tarot Consultation",
-    "Tarot Card Reading",
-    "Love Tarot",
-    "Career Tarot",
     "Tarot Reader Muzaffarnagar",
+    "Tarot Consultation Muzaffarnagar",
+    "Tarot Card Reading",
+    "Tarot Reading",
+    "Love Tarot Reading",
+    "Relationship Tarot",
+    "Career Tarot",
+    "Tarot Consultation India",
     "टैरो रीडिंग",
     "टैरो कार्ड",
     "टैरो परामर्श",
   ],
+
+  alternates: {
+    canonical: "/services/tarot-reading",
+  },
+
+  openGraph: {
+    title: "Tarot Reading in Muzaffarnagar | Tarot Consultation",
+    description:
+      "Question-focused Tarot consultation for relationships, career decisions, personal situations and moments when you want another perspective.",
+    url: "/services/tarot-reading",
+    type: "website",
+  },
 };
 
 const areas = [
@@ -580,7 +595,7 @@ export default function TarotReadingPage() {
           </p>
 
           <Link
-            href="/services/janam-kundali"
+            href="/services/janam-kundli"
             className="mt-7 inline-flex items-center rounded-full border border-[#8b2418] px-7 py-3.5 font-semibold text-[#8b2418] transition hover:bg-[#8b2418] hover:text-white"
           >
             Explore Janam Kundali

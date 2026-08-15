@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Kundali Milan & Vivah Matching in Muzaffarnagar",
   description:
     "Kundali Milan (कुंडली मिलान) and Vivah Matching (विवाह मिलान) consultation based on traditional Vedic Astrology. Personalized marriage compatibility guidance in Muzaffarnagar and online.",
+
   keywords: [
     "Kundali Milan",
     "कुंडली मिलान",
@@ -22,6 +23,18 @@ export const metadata: Metadata = {
     "Ashtakoota",
     "अष्टकूट",
   ],
+
+  alternates: {
+    canonical: "/services/kundali-milan",
+  },
+
+  openGraph: {
+    title: "Kundali Milan & Vivah Matching in Muzaffarnagar",
+    description:
+      "Traditional Kundali Milan and Vivah Matching consultation for understanding marital compatibility through birth charts.",
+    url: "/services/kundali-milan",
+    type: "website",
+  },
 };
 
 export default function KundaliMilanPage() {

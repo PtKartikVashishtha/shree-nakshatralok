@@ -4,21 +4,36 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Palmistry Consultation in Muzaffarnagar | Hast Rekha Shastra",
   description:
-    "Traditional Palmistry and Hast Rekha Shastra consultation in Muzaffarnagar. Explore palm lines, mounts and traditional interpretations through an in-person or image-based reading.",
+    "Traditional Palmistry and Hast Rekha Shastra consultation in Muzaffarnagar. Explore palm lines, mounts, fingers and markings through an in-person or clear-image palm reading.",
+
   keywords: [
-    "Palmistry",
-    "Palmistry Consultation",
-    "Palm Reading",
     "Palmistry Muzaffarnagar",
+    "Palmistry Consultation Muzaffarnagar",
+    "Palm Reader Muzaffarnagar",
+    "Palm Reading Muzaffarnagar",
     "Hast Rekha Shastra",
     "Hast Rekha",
-    "Palm Reader Muzaffarnagar",
-    "Palm Reading India",
+    "Hast Rekha Jyotish",
+    "Palm Reading",
+    "Palmistry India",
+    "Online Palm Reading",
     "हस्त रेखा",
     "हस्त रेखा शास्त्र",
     "हस्तरेखा",
     "हस्तरेखा ज्योतिष",
   ],
+
+  alternates: {
+    canonical: "/services/palmistry",
+  },
+
+  openGraph: {
+    title: "Palmistry Consultation in Muzaffarnagar | Hast Rekha Shastra",
+    description:
+      "Traditional palmistry consultation covering major lines, mounts, fingers and markings through in-person or clear-image readings.",
+    url: "/services/palmistry",
+    type: "website",
+  },
 };
 
 const lines = [
@@ -559,7 +574,7 @@ export default function PalmistryPage() {
           </p>
 
           <Link
-            href="/services/janam-kundali"
+            href="/services/janam-kundli"
             className="mt-7 inline-flex items-center rounded-full border border-[#8b2418] px-7 py-3.5 font-semibold text-[#8b2418] transition hover:bg-[#8b2418] hover:text-white"
           >
             Explore Janam Kundali

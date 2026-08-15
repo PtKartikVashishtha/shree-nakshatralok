@@ -2,20 +2,36 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Medical Jyotish Consultation | Chikitsa Jyotish | Shree Nakshatralok",
+  title: "Medical Jyotish in Muzaffarnagar | Chikitsa Jyotish",
   description:
-    "Traditional Medical Jyotish consultation exploring planetary and astrological influences traditionally associated with wellbeing and health-related themes.",
+    "Traditional Medical Jyotish and Chikitsa Jyotish consultation in Muzaffarnagar and online, exploring birth-chart patterns traditionally associated with wellbeing and health-related themes.",
+
   keywords: [
+    "Medical Jyotish Muzaffarnagar",
+    "Chikitsa Jyotish Muzaffarnagar",
+    "Medical Astrology Muzaffarnagar",
     "Medical Jyotish",
     "Chikitsa Jyotish",
     "Medical Astrology",
     "Health Astrology",
-    "Medical Astrology Muzaffarnagar",
-    "Jyotish Consultation",
+    "Jyotish for Health",
+    "Medical Astrology India",
     "चिकित्सा ज्योतिष",
     "स्वास्थ्य ज्योतिष",
     "चिकित्सा ज्योतिष परामर्श",
   ],
+
+  alternates: {
+    canonical: "/services/medical-astrology",
+  },
+
+  openGraph: {
+    title: "Medical Jyotish in Muzaffarnagar | Chikitsa Jyotish",
+    description:
+      "Traditional Chikitsa Jyotish consultation exploring birth-chart patterns associated with wellbeing and health-related themes.",
+    url: "/services/medical-astrology",
+    type: "website",
+  },
 };
 
 const principles = [

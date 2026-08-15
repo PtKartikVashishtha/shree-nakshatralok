@@ -4,20 +4,34 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Vastu Consultation in Muzaffarnagar",
   description:
-    "Traditional Vastu consultation in Muzaffarnagar for homes, offices, shops and properties, with guidance based on layout, direction and the purpose of the space.",
+    "Traditional Vastu Shastra consultation in Muzaffarnagar for homes, offices, shops and properties. Guidance based on layout, direction, space and intended use.",
+
   keywords: [
-    "Vastu",
-    "Vastu Consultation",
+    "Vastu Consultation Muzaffarnagar",
     "Vastu Consultant Muzaffarnagar",
     "Vastu Shastra Muzaffarnagar",
+    "Vastu for Home Muzaffarnagar",
     "Home Vastu",
     "Office Vastu",
     "Shop Vastu",
+    "Property Vastu",
     "Vastu Shastra",
     "वास्तु",
     "वास्तु शास्त्र",
     "वास्तु परामर्श",
   ],
+
+  alternates: {
+    canonical: "/services/vastu",
+  },
+
+  openGraph: {
+    title: "Vastu Consultation in Muzaffarnagar",
+    description:
+      "Traditional Vastu guidance for homes, offices, shops and properties in Muzaffarnagar and online.",
+    url: "/services/vastu",
+    type: "website",
+  },
 };
 
 const spaces = [
@@ -535,7 +549,7 @@ export default function VastuPage() {
         </p>
 
         <Link
-          href="/services/janam-kundali"
+          href="/services/janam-kundli"
           className="mt-7 inline-flex items-center rounded-full border border-[#8b2418] px-7 py-3.5 font-semibold text-[#8b2418] transition hover:bg-[#8b2418] hover:text-white"
         >
           Explore Janam Kundali

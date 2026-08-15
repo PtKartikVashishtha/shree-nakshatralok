@@ -4,17 +4,33 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Vedic Astrology Consultation in Muzaffarnagar",
   description:
-    "Traditional Vedic astrology consultation in Muzaffarnagar for marriage, career, education, family, business and important life questions. Online consultation also available.",
+    "Consult a Vedic astrologer in Muzaffarnagar for Janam Kundali, marriage, career, education, family, business and important life questions. Online consultation available across India and worldwide.",
+
   keywords: [
-    "Vedic Astrology",
     "Vedic Astrology Muzaffarnagar",
     "Vedic Astrologer Muzaffarnagar",
+    "Astrologer in Muzaffarnagar",
     "Jyotish Muzaffarnagar",
     "Vedic Jyotish",
+    "Janam Kundali",
+    "Career Astrology",
+    "Marriage Astrology",
+    "Business Astrology",
     "वैदिक ज्योतिष",
     "ज्योतिष परामर्श",
-    "Astrologer in Muzaffarnagar",
   ],
+
+  alternates: {
+    canonical: "/services/vedic-astrology",
+  },
+
+  openGraph: {
+    title: "Vedic Astrology Consultation in Muzaffarnagar",
+    description:
+      "Traditional Vedic astrology consultation for marriage, career, education, family, business and important life questions.",
+    url: "/services/vedic-astrology",
+    type: "website",
+  },
 };
 
 const areas = [
@@ -48,7 +64,7 @@ const relatedServices = [
   {
     title: "Janam Kundali",
     hindi: "जन्म कुंडली",
-    href: "/services/janam-kundali",
+    href: "/services/janam-kundli",
     text: "Birth-chart based consultation.",
   },
   {
@@ -66,7 +82,7 @@ const relatedServices = [
   {
     title: "Gemstone Consultation",
     hindi: "रत्न परामर्श",
-    href: "/services/gemstones",
+    href: "/services/gemstone-consultation",
     text: "Astrological guidance concerning gemstones.",
   },
 ];

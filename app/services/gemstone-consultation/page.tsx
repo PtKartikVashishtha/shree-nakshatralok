@@ -4,19 +4,40 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Gemstone Consultation in Muzaffarnagar | Ratna Jyotish",
   description:
-    "Traditional gemstone consultation in Muzaffarnagar based on individual birth-chart analysis and traditional Ratna Jyotish principles.",
+    "Traditional Ratna Jyotish gemstone consultation in Muzaffarnagar based on your individual birth chart. Understand traditional gemstone associations, suitability, wearing methods and alternatives.",
+
   keywords: [
-    "Gemstone Consultation",
+    "Gemstone Consultation Muzaffarnagar",
+    "Gemstone Consultant Muzaffarnagar",
+    "Ratna Jyotish Muzaffarnagar",
     "Ratna Jyotish",
     "Gemstone Astrology",
-    "Gemstone Consultant Muzaffarnagar",
     "Astrological Gemstone",
-    "Ratna Shastra",
     "Gemstone Recommendation",
+    "Gemstone Consultation",
+    "Ratna Shastra",
+    "Ruby Astrology",
+    "Emerald Astrology",
+    "Yellow Sapphire Astrology",
+    "Pearl Astrology",
+    "Red Coral Astrology",
     "रत्न ज्योतिष",
     "रत्न परामर्श",
     "ज्योतिष रत्न",
+    "रत्न शास्त्र",
   ],
+
+  alternates: {
+    canonical: "/services/gemstone-consultation",
+  },
+
+  openGraph: {
+    title: "Gemstone Consultation in Muzaffarnagar | Ratna Jyotish",
+    description:
+      "Traditional gemstone consultation based on individual birth-chart analysis and Ratna Jyotish principles.",
+    url: "/services/gemstone-consultation",
+    type: "website",
+  },
 };
 
 const questions = [
@@ -474,7 +495,7 @@ export default function GemstoneConsultationPage() {
           </p>
 
           <Link
-            href="/services/janam-kundali"
+            href="/services/janam-kundli"
             className="mt-7 inline-flex items-center rounded-full border border-[#8b2418] px-7 py-3.5 font-semibold text-[#8b2418] transition hover:bg-[#8b2418] hover:text-white"
           >
             Explore Janam Kundali
