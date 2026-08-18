@@ -9,6 +9,20 @@ const resend = new Resend(
 );
 
 const schema = z.object({
+  // Requester details
+  name: z
+    .string()
+    .trim()
+    .min(1, "Your name is required.")
+    .max(100),
+
+  address: z
+    .string()
+    .trim()
+    .min(1, "Your address is required.")
+    .max(500),
+
+  // Person 1
   person1Name: z
     .string()
     .trim()
@@ -37,6 +51,7 @@ const schema = z.object({
     .min(1, "Person 1 birth place is required.")
     .max(200),
 
+  // Person 2
   person2Name: z
     .string()
     .trim()
@@ -71,6 +86,7 @@ const schema = z.object({
     .max(2000)
     .optional(),
 
+  // Honeypot
   website: z
     .string()
     .max(0)
@@ -79,6 +95,64 @@ const schema = z.object({
 
 export async function POST(req: Request) {
   try {
+    // -----------------------------
+    // READ BODY
+    // -----------------------------
+
+    const body = await req.json();
+
+    // -----------------------------
+    // VALIDATION
+    // -----------------------------
+
+    const parsed = schema.safeParse(body);
+
+    if (!parsed.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            parsed.error.issues[0]?.message ||
+            "Please check your submitted information.",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    const {
+      name,
+      address,
+      person1Name,
+      person1Dob,
+      person1BirthTime,
+      person1BirthPlace,
+      person2Name,
+      person2Dob,
+      person2BirthTime,
+      person2BirthPlace,
+      question,
+      website,
+    } = parsed.data;
+
+    // -----------------------------
+    // HONEYPOT
+    // -----------------------------
+
+    if (website) {
+      return NextResponse.json(
+        {
+          success: true,
+          message:
+            "Your Kundali Milan request has been submitted successfully.",
+        },
+        {
+          status: 201,
+        }
+      );
+    }
+
     // -----------------------------
     // GET CLIENT IP
     // -----------------------------
@@ -121,62 +195,6 @@ export async function POST(req: Request) {
     }
 
     // -----------------------------
-    // READ BODY
-    // -----------------------------
-
-    const body = await req.json();
-
-    // -----------------------------
-    // VALIDATION
-    // -----------------------------
-
-    const parsed = schema.safeParse(body);
-
-    if (!parsed.success) {
-      return NextResponse.json(
-        {
-          success: false,
-          error:
-            parsed.error.issues[0]?.message ||
-            "Please check your submitted information.",
-        },
-        {
-          status: 400,
-        }
-      );
-    }
-
-    const {
-      person1Name,
-      person1Dob,
-      person1BirthTime,
-      person1BirthPlace,
-      person2Name,
-      person2Dob,
-      person2BirthTime,
-      person2BirthPlace,
-      question,
-      website,
-    } = parsed.data;
-
-    // -----------------------------
-    // HONEYPOT
-    // -----------------------------
-
-    if (website) {
-      return NextResponse.json(
-        {
-          success: true,
-          message:
-            "Your Kundali Milan request has been submitted successfully.",
-        },
-        {
-          status: 201,
-        }
-      );
-    }
-
-    // -----------------------------
     // DOB VALIDATION
     // -----------------------------
 
@@ -207,7 +225,7 @@ export async function POST(req: Request) {
     }
 
     // -----------------------------
-    // SAVE
+    // SAVE TO DATABASE
     // -----------------------------
 
     const submission =
@@ -215,16 +233,23 @@ export async function POST(req: Request) {
         data: {
           type: "KUNDALI_MILAN",
 
+          // Requester details
+          name,
+          address,
+
+          // Person 1
           person1Name,
           person1Dob,
           person1BirthTime,
           person1BirthPlace,
 
+          // Person 2
           person2Name,
           person2Dob,
           person2BirthTime,
           person2BirthPlace,
 
+          // Additional question
           question: question || "",
         },
       });
@@ -250,6 +275,20 @@ export async function POST(req: Request) {
             <h2 style="color: #68170f;">
               New Kundali Milan Request
             </h2>
+
+            <hr />
+
+            <h3>Requester Details</h3>
+
+            <p>
+              <strong>Name:</strong>
+              ${escapeHtml(name)}
+            </p>
+
+            <p>
+              <strong>Address:</strong>
+              ${escapeHtml(address)}
+            </p>
 
             <hr />
 
@@ -304,7 +343,9 @@ export async function POST(req: Request) {
             <h3>Question</h3>
 
             <p style="white-space: pre-wrap;">
-              ${escapeHtml(question || "No additional question")}
+              ${escapeHtml(
+                question || "No additional question"
+              )}
             </p>
 
             <hr />
@@ -320,6 +361,10 @@ export async function POST(req: Request) {
         text: `
 New Kundali Milan Request
 
+REQUESTER DETAILS
+Name: ${name}
+Address: ${address}
+
 PERSON 1
 Name: ${person1Name}
 Date of Birth: ${person1Dob}
@@ -332,13 +377,17 @@ Date of Birth: ${person2Dob}
 Time of Birth: ${person2BirthTime}
 Birth Place: ${person2BirthPlace}
 
-Question:
+QUESTION
 ${question || "No additional question"}
 
 This request has also been saved
 in the admin dashboard.
         `,
       });
+
+    // -----------------------------
+    // EMAIL FAILURE
+    // -----------------------------
 
     if (error) {
       console.error(
@@ -359,6 +408,10 @@ in the admin dashboard.
         }
       );
     }
+
+    // -----------------------------
+    // SUCCESS
+    // -----------------------------
 
     console.log(
       "Kundali Milan email sent:",
@@ -395,6 +448,10 @@ in the admin dashboard.
     );
   }
 }
+
+// -----------------------------
+// HTML ESCAPING
+// -----------------------------
 
 function escapeHtml(value: string) {
   return value
