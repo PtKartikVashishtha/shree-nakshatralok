@@ -11,7 +11,8 @@ type SubmissionStatus =
 
 type SubmissionType =
   | "GENERAL"
-  | "KUNDALI_MILAN";
+  | "KUNDALI_MILAN"
+  | "JANAM_KUNDLI";
 
 export default async function AdminPage() {
   const session = await auth();

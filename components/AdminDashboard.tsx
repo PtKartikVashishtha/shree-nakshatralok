@@ -9,7 +9,8 @@ type SubmissionStatus =
 
 type SubmissionType =
   | "GENERAL"
-  | "KUNDALI_MILAN";
+  | "KUNDALI_MILAN"
+  | "JANAM_KUNDLI";
 
 type Submission = {
   id: string;
@@ -94,17 +95,26 @@ export default function AdminDashboard({
   // SEPARATE REQUEST TYPES
   // --------------------------------
 
-  const kundaliSubmissions = filtered.filter(
-    (item) => item.type === "KUNDALI_MILAN"
-  );
+  const kundaliSubmissions =
+    filtered.filter(
+      (item) => item.type === "KUNDALI_MILAN"
+    );
 
-  const generalSubmissions = filtered.filter(
-    (item) => item.type !== "KUNDALI_MILAN"
-  );
+  const generalSubmissions =
+    filtered.filter(
+      (item) => item.type === "GENERAL"
+    );
+
+  const janamKundliSubmissions =
+    filtered.filter(
+      (item) => item.type === "JANAM_KUNDLI"
+    );
 
   const activeSubmissions =
     activeSection === "KUNDALI_MILAN"
       ? kundaliSubmissions
+      : activeSection === "JANAM_KUNDLI"
+      ? janamKundliSubmissions
       : generalSubmissions;
 
   // --------------------------------
@@ -175,7 +185,9 @@ export default function AdminDashboard({
       }
 
       setSubmissions((current) =>
-        current.filter((item) => item.id !== id)
+        current.filter(
+          (item) => item.id !== id
+        )
       );
     } catch (error) {
       alert(
@@ -237,9 +249,14 @@ export default function AdminDashboard({
   // REQUEST CARD
   // --------------------------------
 
-  function renderSubmission(item: Submission) {
+  function renderSubmission(
+    item: Submission
+  ) {
     const isKundali =
       item.type === "KUNDALI_MILAN";
+
+    const isJanamKundli =
+      item.type === "JANAM_KUNDLI";
 
     const displayName = isKundali
       ? `${item.person1Name || "Person 1"} & ${
@@ -254,29 +271,14 @@ export default function AdminDashboard({
     return (
       <article
         key={item.id}
-        className={`overflow-hidden rounded-3xl border bg-[#fffdf8] shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg ${
-          isKundali
-            ? "border-[#c9a15d]/70"
-            : "border-[#ded1be]"
-        }`}
+        className="overflow-hidden rounded-3xl border border-[#ded1be] bg-[#fffdf8] shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
       >
-        {/* ================= HEADER ================= */}
+        {/* HEADER */}
 
-        <div
-          className={`flex flex-col gap-4 border-b px-6 py-5 md:flex-row md:items-center md:justify-between ${
-            isKundali
-              ? "border-[#e5d3a9] bg-[#faf3df]"
-              : "border-[#e7dccd] bg-[#faf5eb]"
-          }`}
-        >
+        <div className="flex flex-col gap-4 border-b border-[#e7dccd] bg-[#faf5eb] px-6 py-5 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
-            <div
-              className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full font-serif text-lg ${
-                isKundali
-                  ? "bg-[#6b160f] text-[#e7c77d]"
-                  : "bg-[#5b130d] text-[#e7c77d]"
-              }`}
-            >
+
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#5b130d] font-serif text-lg text-[#e7c77d]">
               {initial}
             </div>
 
@@ -292,9 +294,11 @@ export default function AdminDashboard({
                 ).toLocaleString("en-IN")}
               </p>
             </div>
+
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
+
             <select
               value={item.status}
               onChange={(e) =>
@@ -335,19 +339,19 @@ export default function AdminDashboard({
                 ? "Deleting..."
                 : "Delete"}
             </button>
+
           </div>
         </div>
 
-        {/* ================= KUNDALI ================= */}
+        {/* ================= KUNDALI MILAN ================= */}
 
         {isKundali ? (
           <div className="px-6 py-7">
 
-            {/* REQUESTER */}
+            <div className="mb-6 rounded-2xl border border-[#eadfcf] bg-[#fbf7ef] p-5">
 
-            <div className="mb-6 rounded-2xl border border-[#d9c28e] bg-[#fff9e9] p-5">
               <div className="mb-4">
-                <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a2742e]">
+                <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
                   Requester Details
                 </p>
 
@@ -365,15 +369,15 @@ export default function AdminDashboard({
                 {item.address ||
                   "Address not provided"}
               </p>
-            </div>
 
-            {/* PERSONS */}
+            </div>
 
             <div className="grid gap-5 md:grid-cols-2">
 
               {/* PERSON 1 */}
 
               <div className="rounded-2xl border border-[#eadfcf] bg-[#fbf7ef] p-5">
+
                 <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
                   Person 1
                 </p>
@@ -384,6 +388,7 @@ export default function AdminDashboard({
                 </h4>
 
                 <div className="mt-5 space-y-4">
+
                   <div>
                     <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
                       Date of Birth
@@ -416,12 +421,15 @@ export default function AdminDashboard({
                         "Not provided"}
                     </p>
                   </div>
+
                 </div>
+
               </div>
 
               {/* PERSON 2 */}
 
               <div className="rounded-2xl border border-[#eadfcf] bg-[#fbf7ef] p-5">
+
                 <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
                   Person 2
                 </p>
@@ -432,6 +440,7 @@ export default function AdminDashboard({
                 </h4>
 
                 <div className="mt-5 space-y-4">
+
                   <div>
                     <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
                       Date of Birth
@@ -464,35 +473,122 @@ export default function AdminDashboard({
                         "Not provided"}
                     </p>
                   </div>
-                </div>
-              </div>
-            </div>
 
-            {/* QUESTION */}
+                </div>
+
+              </div>
+
+            </div>
 
             {item.question && (
               <div className="mt-6">
+
                 <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
                   Additional Question
                 </p>
 
                 <div className="mt-3 rounded-xl border border-[#eadfcf] bg-[#fbf7ef] px-5 py-4">
+
                   <p className="whitespace-pre-wrap text-sm leading-7 text-[#56443d]">
                     {item.question}
                   </p>
+
                 </div>
+
               </div>
             )}
+
           </div>
+
+        ) : isJanamKundli ? (
+
+          /* ================= JANAM KUNDLI ================= */
+
+          <div className="px-6 py-7">
+
+            <div className="rounded-2xl border border-[#eadfcf] bg-[#fbf7ef] p-5">
+
+              <div className="mb-6">
+
+                <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a2742e]">
+                  JANAM KUNDLI REQUEST
+                </p>
+
+                <h4 className="mt-1 font-serif text-2xl text-[#57120d]">
+                  {item.name ||
+                    "Name not provided"}
+                </h4>
+
+              </div>
+
+              <div className="grid gap-5 md:grid-cols-3">
+
+                <div>
+                  <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                    Date of Birth
+                  </p>
+
+                  <p className="mt-2 text-sm font-semibold text-[#39251f]">
+                    {item.dob ||
+                      "Not provided"}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                    Birth Time
+                  </p>
+
+                  <p className="mt-2 text-sm font-semibold text-[#39251f]">
+                    {item.birthTime ||
+                      "Not provided"}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                    Place of Birth
+                  </p>
+
+                  <p className="mt-2 text-sm leading-6 text-[#64524a]">
+                    {item.address ||
+                      "Not provided"}
+                  </p>
+                </div>
+
+              </div>
+
+              <div className="mt-6 border-t border-[#e5d8c6] pt-5">
+
+                <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                  Question
+                </p>
+
+                <div className="mt-3 rounded-xl border border-[#eadfcf] bg-white/60 px-5 py-4">
+
+                  <p className="whitespace-pre-wrap text-sm leading-7 text-[#56443d]">
+                    {item.question ||
+                      "Not provided"}
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
         ) : (
 
           /* ================= GENERAL ================= */
 
           <div className="px-6 py-7">
+
             <div className="rounded-2xl border border-[#eadfcf] bg-[#fbf7ef] p-5">
 
               <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
-                Requester
+                REQUESTER
               </p>
 
               <h4 className="mt-1 font-serif text-2xl text-[#57120d]">
@@ -534,21 +630,28 @@ export default function AdminDashboard({
                       "Not provided"}
                   </p>
                 </div>
+
               </div>
 
               <div className="mt-6 border-t border-[#e5d8c6] pt-5">
+
                 <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
                   Question
                 </p>
 
                 <div className="mt-3 rounded-xl border border-[#eadfcf] bg-white/60 px-5 py-4">
+
                   <p className="whitespace-pre-wrap text-sm leading-7 text-[#56443d]">
                     {item.question ||
                       "Not provided"}
                   </p>
+
                 </div>
+
               </div>
+
             </div>
+
           </div>
         )}
       </article>
@@ -631,11 +734,13 @@ export default function AdminDashboard({
             Consultation handled
           </p>
         </div>
+
       </div>
 
       {/* ================= SEARCH ================= */}
 
       <div className="mt-8 rounded-2xl border border-[#ddcfbb] bg-[#fffdf8] p-4 shadow-sm">
+
         <div className="flex flex-col gap-3 md:flex-row">
 
           <input
@@ -649,13 +754,17 @@ export default function AdminDashboard({
 
           {search && (
             <button
-              onClick={() => setSearch("")}
+              onClick={() =>
+                setSearch("")
+              }
               className="rounded-xl border border-[#ded0bd] px-5 py-3 text-xs font-semibold text-[#745f54] hover:bg-[#f6efe3]"
             >
               Clear
             </button>
           )}
+
         </div>
+
       </div>
 
       {/* ================= REQUEST HEADER ================= */}
@@ -663,6 +772,7 @@ export default function AdminDashboard({
       <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
 
         <div>
+
           <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#a2742e]">
             ENQUIRIES
           </p>
@@ -674,6 +784,7 @@ export default function AdminDashboard({
           <p className="mt-1 text-xs text-[#8c796c]">
             Select a consultation category below
           </p>
+
         </div>
 
         <a
@@ -682,15 +793,14 @@ export default function AdminDashboard({
         >
           ↓ Export CSV
         </a>
+
       </div>
 
-      {/* ===================================================== */}
-      {/* ====================== TABS ========================= */}
-      {/* ===================================================== */}
+      {/* ================= TABS ================= */}
 
-      <div className="mt-7 grid overflow-hidden rounded-3xl border border-[#d8cbb9] bg-[#fffdf8] shadow-sm md:grid-cols-2">
+      <div className="mt-7 grid overflow-hidden rounded-3xl border border-[#d8cbb9] bg-[#fffdf8] shadow-sm md:grid-cols-3">
 
-        {/* KUNDALI TAB */}
+        {/* KUNDALI MILAN */}
 
         <button
           type="button"
@@ -699,10 +809,11 @@ export default function AdminDashboard({
           }
           className={`relative px-6 py-6 text-left transition ${
             activeSection === "KUNDALI_MILAN"
-              ? "bg-gradient-to-br from-[#fff8e8] to-[#f8edcf]"
+              ? "bg-gradient-to-br from-[#fffdf8] to-[#f5ede2]"
               : "bg-[#fffdf8] hover:bg-[#faf5eb]"
           }`}
         >
+
           {activeSection === "KUNDALI_MILAN" && (
             <span className="absolute bottom-0 left-0 right-0 h-1 bg-[#9c712d]" />
           )}
@@ -714,7 +825,7 @@ export default function AdminDashboard({
               <div
                 className={`flex h-12 w-12 items-center justify-center rounded-full text-xl ${
                   activeSection === "KUNDALI_MILAN"
-                    ? "bg-[#68170f] text-[#e7c77d]"
+                    ? "bg-[#5b130d] text-[#e7c77d]"
                     : "bg-[#f3ead9] text-[#9c712d]"
                 }`}
               >
@@ -722,6 +833,7 @@ export default function AdminDashboard({
               </div>
 
               <div>
+
                 <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a2742e]">
                   MARRIAGE CONSULTATION
                 </p>
@@ -729,26 +841,31 @@ export default function AdminDashboard({
                 <h3 className="mt-1 font-serif text-2xl text-[#57120d]">
                   Kundali Milan
                 </h3>
+
               </div>
+
             </div>
 
             <span
               className={`rounded-full px-4 py-2 text-xs font-bold ${
                 activeSection === "KUNDALI_MILAN"
-                  ? "bg-[#ead6a7] text-[#704b0d]"
+                  ? "bg-[#eee5d7] text-[#735e51]"
                   : "bg-[#f3ead9] text-[#806d60]"
               }`}
             >
               {kundaliSubmissions.length}
             </span>
+
           </div>
 
           <p className="mt-4 pl-16 text-xs text-[#806d60]">
             Marriage matching and compatibility enquiries
           </p>
+
         </button>
 
-        {/* GENERAL TAB */}
+
+        {/* GENERAL CONSULTATION */}
 
         <button
           type="button"
@@ -761,6 +878,7 @@ export default function AdminDashboard({
               : "bg-[#fffdf8] hover:bg-[#faf5eb]"
           }`}
         >
+
           {activeSection === "GENERAL" && (
             <span className="absolute bottom-0 left-0 right-0 h-1 bg-[#9c712d]" />
           )}
@@ -780,6 +898,7 @@ export default function AdminDashboard({
               </div>
 
               <div>
+
                 <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a2742e]">
                   ASTROLOGY CONSULTATION
                 </p>
@@ -787,7 +906,9 @@ export default function AdminDashboard({
                 <h3 className="mt-1 font-serif text-2xl text-[#57120d]">
                   General Consultation
                 </h3>
+
               </div>
+
             </div>
 
             <span
@@ -799,30 +920,103 @@ export default function AdminDashboard({
             >
               {generalSubmissions.length}
             </span>
+
           </div>
 
           <p className="mt-4 pl-16 text-xs text-[#806d60]">
             Individual astrology and life-guidance enquiries
           </p>
-        </button>
-      </div>
 
-      {/* ================= ACTIVE SECTION TITLE ================= */}
+        </button>
+
+
+        {/* JANAM KUNDLI */}
+
+        <button
+          type="button"
+          onClick={() =>
+            setActiveSection("JANAM_KUNDLI")
+          }
+          className={`relative border-t border-[#e1d6c6] px-6 py-6 text-left transition md:border-l md:border-t-0 ${
+            activeSection === "JANAM_KUNDLI"
+              ? "bg-gradient-to-br from-[#fffdf8] to-[#f5ede2]"
+              : "bg-[#fffdf8] hover:bg-[#faf5eb]"
+          }`}
+        >
+
+          {activeSection === "JANAM_KUNDLI" && (
+            <span className="absolute bottom-0 left-0 right-0 h-1 bg-[#9c712d]" />
+          )}
+
+          <div className="flex items-center justify-between">
+
+            <div className="flex items-center gap-4">
+
+              <div
+                className={`flex h-12 w-12 items-center justify-center rounded-full text-xl ${
+                  activeSection === "JANAM_KUNDLI"
+                    ? "bg-[#5b130d] text-[#e7c77d]"
+                    : "bg-[#f3ead9] text-[#9c712d]"
+                }`}
+              >
+                📜
+              </div>
+
+              <div>
+
+                <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a2742e]">
+                  BIRTH CHART
+                </p>
+
+                <h3 className="mt-1 font-serif text-2xl text-[#57120d]">
+                  Janam Kundli
+                </h3>
+
+              </div>
+
+            </div>
+
+            <span
+              className={`rounded-full px-4 py-2 text-xs font-bold ${
+                activeSection === "JANAM_KUNDLI"
+                  ? "bg-[#eee5d7] text-[#735e51]"
+                  : "bg-[#f3ead9] text-[#806d60]"
+              }`}
+            >
+              {janamKundliSubmissions.length}
+            </span>
+
+          </div>
+
+          <p className="mt-4 pl-16 text-xs text-[#806d60]">
+            Birth chart and life guidance enquiries
+          </p>
+
+        </button>
+
+      </div>
+      {/* ================= ACTIVE SECTION ================= */}
 
       <div className="mt-8 flex items-center justify-between">
 
         <div>
+
           <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a2742e]">
             {activeSection === "KUNDALI_MILAN"
               ? "KUNDALI MILAN REQUESTS"
+              : activeSection === "JANAM_KUNDLI"
+              ? "JANAM KUNDLI REQUESTS"
               : "GENERAL CONSULTATION REQUESTS"}
           </p>
 
           <h3 className="mt-1 font-serif text-2xl text-[#57120d]">
             {activeSection === "KUNDALI_MILAN"
               ? "Marriage Matching Enquiries"
+              : activeSection === "JANAM_KUNDLI"
+              ? "Birth Chart Enquiries"
               : "Astrology Consultation Enquiries"}
           </h3>
+
         </div>
 
         <span className="rounded-full border border-[#ddcfbb] bg-[#fffdf8] px-4 py-2 text-xs font-semibold text-[#806d60]">
@@ -831,43 +1025,60 @@ export default function AdminDashboard({
             ? "Request"
             : "Requests"}
         </span>
+
       </div>
 
-      {/* ================= ACTIVE REQUESTS ================= */}
+      {/* ================= REQUESTS ================= */}
 
       {activeSubmissions.length === 0 ? (
+
         <div className="mt-5 rounded-3xl border border-dashed border-[#d8c9b5] bg-[#fffdf8] px-6 py-20 text-center">
 
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-[#d8b976] bg-[#f8efdf] text-2xl text-[#ad7e2d]">
             {activeSection === "KUNDALI_MILAN"
               ? "♡"
+              : activeSection === "JANAM_KUNDLI"
+              ? "📜"
               : "✦"}
           </div>
 
           <h3 className="mt-5 font-serif text-2xl text-[#57120d]">
+
             {search
               ? "No matching requests"
               : activeSection === "KUNDALI_MILAN"
               ? "No Kundali Milan requests yet"
+              : activeSection === "JANAM_KUNDLI"
+              ? "No Janam Kundli requests yet"
               : "No General Consultation requests yet"}
+
           </h3>
 
           <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-[#8c796c]">
+
             {search
               ? "Try another search term."
               : activeSection === "KUNDALI_MILAN"
               ? "New Kundali Milan enquiries will appear here."
+              : activeSection === "JANAM_KUNDLI"
+              ? "New Janam Kundli enquiries will appear here."
               : "New general astrology enquiries will appear here."}
+
           </p>
+
         </div>
+
       ) : (
+
         <div className="mt-5 space-y-5">
           {activeSubmissions.map(
             (item) =>
               renderSubmission(item)
           )}
         </div>
+
       )}
+
     </div>
   );
 }

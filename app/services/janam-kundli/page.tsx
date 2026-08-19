@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import JanamKundliForm from "@/components/JanamKundliForm";
 
 export const metadata: Metadata = {
   title: "Janam Kundali Analysis in Muzaffarnagar | Birth Chart",
@@ -96,7 +97,7 @@ export default function JanamKundaliPage() {
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
 
             <a
-              href="/#contact"
+              href="#request-kundli"
               className="inline-flex items-center justify-center rounded-full bg-[#d2a75c] px-7 py-3.5 font-semibold text-[#300604] transition hover:bg-[#e1bd78]"
             >
               Book Kundali Consultation
@@ -467,6 +468,34 @@ export default function JanamKundaliPage() {
         </div>
 
       </section>
+      {/* JANAM KUNDLI REQUEST */}
+
+      <section
+        id="request-kundli"
+        className="border-y border-[#d9cbb8] bg-[#f7f0e5]"
+      >
+        <div className="mx-auto max-w-5xl px-6 py-20 md:px-10 md:py-28">
+
+          <div className="mb-12 text-center">
+            <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#a2742e]">
+              जन्म कुंडली परामर्श
+            </p>
+
+            <h2 className="mt-4 font-serif text-4xl text-[#57120d] md:text-5xl">
+              Request your{" "}
+              <em>Janam Kundli consultation.</em>
+            </h2>
+
+            <p className="mx-auto mt-5 max-w-2xl leading-7 text-[#74645b]">
+              Share your birth details and tell us what
+              you would like guidance about.
+            </p>
+          </div>
+
+          <JanamKundliForm />
+
+        </div>
+      </section>
 
       {/* KUNDALI MILAN CROSS LINK */}
 
@@ -568,7 +597,7 @@ export default function JanamKundaliPage() {
           </p>
 
           <a
-            href="/#contact"
+            href="#request-kundli"
             className="mt-8 inline-flex items-center rounded-full bg-[#8b2418] px-8 py-4 font-semibold text-white transition hover:bg-[#68170f]"
           >
             Book Kundali Consultation
