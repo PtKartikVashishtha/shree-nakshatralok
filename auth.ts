@@ -19,6 +19,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           label: "Email",
           type: "email",
         },
+
         password: {
           label: "Password",
           type: "password",
@@ -33,8 +34,28 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           return null;
         }
 
-        const email = String(credentials.email);
+        const email = String(credentials.email)
+          .trim()
+          .toLowerCase();
+
         const password = String(credentials.password);
+
+        // --------------------------------
+        // ADMIN EMAIL CHECK
+        // --------------------------------
+
+        const adminEmail =
+          process.env.ADMIN_EMAIL
+            ?.trim()
+            .toLowerCase();
+
+        if (!adminEmail || email !== adminEmail) {
+          return null;
+        }
+
+        // --------------------------------
+        // FIND USER
+        // --------------------------------
 
         const user = await prisma.user.findUnique({
           where: {
@@ -46,6 +67,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           return null;
         }
 
+        // --------------------------------
+        // PASSWORD CHECK
+        // --------------------------------
+
         const valid = await bcrypt.compare(
           password,
           user.passwordHash
@@ -54,6 +79,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (!valid) {
           return null;
         }
+
+        // --------------------------------
+        // AUTHENTICATED ADMIN
+        // --------------------------------
 
         return {
           id: user.id,
