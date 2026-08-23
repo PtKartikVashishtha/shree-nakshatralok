@@ -1,4 +1,12 @@
 import { signIn } from "@/auth";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function LoginPage() {
   async function login(formData: FormData) {

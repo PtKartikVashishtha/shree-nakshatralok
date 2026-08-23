@@ -3,6 +3,14 @@ import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import AdminDashboard from "@/components/AdminDashboard";
 import { site } from "@/lib/site";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 type SubmissionStatus =
   | "NEW"
