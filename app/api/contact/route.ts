@@ -12,11 +12,21 @@ const schema = z.object({
   name: z
     .string()
     .trim()
-    .min(1, "Name is required.")
-    .max(
-      100,
-      "Name must be 100 characters or less."
-    ),
+    .min(1, "नाम आवश्यक है।")
+    .max(100, "Name must be 100 characters or less."),
+
+  phone: z
+    .string()
+    .trim()
+    .min(7, "कृपया मान्य फ़ोन या व्हाट्सएप नंबर दर्ज करें।")
+    .max(25, "Phone number is too long."),
+
+  email: z
+    .string()
+    .trim()
+    .email("कृपया मान्य ईमेल पता दर्ज करें।")
+    .or(z.literal(""))
+    .optional(),
 
   dob: z
     .string()
@@ -129,6 +139,8 @@ export async function POST(req: Request) {
 
     const {
       name,
+      phone,
+      email,
       dob,
       birthTime,
       address,
@@ -186,6 +198,8 @@ export async function POST(req: Request) {
         data: {
           type: "GENERAL",
           name,
+          phone,
+          email: email || null,
           dob,
           birthTime,
           address,
@@ -194,8 +208,13 @@ export async function POST(req: Request) {
       });
 
     // -----------------------------
-    // SEND EMAIL
+    // SEND EMAIL (WITH CONTACT RETRACE LINKS)
     // -----------------------------
+
+    const cleanPhoneDigits = phone.replace(/\D/g, "");
+    const waLink = cleanPhoneDigits.length >= 10
+      ? `https://wa.me/${cleanPhoneDigits.length === 10 ? "91" + cleanPhoneDigits : cleanPhoneDigits}`
+      : null;
 
     const { data, error } =
       await resend.emails.send({
@@ -206,68 +225,68 @@ export async function POST(req: Request) {
         to: [process.env.CLIENT_EMAIL!],
 
         subject:
-          `New Consultation Request - ${name}`,
+          `New Consultation Request - ${name} (${phone})`,
 
         html: `
-          <div style="font-family: Arial, sans-serif; max-width: 700px; margin: auto; color: #333;">
-
-            <h2 style="color: #68170f;">
-              New Consultation Request
+          <div style="font-family: Arial, sans-serif; max-width: 700px; margin: auto; color: #333; line-height: 1.6;">
+            <h2 style="color: #68170f; border-bottom: 2px solid #68170f; padding-bottom: 8px;">
+              New Consultation Request (नया परामर्श अनुरोध)
             </h2>
 
-            <hr />
+            <div style="background-color: #fff8ee; border: 1px solid #ebd3b0; border-radius: 8px; padding: 15px; margin: 15px 0;">
+              <h3 style="margin-top: 0; color: #8b2418;">Contact & Follow-up Details</h3>
+              <p style="margin: 6px 0; font-size: 16px;">
+                <strong>Phone / Call:</strong> <a href="tel:${escapeHtml(phone)}" style="color: #8b2418; font-weight: bold; font-size: 17px;">${escapeHtml(phone)}</a>
+              </p>
+              ${waLink ? `
+                <p style="margin: 6px 0;">
+                  <strong>WhatsApp:</strong> <a href="${waLink}" style="background-color: #25d366; color: white; padding: 4px 10px; border-radius: 4px; text-decoration: none; font-weight: bold; display: inline-block;">Open WhatsApp Chat ↗</a>
+                </p>
+              ` : ""}
+              ${email ? `
+                <p style="margin: 6px 0;">
+                  <strong>Email:</strong> <a href="mailto:${escapeHtml(email)}" style="color: #0b5394;">${escapeHtml(email)}</a>
+                </p>
+              ` : '<p style="margin: 6px 0; color: #888;">Email: Not provided</p>'}
+            </div>
 
-            <h3>Customer Details</h3>
+            <h3>Birth Details & Question</h3>
+            <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+            <p><strong>Date of Birth:</strong> ${escapeHtml(dob)}</p>
+            <p><strong>Time of Birth:</strong> ${escapeHtml(birthTime)}</p>
+            <p><strong>Place of Birth / Address:</strong> ${escapeHtml(address)}</p>
 
-            <p>
-              <strong>Name:</strong>
-              ${escapeHtml(name)}
-            </p>
-
-            <p>
-              <strong>Date of Birth:</strong>
-              ${escapeHtml(dob)}
-            </p>
-
-            <p>
-              <strong>Time of Birth:</strong>
-              ${escapeHtml(birthTime)}
-            </p>
-
-            <p>
-              <strong>Address:</strong>
-              ${escapeHtml(address)}
-            </p>
-
-            <h3>Question</h3>
-
-            <p style="white-space: pre-wrap;">
+            <h4 style="color: #57120d; margin-top: 20px;">Question / Query:</h4>
+            <div style="background: #fbfbfb; border-left: 4px solid #8b2418; padding: 10px 14px; white-space: pre-wrap;">
               ${escapeHtml(question)}
+            </div>
+
+            <hr style="margin-top: 25px; border: none; border-top: 1px solid #eee;" />
+            <p style="color: #777; font-size: 12px;">
+              Submission ID: ${submission.id} · Saved in Admin Portal.
             </p>
-
-            <hr />
-
-            <p style="color: #666;">
-              This request has also been saved
-              in the admin dashboard.
-            </p>
-
           </div>
         `,
 
         text: `
 New Consultation Request
 
+Customer Contact Details:
 Name: ${name}
+Phone: ${phone}
+${waLink ? `WhatsApp: ${waLink}` : ""}
+Email: ${email || "Not provided"}
+
+Birth Details:
 Date of Birth: ${dob}
 Time of Birth: ${birthTime}
-Address: ${address}
+Address / Place of Birth: ${address}
 
 Question:
 ${question}
 
-This request has also been saved
-in the admin dashboard.
+This request has also been saved in the admin dashboard.
+Submission ID: ${submission.id}
         `,
       });
 

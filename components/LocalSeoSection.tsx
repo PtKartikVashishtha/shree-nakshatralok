@@ -5,17 +5,17 @@ export default function LocalSeoSection() {
 
         <div className="local-seo-heading">
           <p className="section-label">
-            MUZAFFARNAGAR · UTTAR PRADESH
+            मुजफ्फरनगर · उत्तर प्रदेश · MUZAFFARNAGAR
           </p>
 
           <h2>
-            Vedic Astrology in{" "}
-            <em>Muzaffarnagar.</em>
+            मुजफ्फरनगर एवं देश-विदेश में
+            <br />
+            <em>वैदिक ज्योतिष परामर्श।</em>
           </h2>
 
           <p>
-            Traditional Jyotish guidance for important questions
-            about marriage, career, family, education and life.
+            विवाह, करियर, संतान, स्वास्थ्य, व्यापार एवं पारिवारिक समस्याओं हेतु ५५+ वर्षों से प्रतिष्ठित एवं शास्त्रसम्मत मार्गदर्शन।
           </p>
         </div>
 
@@ -23,37 +23,33 @@ export default function LocalSeoSection() {
 
           <div>
             <span>01</span>
-            <h3>Janam Kundali</h3>
+            <h3>जन्म कुंडली विश्लेषण</h3>
             <p>
-              Personalized birth-chart consultation based on
-              traditional Vedic astrology principles.
+              लग्न, राशि, नवमांश एवं दशाओं का सूक्ष्म अध्ययन कर जीवन के हर पहलू पर प्रामाणिक वैदिक मार्गदर्शन।
             </p>
           </div>
 
           <div>
             <span>02</span>
-            <h3>Kundali & Vivah Milan</h3>
+            <h3>कुंडली एवं विवाह मिलान</h3>
             <p>
-              Kundali matching and marriage compatibility
-              guidance for couples and families.
+              अष्टकूट गुण मिलान, मांगलिक विचार, मानसिक तालमेल एवं दांपत्य सुख का विस्तृत शास्त्रसम्मत विश्लेषण।
             </p>
           </div>
 
           <div>
             <span>03</span>
-            <h3>Career & Life Guidance</h3>
+            <h3>करियर एवं व्यापार मार्गदर्शन</h3>
             <p>
-              Astrology-based guidance for career, education,
-              business, family and important life decisions.
+              शिक्षा, नौकरी, व्यवसाय चयन, वित्तीय स्थिरता और उन्नति के लिए उपयुक्त समय व उपायों का परामर्श।
             </p>
           </div>
 
           <div>
             <span>04</span>
-            <h3>Vastu & Other Consultations</h3>
+            <h3>वास्तु, रत्न एवं ग्रह शांति</h3>
             <p>
-              Consultations covering Vastu, gemstones, Tarot
-              and Medical Astrology.
+              गृह-व्यापारिक वास्तु विश्लेषण, शुद्ध प्राण-प्रतिष्ठित रत्न विचार, कालसर्प व शनि साढ़ेसाती निवारण।
             </p>
           </div>
 
@@ -62,16 +58,16 @@ export default function LocalSeoSection() {
         <div className="local-seo-location">
 
           <div>
-            <span>OFFLINE CONSULTATION</span>
+            <span>कार्यालय में प्रत्यक्ष परामर्श</span>
             <strong>
-              Shanti Nagar, Muzaffarnagar, Uttar Pradesh · 251002
+              शांति नगर, मुजफ्फरनगर, उत्तर प्रदेश · 251002
             </strong>
           </div>
 
           <div>
-            <span>ONLINE CONSULTATION</span>
+            <span>ऑनलाइन फोन / व्हाट्सएप परामर्श</span>
             <strong>
-              Available across India & worldwide
+              संपूर्ण भारत एवं विदेशों में घर बैठे उपलब्ध
             </strong>
           </div>
 

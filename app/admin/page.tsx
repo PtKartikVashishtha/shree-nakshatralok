@@ -1,6 +1,7 @@
 import { auth, signOut } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
+import AdminNav from "@/components/admin/AdminNav";
 import AdminDashboard from "@/components/AdminDashboard";
 import { site } from "@/lib/site";
 import type { Metadata } from "next";
@@ -51,6 +52,8 @@ export default async function AdminPage() {
 
     // General consultation
     name: item.name ?? undefined,
+    phone: item.phone ?? undefined,
+    email: item.email ?? undefined,
     dob: item.dob ?? undefined,
     birthTime: item.birthTime ?? undefined,
     address: item.address ?? undefined,
@@ -79,85 +82,8 @@ export default async function AdminPage() {
 
   return (
     <main className="min-h-screen bg-[#f5efe4] text-[#291412]">
-
       {/* HEADER */}
-
-      <header className="relative overflow-hidden bg-[#300604] text-white">
-
-        <div className="absolute inset-0 opacity-20">
-
-          <div className="absolute -right-20 -top-32 h-96 w-96 rounded-full border border-[#d7ad63]" />
-
-          <div className="absolute -right-10 -top-20 h-72 w-72 rounded-full border border-[#d7ad63]" />
-
-          <div className="absolute right-20 top-10 text-5xl text-[#d7ad63]">
-            ✦
-          </div>
-
-        </div>
-
-        <div className="relative mx-auto max-w-7xl px-5 py-6 md:px-8">
-
-          <div className="flex items-center justify-between">
-
-            {/* BRAND */}
-
-            <div className="flex items-center gap-4">
-
-              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#cda456]/50 text-xl text-[#e4c57d]">
-                ✦
-              </div>
-
-              <div>
-
-                <p className="font-serif text-lg text-[#f2d99d]">
-                  श्री नक्षत्रलोक
-                </p>
-
-                <p className="text-[9px] tracking-[3px] text-[#a99683]">
-                  JYOTISH SANSTHAN
-                </p>
-
-              </div>
-
-            </div>
-
-
-            {/* ACCOUNT */}
-
-            <div className="flex items-center gap-3">
-
-              <div className="hidden text-right sm:block">
-
-                <p className="text-xs text-[#a99683]">
-                  Signed in as
-                </p>
-
-                <p className="text-sm font-medium text-[#ead9b3]">
-                  {session.user.email}
-                </p>
-
-              </div>
-
-              <form action={logout}>
-
-                <button
-                  type="submit"
-                  className="rounded-full border border-[#d5ae62]/40 px-5 py-2.5 text-xs font-semibold tracking-wide text-[#ead49a] transition hover:bg-white/10"
-                >
-                  Logout
-                </button>
-
-              </form>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </header>
-
+      <AdminNav userEmail={session.user.email} onLogout={logout} />
 
       {/* DASHBOARD */}
 
@@ -213,8 +139,11 @@ export default async function AdminPage() {
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-6 text-center text-[10px] tracking-wide text-[#8c796b] md:flex-row md:items-center md:justify-between md:px-8 md:text-left">
 
           <span>
-            © {new Date().getFullYear()} Shree Nakshatralok
-            Jyotish Sansthan
+            © {new Date().getFullYear()} Shree Nakshatralok Jyotish Sansthan
+          </span>
+
+          <span className="font-medium text-[#7a6456]">
+            Made by Kartik Vashishtha <span className="text-[#c93b3b] font-sans">♥</span>
           </span>
 
           <span className="text-[#a2742e]">

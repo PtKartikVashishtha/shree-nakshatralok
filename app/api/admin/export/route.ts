@@ -31,6 +31,8 @@ export async function GET() {
       "Type",
 
       "Requester Name",
+      "Phone",
+      "Email",
       "Requester Address",
 
       "Name",
@@ -57,6 +59,8 @@ export async function GET() {
       item.type,
 
       item.name,
+      item.phone,
+      item.email,
       item.address,
 
       item.name,

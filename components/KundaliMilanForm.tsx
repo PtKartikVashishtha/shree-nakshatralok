@@ -29,6 +29,8 @@ export default function KundaliMilanForm() {
 
     const data = {
       name: form.get("name"),
+      phone: form.get("phone"),
+      email: form.get("email"),
       address: form.get("address"),
       question: form.get("question"),
 
@@ -66,7 +68,7 @@ export default function KundaliMilanForm() {
       if (!res.ok) {
         throw new Error(
           result.error ||
-            "Submission failed."
+            "परामर्श अनुरोध भेजने में समस्या आई।"
         );
       }
 
@@ -76,14 +78,14 @@ export default function KundaliMilanForm() {
         setStatus("warning");
 
         setMessage(
-          "Your Kundali Milan request has been saved successfully, but we could not send the notification. We will still be able to see your request."
+          "आपकी कुंडली मिलान का अनुरोध सफलतापूर्वक दर्ज कर लिया गया है। हम आपके दिए गए नंबर पर शीघ्र ही संपर्क करेंगे।"
         );
       } else {
         setStatus("success");
 
         setMessage(
           result.message ||
-            "Your Kundali Milan request has been submitted successfully. We will contact you soon."
+            "आपकी कुंडली मिलान का अनुरोध सफलतापूर्वक प्राप्त हो गया है। पंडित जी की टीम आपसे जल्द संपर्क करेगी।"
         );
       }
     } catch (error) {
@@ -92,7 +94,7 @@ export default function KundaliMilanForm() {
       setMessage(
         error instanceof Error
           ? error.message
-          : "Something went wrong. Please try again."
+          : "कुछ त्रुटि हुई। कृपया दोबारा प्रयास करें।"
       );
     } finally {
       setLoading(false);
@@ -127,16 +129,16 @@ export default function KundaliMilanForm() {
 
       <div>
         <p className="mb-4 text-[10px] font-bold uppercase tracking-[3px] text-[#a2742e]">
-          YOUR DETAILS · आपके विवरण
+          परामर्शकर्ता का विवरण · REQUESTER DETAILS
         </p>
 
         <div className="grid gap-5 md:grid-cols-2">
           <div>
             <label
               htmlFor="name"
-              className="mb-2 block text-sm font-medium"
+              className="mb-2 block text-sm font-semibold text-[#57120d]"
             >
-              Your Name
+              आपका पूरा नाम <span className="text-red-600">*</span>
             </label>
 
             <input
@@ -146,7 +148,48 @@ export default function KundaliMilanForm() {
               maxLength={100}
               disabled={loading}
               autoComplete="name"
-              placeholder="Your name"
+              placeholder="उदा. राजेश कुमार"
+              className="w-full rounded-xl border border-[#ded1be] bg-[#fffdf8] p-3 outline-none transition focus:border-[#a2742e] disabled:bg-gray-100"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="phone"
+              className="mb-2 block text-sm font-semibold text-[#57120d]"
+            >
+              फ़ोन / व्हाट्सएप नंबर <span className="text-red-600">*</span>
+            </label>
+
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              required
+              maxLength={20}
+              disabled={loading}
+              autoComplete="tel"
+              placeholder="उदा. 9876543210 (संपर्क सूत्र)"
+              className="w-full rounded-xl border border-[#ded1be] bg-[#fffdf8] p-3 outline-none transition focus:border-[#a2742e] disabled:bg-gray-100"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="email"
+              className="mb-2 block text-sm font-semibold text-[#57120d]"
+            >
+              ईमेल पता <span className="text-xs font-normal text-gray-500">(वैकल्पिक)</span>
+            </label>
+
+            <input
+              id="email"
+              name="email"
+              type="email"
+              maxLength={120}
+              disabled={loading}
+              autoComplete="email"
+              placeholder="उदा. yourname@gmail.com"
               className="w-full rounded-xl border border-[#ded1be] bg-[#fffdf8] p-3 outline-none transition focus:border-[#a2742e] disabled:bg-gray-100"
             />
           </div>
@@ -154,9 +197,9 @@ export default function KundaliMilanForm() {
           <div>
             <label
               htmlFor="address"
-              className="mb-2 block text-sm font-medium"
+              className="mb-2 block text-sm font-semibold text-[#57120d]"
             >
-              Address
+              निवास स्थान / पता <span className="text-red-600">*</span>
             </label>
 
             <input
@@ -166,7 +209,7 @@ export default function KundaliMilanForm() {
               maxLength={500}
               disabled={loading}
               autoComplete="street-address"
-              placeholder="Your address"
+              placeholder="उदा. मुजफ्फरनगर, उत्तर प्रदेश"
               className="w-full rounded-xl border border-[#ded1be] bg-[#fffdf8] p-3 outline-none transition focus:border-[#a2742e] disabled:bg-gray-100"
             />
           </div>
@@ -179,11 +222,11 @@ export default function KundaliMilanForm() {
         <div className="mb-6 flex items-center justify-between">
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#a2742e]">
-              PERSON 1
+              प्रथम जन्म पत्रिका · PERSON 1 (वर / वधू)
             </p>
 
             <h3 className="mt-1 font-serif text-3xl text-[#57120d]">
-              First Birth Chart
+              प्रथम जातक का विवरण
             </h3>
           </div>
 
@@ -196,9 +239,9 @@ export default function KundaliMilanForm() {
           <div>
             <label
               htmlFor="person1Name"
-              className="mb-2 block text-sm font-medium"
+              className="mb-2 block text-sm font-semibold text-[#57120d]"
             >
-              Name
+              नाम <span className="text-red-600">*</span>
             </label>
 
             <input
@@ -207,7 +250,7 @@ export default function KundaliMilanForm() {
               required
               maxLength={100}
               disabled={loading}
-              placeholder="Person 1 name"
+              placeholder="उदा. वर या कन्या का नाम"
               className="w-full rounded-xl border border-[#ded1be] p-3 outline-none focus:border-[#a2742e] disabled:bg-gray-100"
             />
           </div>
@@ -215,9 +258,9 @@ export default function KundaliMilanForm() {
           <div>
             <label
               htmlFor="person1BirthPlace"
-              className="mb-2 block text-sm font-medium"
+              className="mb-2 block text-sm font-semibold text-[#57120d]"
             >
-              Birth Place
+              जन्म स्थान (शहर / राज्य) <span className="text-red-600">*</span>
             </label>
 
             <input
@@ -226,7 +269,7 @@ export default function KundaliMilanForm() {
               required
               maxLength={200}
               disabled={loading}
-              placeholder="City, State, Country"
+              placeholder="उदा. मेरठ, उत्तर प्रदेश"
               className="w-full rounded-xl border border-[#ded1be] p-3 outline-none focus:border-[#a2742e] disabled:bg-gray-100"
             />
           </div>
@@ -234,9 +277,9 @@ export default function KundaliMilanForm() {
           <div>
             <label
               htmlFor="person1Dob"
-              className="mb-2 block text-sm font-medium"
+              className="mb-2 block text-sm font-semibold text-[#57120d]"
             >
-              Date of Birth
+              जन्म तिथि <span className="text-red-600">*</span>
             </label>
 
             <input
@@ -252,9 +295,9 @@ export default function KundaliMilanForm() {
           <div>
             <label
               htmlFor="person1BirthTime"
-              className="mb-2 block text-sm font-medium"
+              className="mb-2 block text-sm font-semibold text-[#57120d]"
             >
-              Time of Birth
+              जन्म समय <span className="text-red-600">*</span>
             </label>
 
             <input
@@ -275,11 +318,11 @@ export default function KundaliMilanForm() {
         <div className="mb-6 flex items-center justify-between">
           <div>
             <p className="text-[10px] font-bold uppercase tracking-[3px] text-[#a2742e]">
-              PERSON 2
+              द्वितीय जन्म पत्रिका · PERSON 2 (वर / वधू)
             </p>
 
             <h3 className="mt-1 font-serif text-3xl text-[#57120d]">
-              Second Birth Chart
+              द्वितीय जातक का विवरण
             </h3>
           </div>
 
@@ -292,9 +335,9 @@ export default function KundaliMilanForm() {
           <div>
             <label
               htmlFor="person2Name"
-              className="mb-2 block text-sm font-medium"
+              className="mb-2 block text-sm font-semibold text-[#57120d]"
             >
-              Name
+              नाम <span className="text-red-600">*</span>
             </label>
 
             <input
@@ -303,7 +346,7 @@ export default function KundaliMilanForm() {
               required
               maxLength={100}
               disabled={loading}
-              placeholder="Person 2 name"
+              placeholder="उदा. वर या कन्या का नाम"
               className="w-full rounded-xl border border-[#ded1be] p-3 outline-none focus:border-[#a2742e] disabled:bg-gray-100"
             />
           </div>
@@ -311,9 +354,9 @@ export default function KundaliMilanForm() {
           <div>
             <label
               htmlFor="person2BirthPlace"
-              className="mb-2 block text-sm font-medium"
+              className="mb-2 block text-sm font-semibold text-[#57120d]"
             >
-              Birth Place
+              जन्म स्थान (शहर / राज्य) <span className="text-red-600">*</span>
             </label>
 
             <input
@@ -322,7 +365,7 @@ export default function KundaliMilanForm() {
               required
               maxLength={200}
               disabled={loading}
-              placeholder="City, State, Country"
+              placeholder="उदा. देहरादून, उत्तराखंड"
               className="w-full rounded-xl border border-[#ded1be] p-3 outline-none focus:border-[#a2742e] disabled:bg-gray-100"
             />
           </div>
@@ -330,9 +373,9 @@ export default function KundaliMilanForm() {
           <div>
             <label
               htmlFor="person2Dob"
-              className="mb-2 block text-sm font-medium"
+              className="mb-2 block text-sm font-semibold text-[#57120d]"
             >
-              Date of Birth
+              जन्म तिथि <span className="text-red-600">*</span>
             </label>
 
             <input
@@ -348,9 +391,9 @@ export default function KundaliMilanForm() {
           <div>
             <label
               htmlFor="person2BirthTime"
-              className="mb-2 block text-sm font-medium"
+              className="mb-2 block text-sm font-semibold text-[#57120d]"
             >
-              Time of Birth
+              जन्म समय <span className="text-red-600">*</span>
             </label>
 
             <input
@@ -370,18 +413,18 @@ export default function KundaliMilanForm() {
       <div>
         <label
           htmlFor="question"
-          className="mb-2 block text-sm font-medium"
+          className="mb-2 block text-sm font-semibold text-[#57120d]"
         >
-          Additional Question
+          अतिरिक्त प्रश्न / विशेष शंका (वैकल्पिक)
         </label>
 
         <textarea
           id="question"
           name="question"
           maxLength={2000}
-          rows={5}
+          rows={4}
           disabled={loading}
-          placeholder="Any specific question about the marriage matching?"
+          placeholder="मांगलिक दोष, वैवाहिक अनुकूलता, पारिवारिक सामंजस्य अथवा कोई अन्य प्रश्न जिसका समाधान आप चाहते हैं..."
           className="w-full resize-none rounded-xl border border-[#ded1be] bg-[#fffdf8] p-3 outline-none focus:border-[#a2742e] disabled:bg-gray-100"
         />
       </div>
@@ -391,12 +434,12 @@ export default function KundaliMilanForm() {
       {status !== "idle" && (
         <div
           role="alert"
-          className={`rounded-xl p-4 text-sm ${
+          className={`rounded-xl p-4 text-sm font-medium ${
             status === "success"
-              ? "bg-green-100 text-green-800"
+              ? "bg-green-100 text-green-900 border border-green-300"
               : status === "warning"
-                ? "bg-amber-100 text-amber-800"
-                : "bg-red-100 text-red-800"
+                ? "bg-amber-100 text-amber-900 border border-amber-300"
+                : "bg-red-100 text-red-900 border border-red-300"
           }`}
         >
           {message}
@@ -408,16 +451,15 @@ export default function KundaliMilanForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full rounded-full bg-[#8b2418] px-6 py-4 font-semibold text-white transition hover:bg-[#68170f] disabled:cursor-not-allowed disabled:opacity-50"
+        className="w-full rounded-full bg-[#8b2418] px-6 py-4 font-semibold text-white shadow transition hover:bg-[#68170f] disabled:cursor-not-allowed disabled:opacity-50"
       >
         {loading
-          ? "Submitting..."
-          : "Request Kundali Milan Consultation →"}
+          ? "अनुरोध भेजा जा रहा है..."
+          : "कुंडली मिलान परामर्श हेतु अनुरोध भेजें →"}
       </button>
 
       <p className="text-center text-xs text-[#806d66]">
-        Your birth details are used for the
-        consultation request only.
+        🔒 दोनों जातकों का जन्म विवरण व संपर्क सूत्र पूर्णतः सुरक्षित एवं गोपनीय रखा जाता है।
       </p>
     </form>
   );

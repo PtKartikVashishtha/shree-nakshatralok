@@ -16,37 +16,99 @@ model User {
 }
 
 model Submission {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
 
   // GENERAL or KUNDALI_MILAN
-  type      String   @default("GENERAL")
+  type String @default("GENERAL")
 
   // Existing/general consultation fields
   name      String?
+  phone     String?
+  email     String?
   dob       String?
   birthTime String?
   address   String?
   question  String?
 
   // Kundali Milan - Person 1
-  person1Name      String?
-  person1Dob       String?
-  person1BirthTime String?
+  person1Name       String?
+  person1Dob        String?
+  person1BirthTime  String?
   person1BirthPlace String?
 
   // Kundali Milan - Person 2
-  person2Name      String?
-  person2Dob       String?
-  person2BirthTime String?
+  person2Name       String?
+  person2Dob        String?
+  person2BirthTime  String?
   person2BirthPlace String?
 
   status    String   @default("NEW")
   createdAt DateTime @default(now())
 }
+
 model RateLimit {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   key       String   @unique
   count     Int      @default(0)
   resetAt   DateTime
   createdAt DateTime @default(now())
+}
+
+model BlogPost {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  title          String
+  slug           String    @unique
+  excerpt        String
+  content        String
+  category       String    @default("Jyotish")
+  featuredImage  String?
+  author         String    @default("Pt. Radhey Shyam Sharma")
+  status         String    @default("DRAFT")
+  publishedAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  seoTitle       String?
+  seoDescription String?
+  seoKeywords    String?
+  canonicalUrl   String?
+
+  @@index([status, publishedAt])
+  @@index([category])
+}
+
+model Panchang {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  date                String   @unique
+  dateObj             DateTime @default(now())
+  dayName             String
+  location            String   @default("Muzaffarnagar, Uttar Pradesh")
+  sunrise             String
+  sunset              String
+  moonrise            String?
+  moonset             String?
+  tithi               String
+  nakshatra           String
+  yoga                String
+  karana              String
+  paksha              String
+  vikramSamvat        String?
+  shakaSamvat         String?
+  ayana               String?
+  ritu                String?
+  moonSign            String?
+  sunSign             String?
+  rahukaal            String?
+  yamaganda           String?
+  gulikaKaal          String?
+  abhijitMuhurat      String?
+  brahmaMuhurat       String?
+  auspiciousTimings   String?
+  inauspiciousTimings String?
+  festivals           String?
+  specialNotes        String?
+  status              String   @default("PUBLISHED")
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@index([status, date])
 }

@@ -17,6 +17,8 @@ type Submission = {
   type?: SubmissionType;
 
   name?: string;
+  phone?: string;
+  email?: string;
   dob?: string;
   birthTime?: string;
   address?: string;
@@ -67,6 +69,8 @@ export default function AdminDashboard({
       [
         item.type,
         item.name,
+        item.phone,
+        item.email,
         item.dob,
         item.birthTime,
         item.address,
@@ -350,25 +354,52 @@ export default function AdminDashboard({
 
             <div className="mb-6 rounded-2xl border border-[#eadfcf] bg-[#fbf7ef] p-5">
 
-              <div className="mb-4">
-                <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
-                  Requester Details
-                </p>
+              <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <div>
+                  <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                    Requester Details · संपर्क सूत्र
+                  </p>
 
-                <h4 className="mt-1 font-serif text-2xl text-[#57120d]">
-                  {item.name ||
-                    "Name not provided"}
-                </h4>
+                  <h4 className="mt-1 font-serif text-2xl text-[#57120d]">
+                    {item.name || "Name not provided"}
+                  </h4>
+                </div>
+
+                {item.phone && (
+                  <div className="flex flex-wrap items-center gap-2">
+                    <a
+                      href={`tel:${item.phone}`}
+                      className="inline-flex items-center gap-1.5 rounded-lg bg-[#8b2418] px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-[#68170f] transition"
+                    >
+                      <span>📞 Call:</span>
+                      <span>{item.phone}</span>
+                    </a>
+                    <a
+                      href={`https://wa.me/${item.phone.replace(/\D/g, '').length === 10 ? '91' + item.phone.replace(/\D/g, '') : item.phone.replace(/\D/g, '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-lg bg-[#25d366] px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-[#1faa53] transition"
+                    >
+                      <span>💬 WhatsApp</span>
+                    </a>
+                  </div>
+                )}
               </div>
 
-              <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
-                Address
-              </p>
-
-              <p className="mt-2 text-sm leading-6 text-[#64524a]">
-                {item.address ||
-                  "Address not provided"}
-              </p>
+              <div className="grid gap-3 text-xs md:grid-cols-2">
+                <div>
+                  <span className="font-bold text-[#8c796b]">Address: </span>
+                  <span className="text-[#56443d]">{item.address || "Not provided"}</span>
+                </div>
+                {item.email && (
+                  <div>
+                    <span className="font-bold text-[#8c796b]">Email: </span>
+                    <a href={`mailto:${item.email}`} className="text-[#0b5394] hover:underline">
+                      {item.email}
+                    </a>
+                  </div>
+                )}
+              </div>
 
             </div>
 
@@ -508,18 +539,46 @@ export default function AdminDashboard({
 
             <div className="rounded-2xl border border-[#eadfcf] bg-[#fbf7ef] p-5">
 
-              <div className="mb-6">
+              <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <div>
+                  <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a2742e]">
+                    JANAM KUNDLI REQUEST · जन्म कुंडली
+                  </p>
 
-                <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a2742e]">
-                  JANAM KUNDLI REQUEST
-                </p>
+                  <h4 className="mt-1 font-serif text-2xl text-[#57120d]">
+                    {item.name || "Name not provided"}
+                  </h4>
+                </div>
 
-                <h4 className="mt-1 font-serif text-2xl text-[#57120d]">
-                  {item.name ||
-                    "Name not provided"}
-                </h4>
-
+                {item.phone && (
+                  <div className="flex flex-wrap items-center gap-2">
+                    <a
+                      href={`tel:${item.phone}`}
+                      className="inline-flex items-center gap-1.5 rounded-lg bg-[#8b2418] px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-[#68170f] transition"
+                    >
+                      <span>📞 Call:</span>
+                      <span>{item.phone}</span>
+                    </a>
+                    <a
+                      href={`https://wa.me/${item.phone.replace(/\D/g, '').length === 10 ? '91' + item.phone.replace(/\D/g, '') : item.phone.replace(/\D/g, '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-lg bg-[#25d366] px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-[#1faa53] transition"
+                    >
+                      <span>💬 WhatsApp</span>
+                    </a>
+                  </div>
+                )}
               </div>
+
+              {item.email && (
+                <div className="mb-4 text-xs">
+                  <span className="font-bold text-[#8c796b]">Email: </span>
+                  <a href={`mailto:${item.email}`} className="text-[#0b5394] hover:underline">
+                    {item.email}
+                  </a>
+                </div>
+              )}
 
               <div className="grid gap-5 md:grid-cols-3">
 
@@ -587,14 +646,46 @@ export default function AdminDashboard({
 
             <div className="rounded-2xl border border-[#eadfcf] bg-[#fbf7ef] p-5">
 
-              <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
-                REQUESTER
-              </p>
+              <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <div>
+                  <p className="text-[9px] font-bold uppercase tracking-[2px] text-[#a48d7b]">
+                    REQUESTER · सामान्य परामर्श
+                  </p>
 
-              <h4 className="mt-1 font-serif text-2xl text-[#57120d]">
-                {item.name ||
-                  "Name not provided"}
-              </h4>
+                  <h4 className="mt-1 font-serif text-2xl text-[#57120d]">
+                    {item.name || "Name not provided"}
+                  </h4>
+                </div>
+
+                {item.phone && (
+                  <div className="flex flex-wrap items-center gap-2">
+                    <a
+                      href={`tel:${item.phone}`}
+                      className="inline-flex items-center gap-1.5 rounded-lg bg-[#8b2418] px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-[#68170f] transition"
+                    >
+                      <span>📞 Call:</span>
+                      <span>{item.phone}</span>
+                    </a>
+                    <a
+                      href={`https://wa.me/${item.phone.replace(/\D/g, '').length === 10 ? '91' + item.phone.replace(/\D/g, '') : item.phone.replace(/\D/g, '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-lg bg-[#25d366] px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-[#1faa53] transition"
+                    >
+                      <span>💬 WhatsApp</span>
+                    </a>
+                  </div>
+                )}
+              </div>
+
+              {item.email && (
+                <div className="mb-4 text-xs">
+                  <span className="font-bold text-[#8c796b]">Email: </span>
+                  <a href={`mailto:${item.email}`} className="text-[#0b5394] hover:underline">
+                    {item.email}
+                  </a>
+                </div>
+              )}
 
               <div className="mt-5 grid gap-5 md:grid-cols-3">
 

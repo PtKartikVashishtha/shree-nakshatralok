@@ -24,13 +24,14 @@ export default function ContactForm() {
 
     const data = {
       name: form.get("name"),
+      phone: form.get("phone"),
+      email: form.get("email"),
       dob: form.get("dob"),
       birthTime: form.get("birthTime"),
       address: form.get("address"),
       question: form.get("question"),
 
-      // Honeypot.
-      // Humans won't interact with this.
+      // Honeypot
       website: form.get("website"),
     };
 
@@ -47,7 +48,7 @@ export default function ContactForm() {
 
       if (!res.ok) {
         throw new Error(
-          result.error || "Submission failed."
+          result.error || "परामर्श अनुरोध भेजने में समस्या आई।"
         );
       }
 
@@ -57,14 +58,14 @@ export default function ContactForm() {
         setStatus("warning");
 
         setMessage(
-          "Your request has been saved successfully, but we could not send the notification. We will still be able to see your request."
+          "आपका परामर्श अनुरोध सफलतापूर्वक दर्ज कर लिया गया है। हम आपके दिए गए नंबर पर शीघ्र ही संपर्क करेंगे।"
         );
       } else {
         setStatus("success");
 
         setMessage(
           result.message ||
-            "Your consultation request has been submitted successfully. We will contact you soon."
+            "आपका परामर्श अनुरोध सफलतापूर्वक प्राप्त हो गया है। पंडित जी की टीम आपसे जल्द संपर्क करेगी।"
         );
       }
     } catch (err) {
@@ -73,7 +74,7 @@ export default function ContactForm() {
       setMessage(
         err instanceof Error
           ? err.message
-          : "Something went wrong. Please try again."
+          : "कुछ त्रुटि हुई। कृपया दोबारा प्रयास करें।"
       );
     } finally {
       setLoading(false);
@@ -83,10 +84,9 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={submit}
-      className="space-y-6"
+      className="space-y-5"
     >
       {/* HONEYPOT */}
-
       <div
         className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden"
         aria-hidden="true"
@@ -94,7 +94,6 @@ export default function ContactForm() {
         <label htmlFor="website">
           Website
         </label>
-
         <input
           id="website"
           name="website"
@@ -105,13 +104,12 @@ export default function ContactForm() {
       </div>
 
       {/* NAME */}
-
       <div>
         <label
           htmlFor="name"
-          className="mb-2 block text-sm font-medium"
+          className="mb-1.5 block text-sm font-semibold text-[#57120d]"
         >
-          Name
+          पूरा नाम <span className="text-red-600">*</span>
         </label>
 
         <input
@@ -121,20 +119,63 @@ export default function ContactForm() {
           maxLength={100}
           disabled={loading}
           autoComplete="name"
-          className="w-full rounded-xl border border-gray-200 p-3 outline-none transition focus:border-amber-600 disabled:bg-gray-100"
-          placeholder="Your name"
+          className="w-full rounded-xl border border-gray-300 bg-white p-3 text-sm text-[#2b1712] outline-none transition focus:border-[#8b2418] disabled:bg-gray-100"
+          placeholder="उदा. अमित कुमार शर्मा"
         />
       </div>
 
-      {/* DOB + TIME */}
+      {/* CONTACT INFO: PHONE & EMAIL */}
+      <div className="grid gap-4 md:grid-cols-2">
+        <div>
+          <label
+            htmlFor="phone"
+            className="mb-1.5 block text-sm font-semibold text-[#57120d]"
+          >
+            फ़ोन नंबर / व्हाट्सएप नंबर <span className="text-red-600">*</span>
+          </label>
 
-      <div className="grid gap-5 md:grid-cols-2">
+          <input
+            id="phone"
+            type="tel"
+            name="phone"
+            required
+            maxLength={20}
+            disabled={loading}
+            autoComplete="tel"
+            className="w-full rounded-xl border border-gray-300 bg-white p-3 text-sm text-[#2b1712] outline-none transition focus:border-[#8b2418] disabled:bg-gray-100"
+            placeholder="उदा. 9876543210 (परामर्श हेतु)"
+          />
+        </div>
+
+        <div>
+          <label
+            htmlFor="email"
+            className="mb-1.5 block text-sm font-semibold text-[#57120d]"
+          >
+            ईमेल पता <span className="text-xs font-normal text-gray-500">(वैकल्पिक)</span>
+          </label>
+
+          <input
+            id="email"
+            type="email"
+            name="email"
+            maxLength={120}
+            disabled={loading}
+            autoComplete="email"
+            className="w-full rounded-xl border border-gray-300 bg-white p-3 text-sm text-[#2b1712] outline-none transition focus:border-[#8b2418] disabled:bg-gray-100"
+            placeholder="उदा. yourname@gmail.com"
+          />
+        </div>
+      </div>
+
+      {/* DOB + TIME */}
+      <div className="grid gap-4 md:grid-cols-2">
         <div>
           <label
             htmlFor="dob"
-            className="mb-2 block text-sm font-medium"
+            className="mb-1.5 block text-sm font-semibold text-[#57120d]"
           >
-            Date of Birth
+            जन्म तिथि <span className="text-red-600">*</span>
           </label>
 
           <input
@@ -143,16 +184,16 @@ export default function ContactForm() {
             name="dob"
             required
             disabled={loading}
-            className="w-full rounded-xl border border-gray-200 p-3 outline-none focus:border-amber-600 disabled:bg-gray-100"
+            className="w-full rounded-xl border border-gray-300 bg-white p-3 text-sm text-[#2b1712] outline-none focus:border-[#8b2418] disabled:bg-gray-100"
           />
         </div>
 
         <div>
           <label
             htmlFor="birthTime"
-            className="mb-2 block text-sm font-medium"
+            className="mb-1.5 block text-sm font-semibold text-[#57120d]"
           >
-            Time of Birth
+            जन्म समय <span className="text-red-600">*</span>
           </label>
 
           <input
@@ -161,42 +202,39 @@ export default function ContactForm() {
             name="birthTime"
             required
             disabled={loading}
-            className="w-full rounded-xl border border-gray-200 p-3 outline-none focus:border-amber-600 disabled:bg-gray-100"
+            className="w-full rounded-xl border border-gray-300 bg-white p-3 text-sm text-[#2b1712] outline-none focus:border-[#8b2418] disabled:bg-gray-100"
           />
         </div>
       </div>
 
-      {/* ADDRESS */}
-
+      {/* ADDRESS / BIRTH PLACE */}
       <div>
         <label
           htmlFor="address"
-          className="mb-2 block text-sm font-medium"
+          className="mb-1.5 block text-sm font-semibold text-[#57120d]"
         >
-          Birth Place
+          जन्म स्थान (शहर / राज्य) <span className="text-red-600">*</span>
         </label>
 
-        <textarea
+        <input
           id="address"
           name="address"
           required
-          maxLength={500}
-          rows={3}
+          maxLength={300}
           disabled={loading}
-          autoComplete="street-address"
-          className="w-full resize-none rounded-xl border border-gray-200 p-3 outline-none focus:border-amber-600 disabled:bg-gray-100"
-          placeholder="City / Place of birth"
+          autoComplete="address-level2"
+          className="w-full rounded-xl border border-gray-300 bg-white p-3 text-sm text-[#2b1712] outline-none focus:border-[#8b2418] disabled:bg-gray-100"
+          placeholder="उदा. मुजफ्फरनगर, उत्तर प्रदेश"
         />
       </div>
 
       {/* QUESTION */}
-
       <div>
         <label
           htmlFor="question"
-          className="mb-2 block text-sm font-medium"
+          className="mb-1.5 block text-sm font-semibold text-[#57120d]"
         >
-          Your Question
+          आपका प्रश्न / समस्या का विवरण <span className="text-red-600">*</span>
         </label>
 
         <textarea
@@ -204,24 +242,23 @@ export default function ContactForm() {
           name="question"
           required
           maxLength={2000}
-          rows={5}
+          rows={4}
           disabled={loading}
-          className="w-full resize-none rounded-xl border border-gray-200 p-3 outline-none focus:border-amber-600 disabled:bg-gray-100"
-          placeholder="What would you like guidance about?"
+          className="w-full resize-none rounded-xl border border-gray-300 bg-white p-3 text-sm text-[#2b1712] outline-none focus:border-[#8b2418] disabled:bg-gray-100"
+          placeholder="विवाह, करियर, स्वास्थ्य, व्यापार, पारिवारिक शांति अथवा कोई अन्य प्रश्न जिसके संबंध में आप परामर्श चाहते हैं..."
         />
       </div>
 
       {/* STATUS */}
-
       {status !== "idle" && (
         <div
           role="alert"
-          className={`rounded-xl p-4 text-sm ${
+          className={`rounded-xl p-4 text-sm font-medium ${
             status === "success"
-              ? "bg-green-100 text-green-800"
+              ? "bg-green-100 text-green-900 border border-green-300"
               : status === "warning"
-                ? "bg-amber-100 text-amber-800"
-                : "bg-red-100 text-red-800"
+                ? "bg-amber-100 text-amber-900 border border-amber-300"
+                : "bg-red-100 text-red-900 border border-red-300"
           }`}
         >
           {message}
@@ -229,16 +266,19 @@ export default function ContactForm() {
       )}
 
       {/* BUTTON */}
-
       <button
         type="submit"
         disabled={loading}
-        className="w-full rounded-xl bg-[#8b2418] px-6 py-3 font-semibold text-white transition hover:bg-[#68170f] disabled:cursor-not-allowed disabled:opacity-50"
+        className="w-full rounded-xl bg-[#8b2418] px-6 py-3.5 text-base font-semibold text-white shadow transition hover:bg-[#68170f] disabled:cursor-not-allowed disabled:opacity-50"
       >
         {loading
-          ? "Submitting..."
-          : "Book Consultation"}
+          ? "परामर्श अनुरोध भेजा जा रहा है..."
+          : "परामर्श हेतु अनुरोध भेजें →"}
       </button>
+
+      <p className="text-center text-xs text-[#7d6b60]">
+        🔒 आपकी संपूर्ण जानकारी एवं कुंडली विवरण पूर्णतः गोपनीय रखा जाता है।
+      </p>
     </form>
   );
 }

@@ -55,7 +55,7 @@ export default function ServicePage({
               href="/#contact"
               className="inline-flex items-center justify-center rounded-full bg-[#d2a75c] px-7 py-3.5 font-semibold text-[#300604] transition hover:bg-[#e1bd78]"
             >
-              Book a Consultation
+              परामर्श हेतु अनुरोध करें
               <span className="ml-3">→</span>
             </a>
 
@@ -63,7 +63,7 @@ export default function ServicePage({
               href="/#services"
               className="inline-flex items-center justify-center rounded-full border border-[#d7ad63]/50 px-7 py-3.5 font-semibold text-[#ead9b3] transition hover:bg-white/10"
             >
-              Explore Services
+              सभी सेवाएं देखें
             </Link>
 
           </div>
@@ -80,7 +80,7 @@ export default function ServicePage({
           <div>
 
             <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#a2742e]">
-              परिचय · INTRODUCTION
+              विषय परिचय · OVERVIEW
             </p>
 
             <h2 className="mt-4 font-serif text-4xl leading-tight text-[#57120d] md:text-5xl">
@@ -112,13 +112,13 @@ export default function ServicePage({
           <div className="max-w-2xl">
 
             <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#a2742e]">
-              AREAS OF GUIDANCE
+              परामर्श के मुख्य बिंदु · AREAS OF GUIDANCE
             </p>
 
             <h2 className="mt-4 font-serif text-4xl text-[#57120d] md:text-5xl">
-              Explore the areas of
+              इस परामर्श के मुख्य
               <br />
-              <em>this consultation.</em>
+              <em>विषय एवं लाभ।</em>
             </h2>
 
           </div>
@@ -159,25 +159,23 @@ export default function ServicePage({
         <div className="rounded-3xl bg-[#300604] p-8 text-white md:p-12">
 
           <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#d7ad63]">
-            MUZAFFARNAGAR · UTTAR PRADESH
+            मुजफ्फरनगर · उत्तर प्रदेश · MUZAFFARNAGAR
           </p>
 
           <h2 className="mt-4 font-serif text-3xl text-[#f3dca8] md:text-4xl">
-            Personal guidance in
+            कार्यालय में प्रत्यक्ष अथवा
             <br />
-            <em>Muzaffarnagar & online.</em>
+            <em>घर बैठे ऑनलाइन परामर्श।</em>
           </h2>
 
           <p className="mt-5 max-w-2xl leading-7 text-[#d4c3b5]">
-            Consultations are available offline at Shanti
-            Nagar, Muzaffarnagar, Uttar Pradesh, and online
-            across India and worldwide.
+            शांति नगर, मुजफ्फरनगर (उत्तर प्रदेश) स्थित संस्थान में व्यक्तिगत भेंट द्वारा अथवा देश-विदेश में फोन व व्हाट्सएप के माध्यम से ऑनलाइन परामर्श उपलब्ध है।
           </p>
 
           <div className="mt-8 flex flex-col gap-3 text-sm text-[#ead9b3] sm:flex-row sm:gap-8">
-            <span>OFFLINE · SHANTI NAGAR</span>
-            <span>PIN · 251002</span>
-            <span>ONLINE · WORLDWIDE</span>
+            <span>कार्यालय · शांति नगर</span>
+            <span>पिन कोड · 251002</span>
+            <span>ऑनलाइन · संपूर्ण भारत एवं विदेश</span>
           </div>
 
         </div>
@@ -191,25 +189,24 @@ export default function ServicePage({
         <div className="mx-auto max-w-4xl px-6 py-20 text-center md:py-24">
 
           <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#a2742e]">
-            YOUR NEXT CHAPTER
+            परामर्श प्रारंभ करें · CONSULTATION
           </p>
 
           <h2 className="mt-4 font-serif text-4xl text-[#57120d] md:text-5xl">
-            Have a question?
+            क्या आपके मन में कोई शंका है?
             <br />
-            <em>Begin your consultation.</em>
+            <em>आज ही परामर्श प्राप्त करें।</em>
           </h2>
 
           <p className="mx-auto mt-5 max-w-xl leading-7 text-[#74645b]">
-            Share your birth details and your question for
-            personalized traditional Jyotish guidance.
+            अपनी जन्म तिथि, समय और मुख्य प्रश्न साझा करें। पंडित जी द्वारा आपकी जन्म पत्रिका का सूक्ष्म विश्लेषण किया जाएगा।
           </p>
 
           <a
             href="/#contact"
             className="mt-8 inline-flex items-center rounded-full bg-[#8b2418] px-8 py-4 font-semibold text-white transition hover:bg-[#68170f]"
           >
-            Book a Consultation
+            परामर्श हेतु अनुरोध भेजें
             <span className="ml-3">→</span>
           </a>
 

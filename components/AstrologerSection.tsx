@@ -89,7 +89,7 @@ export default function AstrologerSection() {
         <div className="astrologer-heading">
 
           <p className="astrologer-label">
-            THE ASTROLOGER
+            ज्योतिषाचार्य परिचय · THE ASTROLOGER
           </p>
 
           <div className="astrologer-divider">
@@ -99,11 +99,11 @@ export default function AstrologerSection() {
           </div>
 
           <h2>
-            Radhey Shyam Sharma
+            पंडित राधे श्याम शर्मा
           </h2>
 
           <p>
-            राधे श्याम शर्मा
+            Pt. Radhey Shyam Sharma · 55+ Years Experience
           </p>
 
         </div>
@@ -211,13 +211,13 @@ export default function AstrologerSection() {
           <div className="astrologer-bio">
 
             <p className="bio-label">
-              परिचय · INTRODUCTION
+              आचार्य परिचय · ABOUT THE ASTROLOGER
             </p>
 
             <h3>
-              दशकों का अनुभव,
+              ५५+ वर्षों की साधना,
               <br />
-              <em>एक व्यक्तिगत दृष्टिकोण।</em>
+              <em>शास्त्रसम्मत व्यक्तिगत मार्गदर्शन।</em>
             </h3>
 
             {/* HINDI */}
@@ -225,51 +225,29 @@ export default function AstrologerSection() {
             <div className="bio-language">
 
               <p className="language-label">
-                हिंदी
+                वैदिक परिचय
               </p>
 
               <p>
-                राधे श्याम शर्मा को ज्योतिष के
-                क्षेत्र में 55 से अधिक वर्षों का अनुभव है।
-                जन्म कुंडली, ग्रहों के प्रभाव और जीवन के
-                महत्वपूर्ण निर्णयों के संबंध में वे
-                पारंपरिक वैदिक ज्योतिष के आधार पर
-                परामर्श प्रदान करते हैं।
+                पंडित राधे श्याम शर्मा जी को वैदिक ज्योतिष एवं अध्यात्म के क्षेत्र में ५५ से अधिक वर्षों का गहन अनुभव प्राप्त है। महर्षि पाराशर एवं प्राचीन ऋषियों द्वारा प्रतिपादित सिद्धांतों के आधार पर जन्म कुंडली, ग्रह-दशाओं एवं गोचरों का सूक्ष्म अध्ययन कर वे जीवन के महत्वपूर्ण निर्णयों में सटीक दिशा-निर्देश प्रदान करते हैं।
               </p>
 
               <p>
-                विवाह मिलान एवं कुंडली मिलान उनके प्रमुख
-                परामर्श क्षेत्रों में से हैं। जीवन, विवाह,
-                करियर, शिक्षा, परिवार, व्यवसाय तथा अन्य
-                महत्वपूर्ण विषयों से जुड़े प्रश्नों पर
-                व्यक्तिगत मार्गदर्शन प्रदान किया जाता है।
+                विवाह कुंडली मिलान, मांगलिक विचार, करियर, व्यापार, शिक्षा, पारिवारिक सुख-शांति तथा स्वास्थ्य संबंधी विषयों पर उनका मार्गदर्शन अत्यंत विश्वसनीय माना जाता है। यहाँ प्रत्येक जातक की समस्या को पूर्ण आत्मीयता एवं गोपनीयता के साथ सुना जाता है।
               </p>
 
             </div>
 
-            {/* ENGLISH */}
+            {/* ENGLISH BRIEF */}
 
             <div className="bio-language">
 
               <p className="language-label">
-                ENGLISH
+                OVERVIEW
               </p>
 
               <p>
-                Radhey Shyam Sharma brings over
-                55 years of experience in the field of
-                astrology. His consultations draw upon
-                traditional principles of Vedic astrology
-                to study birth charts, planetary
-                influences and important phases of life.
-              </p>
-
-              <p>
-                He has particular experience in Kundali
-                Milan and Vivah Matching, along with
-                guidance relating to career, education,
-                family, business and other important
-                life decisions.
+                Pt. Radhey Shyam Sharma brings over 55 years of traditional Vedic astrology expertise, offering authentic guidance for Janam Kundali, marriage matching, career, and life dilemmas to thousands of seekers across India and worldwide.
               </p>
 
             </div>
@@ -281,23 +259,23 @@ export default function AstrologerSection() {
             <div className="astrologer-highlights">
 
               <div>
-                <strong>55+</strong>
-                <span>Years</span>
+                <strong>५५+ वर्ष</strong>
+                <span>दीर्घ अनुभव</span>
               </div>
 
               <div>
-                <strong>Vedic</strong>
-                <span>Jyotish</span>
+                <strong>वैदिक</strong>
+                <span>ऋषि परंपरा</span>
               </div>
 
               <div>
-                <strong>Vivah</strong>
-                <span>Matching</span>
+                <strong>विवाह</strong>
+                <span>गुण मिलान</span>
               </div>
 
               <div>
-                <strong>12+</strong>
-                <span>Services</span>
+                <strong>१२+</strong>
+                <span>प्रमुख सेवाएं</span>
               </div>
 
             </div>
@@ -311,17 +289,17 @@ export default function AstrologerSection() {
               <div>
 
                 <p>
-                  BASED IN
+                  कार्यालय एवं परामर्श केंद्र
                 </p>
 
                 <strong>
-                  Muzaffarnagar, Uttar Pradesh
+                  शांति नगर, मुजफ्फरनगर (उत्तर प्रदेश)
                 </strong>
 
               </div>
 
               <a href="#contact">
-                Book a Consultation
+                परामर्श हेतु संपर्क करें
                 <span>→</span>
               </a>
 

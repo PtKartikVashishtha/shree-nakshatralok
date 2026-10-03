@@ -22,6 +22,8 @@ export default function JanamKundliForm() {
 
     const payload = {
       name: formData.get("name"),
+      phone: formData.get("phone"),
+      email: formData.get("email"),
       dob: formData.get("dob"),
       birthTime: formData.get("birthTime"),
       birthPlace: formData.get("birthPlace"),
@@ -46,13 +48,13 @@ export default function JanamKundliForm() {
       if (!response.ok || !data.success) {
         throw new Error(
           data.error ||
-            "Unable to submit your request."
+            "परामर्श अनुरोध भेजने में समस्या आई।"
         );
       }
 
       setMessage(
         data.message ||
-          "Your Janam Kundli request has been submitted successfully."
+          "आपकी जन्म कुंडली परामर्श का अनुरोध सफलतापूर्वक दर्ज कर लिया गया है। हम आपके नंबर पर शीघ्र संपर्क करेंगे।"
       );
 
       form.reset();
@@ -60,7 +62,7 @@ export default function JanamKundliForm() {
       setError(
         err instanceof Error
           ? err.message
-          : "Unable to submit your request. Please try again."
+          : "परामर्श अनुरोध भेजने में समस्या आई। कृपया पुनः प्रयास करें।"
       );
     } finally {
       setLoading(false);
@@ -74,18 +76,15 @@ export default function JanamKundliForm() {
     >
       <div className="mb-8">
         <p className="text-[10px] font-bold uppercase tracking-[4px] text-[#a2742e]">
-          JANAM KUNDLI CONSULTATION
+          जन्म कुंडली परामर्श · JANAM KUNDLI CONSULTATION
         </p>
 
         <h3 className="mt-3 font-serif text-3xl text-[#57120d] md:text-4xl">
-          Share your{" "}
-          <em>birth details.</em>
+          अपना <em>जन्म विवरण</em> साझा करें।
         </h3>
 
         <p className="mt-4 leading-7 text-[#74645b]">
-          Provide your birth information and tell us
-          what you would like to discuss during your
-          consultation.
+          अपनी जन्म तिथि, समय, जन्म स्थान और संपर्क सूत्र साझा करें। पंडित जी द्वारा आपकी पत्रिका का सूक्ष्म अध्ययन कर आपको संपूर्ण मार्गदर्शन प्रदान किया जाएगा।
         </p>
       </div>
 
@@ -95,7 +94,7 @@ export default function JanamKundliForm() {
             htmlFor="janam-name"
             className="mb-2 block text-sm font-semibold text-[#57120d]"
           >
-            Name
+            पूरा नाम <span className="text-red-600">*</span>
           </label>
 
           <input
@@ -104,7 +103,44 @@ export default function JanamKundliForm() {
             type="text"
             required
             maxLength={100}
-            placeholder="Your full name"
+            placeholder="उदा. राहुल शर्मा"
+            className="w-full rounded-xl border border-[#d5c5ae] bg-white px-4 py-3 outline-none transition focus:border-[#8b2418]"
+          />
+        </div>
+
+        <div>
+          <label
+            htmlFor="janam-phone"
+            className="mb-2 block text-sm font-semibold text-[#57120d]"
+          >
+            फ़ोन / व्हाट्सएप नंबर <span className="text-red-600">*</span>
+          </label>
+
+          <input
+            id="janam-phone"
+            name="phone"
+            type="tel"
+            required
+            maxLength={20}
+            placeholder="उदा. 9876543210 (परामर्श हेतु)"
+            className="w-full rounded-xl border border-[#d5c5ae] bg-white px-4 py-3 outline-none transition focus:border-[#8b2418]"
+          />
+        </div>
+
+        <div>
+          <label
+            htmlFor="janam-email"
+            className="mb-2 block text-sm font-semibold text-[#57120d]"
+          >
+            ईमेल पता <span className="text-xs font-normal text-gray-500">(वैकल्पिक)</span>
+          </label>
+
+          <input
+            id="janam-email"
+            name="email"
+            type="email"
+            maxLength={120}
+            placeholder="उदा. yourname@gmail.com"
             className="w-full rounded-xl border border-[#d5c5ae] bg-white px-4 py-3 outline-none transition focus:border-[#8b2418]"
           />
         </div>
@@ -114,7 +150,7 @@ export default function JanamKundliForm() {
             htmlFor="janam-dob"
             className="mb-2 block text-sm font-semibold text-[#57120d]"
           >
-            Date of Birth
+            जन्म तिथि <span className="text-red-600">*</span>
           </label>
 
           <input
@@ -131,7 +167,7 @@ export default function JanamKundliForm() {
             htmlFor="janam-birth-time"
             className="mb-2 block text-sm font-semibold text-[#57120d]"
           >
-            Time of Birth
+            जन्म समय <span className="text-red-600">*</span>
           </label>
 
           <input
@@ -143,9 +179,7 @@ export default function JanamKundliForm() {
           />
 
           <p className="mt-2 text-xs leading-5 text-[#806d66]">
-            If your exact birth time is uncertain,
-            mention that in your question instead of
-            guessing.
+            यदि जन्म का सही समय निश्चित न हो, तो नीचे प्रश्न वाले भाग में उल्लेख करें।
           </p>
         </div>
 
@@ -154,7 +188,7 @@ export default function JanamKundliForm() {
             htmlFor="janam-birth-place"
             className="mb-2 block text-sm font-semibold text-[#57120d]"
           >
-            Place of Birth
+            जन्म स्थान (शहर / जिला / राज्य) <span className="text-red-600">*</span>
           </label>
 
           <input
@@ -163,7 +197,7 @@ export default function JanamKundliForm() {
             type="text"
             required
             maxLength={200}
-            placeholder="City, town or place"
+            placeholder="उदा. मुजफ्फरनगर, उत्तर प्रदेश"
             className="w-full rounded-xl border border-[#d5c5ae] bg-white px-4 py-3 outline-none transition focus:border-[#8b2418]"
           />
         </div>
@@ -173,7 +207,7 @@ export default function JanamKundliForm() {
             htmlFor="janam-question"
             className="mb-2 block text-sm font-semibold text-[#57120d]"
           >
-            What would you like to discuss?
+            आपका मुख्य प्रश्न / जीवन का विषय <span className="text-red-600">*</span>
           </label>
 
           <textarea
@@ -181,8 +215,8 @@ export default function JanamKundliForm() {
             name="question"
             required
             maxLength={2000}
-            rows={6}
-            placeholder="For example: career, education, marriage, family, business or an important life question."
+            rows={5}
+            placeholder="उदा. करियर व नौकरी, शिक्षा, विवाह की संभावना, संतान सुख, व्यापार वृद्धि, स्वास्थ्य संबंधी शंका अथवा कोई विशिष्ट प्रश्न..."
             className="w-full resize-y rounded-xl border border-[#d5c5ae] bg-white px-4 py-3 outline-none transition focus:border-[#8b2418]"
           />
         </div>
@@ -207,13 +241,13 @@ export default function JanamKundliForm() {
       </div>
 
       {error && (
-        <div className="mt-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+        <div className="mt-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm font-medium text-red-700">
           {error}
         </div>
       )}
 
       {message && (
-        <div className="mt-6 rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-700">
+        <div className="mt-6 rounded-xl border border-green-200 bg-green-50 p-4 text-sm font-medium text-green-700">
           {message}
         </div>
       )}
@@ -224,9 +258,13 @@ export default function JanamKundliForm() {
         className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[#8b2418] px-8 py-4 font-semibold text-white transition hover:bg-[#68170f] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {loading
-          ? "Submitting..."
-          : "Request Janam Kundli Consultation →"}
+          ? "अनुरोध भेजा जा रहा है..."
+          : "जन्म कुंडली परामर्श हेतु अनुरोध भेजें →"}
       </button>
+
+      <p className="mt-3 text-center text-xs text-[#7d6b60]">
+        🔒 आपका जन्म विवरण व संपर्क सूत्र शत-प्रतिशत सुरक्षित एवं गोपनीय रखा जाता है।
+      </p>
     </form>
   );
 }
