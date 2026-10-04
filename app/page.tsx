@@ -1,16 +1,20 @@
-"use client";
-
-import { useState } from "react";
+import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 import AstrologerSection from "@/components/AstrologerSection";
 import LocalSeoSection from "@/components/LocalSeoSection";
 import TalkToAstrologerSection from "@/components/TalkToAstrologerSection";
+import HomeNav from "@/components/HomeNav";
+import HomePanchangSection from "@/components/home/HomePanchangSection";
+import HomeBlogSection, { HomeBlogPost } from "@/components/home/HomeBlogSection";
+import { prisma } from "@/lib/prisma";
 import { site } from "@/lib/site";
 import {
   Cinzel,
   Cormorant_Garamond,
   Inter,
 } from "next/font/google";
+
+export const revalidate = 60;
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -114,16 +118,92 @@ const services = [
   },
 ];
 
-export default function Home() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+function getTodayIST(): string {
+  const istOffset = 5.5 * 60 * 60 * 1000;
+  const nowIST = new Date(Date.now() + istOffset);
+  return nowIST.toISOString().split("T")[0];
+}
 
+export default async function Home() {
   const whatsappUrl =
     `https://wa.me/${site.whatsapp}?text=` +
     encodeURIComponent(site.whatsappMessage);
 
-  const closeMobileMenu = () => {
-    setMobileOpen(false);
+  const todayDate = getTodayIST();
+  const [y, m, d] = todayDate.split("-").map(Number);
+  const dateObj = new Date(y, m - 1, d);
+  const formattedDate = dateObj.toLocaleDateString("hi-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+  const dayNameEn = dateObj.toLocaleDateString("en-IN", { weekday: "long" });
+  const dayMap: Record<string, string> = {
+    Sunday: "रविवार",
+    Monday: "सोमवार",
+    Tuesday: "मंगलवार",
+    Wednesday: "बुधवार",
+    Thursday: "गुरुवार",
+    Friday: "शुक्रवार",
+    Saturday: "शनिवार",
   };
+  const formattedDayHindi = dayMap[dayNameEn] || dayNameEn;
+
+  let todayPanchang = null;
+  let recentBlogs: HomeBlogPost[] = [];
+
+  try {
+    const panchangRecord = await prisma.panchang.findFirst({
+      where: {
+        date: todayDate,
+        status: "PUBLISHED",
+      },
+    });
+
+    if (panchangRecord) {
+      todayPanchang = {
+        date: panchangRecord.date,
+        dayName: panchangRecord.dayName,
+        location: panchangRecord.location,
+        tithi: panchangRecord.tithi,
+        nakshatra: panchangRecord.nakshatra,
+        yoga: panchangRecord.yoga,
+        karana: panchangRecord.karana,
+        paksha: panchangRecord.paksha,
+        vikramSamvat: panchangRecord.vikramSamvat,
+        sunrise: panchangRecord.sunrise,
+        sunset: panchangRecord.sunset,
+        abhijitMuhurat: panchangRecord.abhijitMuhurat,
+        rahukaal: panchangRecord.rahukaal,
+      };
+    }
+
+    const blogRecords = await prisma.blogPost.findMany({
+      where: { status: "PUBLISHED" },
+      orderBy: { publishedAt: "desc" },
+      take: 3,
+    });
+
+    recentBlogs = blogRecords.map((b) => {
+      const wordCount = b.content
+        ? b.content.replace(/<[^>]*>/g, " ").trim().split(/\s+/).filter(Boolean).length
+        : 0;
+      const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+
+      return {
+        id: b.id,
+        title: b.title,
+        slug: b.slug,
+        excerpt: b.excerpt,
+        category: b.category,
+        featuredImage: b.featuredImage,
+        readingTime,
+        publishedAt: b.publishedAt ? b.publishedAt.toISOString() : b.createdAt.toISOString(),
+      };
+    });
+  } catch (error) {
+    console.error("Error loading home highlights:", error);
+  }
 
   return (
     <main
@@ -132,141 +212,7 @@ export default function Home() {
       {/* =====================================================
           NAVIGATION
       ===================================================== */}
-
-      <nav className="astro-nav">
-        <div className="nav-inner">
-
-          {/* BRAND */}
-
-          <a
-            href="#top"
-            className="brand"
-            onClick={closeMobileMenu}
-          >
-            <span className="brand-symbol">✦</span>
-
-            <span>
-              <strong>श्री नक्षत्रलोक</strong>
-              <small>JYOTISH SANSTHAN</small>
-            </span>
-          </a>
-
-          {/* DESKTOP NAV */}
-
-          <div className="nav-links">
-            <a href="#astrologer">ज्योतिषाचार्य</a>
-            <a href="#services">सेवाएं</a>
-            <a href="#talk-to-astrologer">बात करें</a>
-            <a href="/blog">ज्योतिष लेख</a>
-            <a href="/panchang">दैनिक पंचांग</a>
-            <a href="#about">संस्थान दर्शन</a>
-            <a href="#contact">परामर्श</a>
-          </div>
-
-          {/* NAV ACTIONS */}
-
-          <div className="nav-actions">
-
-            {/* WHATSAPP */}
-
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="nav-cta"
-            >
-              व्हाट्सएप परामर्श
-              <span>↗</span>
-            </a>
-
-            {/* MOBILE MENU */}
-
-            <button
-              type="button"
-              className="mobile-menu-button"
-              aria-label={
-                mobileOpen
-                  ? "Close navigation menu"
-                  : "Open navigation menu"
-              }
-              aria-expanded={mobileOpen}
-              onClick={() =>
-                setMobileOpen((current) => !current)
-              }
-            >
-              <span>{mobileOpen ? "बंद करें" : "मेनू"}</span>
-
-              <span
-                className={`menu-icon ${
-                  mobileOpen ? "menu-open" : ""
-                }`}
-                aria-hidden="true"
-              >
-                <i />
-                <i />
-                <i />
-              </span>
-            </button>
-          </div>
-        </div>
-
-        {/* MOBILE NAVIGATION */}
-
-        <div
-          className={`mobile-nav ${
-            mobileOpen ? "mobile-nav-open" : ""
-          }`}
-        >
-          <a
-            href="#astrologer"
-            onClick={closeMobileMenu}
-          >
-            ज्योतिषाचार्य परिचय
-          </a>
-
-          <a
-            href="#services"
-            onClick={closeMobileMenu}
-          >
-            हमारी सेवाएं
-          </a>
-
-          <a
-            href="#talk-to-astrologer"
-            onClick={closeMobileMenu}
-          >
-            ज्योतिषाचार्य से बात करें
-          </a>
-
-          <a
-            href="/blog"
-            onClick={closeMobileMenu}
-          >
-            ज्योतिष एवं आयुर्वेद लेख
-          </a>
-
-          <a
-            href="/panchang"
-            onClick={closeMobileMenu}
-          >
-            दैनिक पंचांग
-          </a>
-
-          <a
-            href="#about"
-            onClick={closeMobileMenu}
-          >
-            संस्थान का दर्शन
-          </a>
-
-          <a
-            href="#contact"
-            onClick={closeMobileMenu}
-          >
-            परामर्श हेतु संपर्क
-          </a>
-        </div>
-      </nav>
+      <HomeNav />
 
       {/* =====================================================
           HERO
@@ -535,8 +481,31 @@ export default function Home() {
 
         </div>
       </section>
+
+      {/* =====================================================
+          LOCAL SEO SECTION
+      ===================================================== */}
       <LocalSeoSection />
+
+      {/* =====================================================
+          TALK TO ASTROLOGER (WHATSAPP REDIRECT)
+      ===================================================== */}
       <TalkToAstrologerSection />
+
+      {/* =====================================================
+          TODAY'S PANCHANG HIGHLIGHT
+      ===================================================== */}
+      <HomePanchangSection
+        panchang={todayPanchang}
+        formattedDate={formattedDate}
+        formattedDayHindi={formattedDayHindi}
+      />
+
+      {/* =====================================================
+          RECENT BLOG ARTICLES HIGHLIGHT
+      ===================================================== */}
+      <HomeBlogSection blogs={recentBlogs} />
+
       {/* =====================================================
           PHILOSOPHY
       ===================================================== */}
@@ -723,13 +692,13 @@ export default function Home() {
               बात करें
             </a>
 
-            <a href="/blog">
-              ज्योतिष लेख
-            </a>
-
-            <a href="/panchang">
+            <Link href="/panchang">
               दैनिक पंचांग
-            </a>
+            </Link>
+
+            <Link href="/blog">
+              ज्योतिष लेख
+            </Link>
 
             <a href="#about">
               संस्थान दर्शन

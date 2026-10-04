@@ -1,0 +1,330 @@
+/* =========================================================
+   HOME PANCHANG SECTION
+========================================================= */
+
+.home-panchang-section {
+  position: relative;
+  overflow: hidden;
+  padding: 110px 7%;
+  background: linear-gradient(180deg, #f8f1e5 0%, #f4ecdf 100%);
+  border-bottom: 1px solid rgba(199, 154, 69, 0.2);
+}
+
+.home-panchang-glow {
+  position: absolute;
+  top: -100px;
+  left: 20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(199, 154, 69, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.home-panchang-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.home-panchang-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 48px;
+}
+
+.home-panchang-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  font-family: var(--font-cinzel), serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.home-panchang-title {
+  margin: 0 0 16px;
+  color: var(--wine-3);
+  font-family: var(--font-cinzel), serif;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.25;
+  font-weight: 500;
+}
+
+.home-panchang-title em {
+  display: inline-block;
+  color: var(--gold);
+  font-family: var(--font-cormorant), serif;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.home-panchang-subtitle {
+  color: var(--muted);
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(17px, 1.8vw, 20px);
+  line-height: 1.65;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.home-panchang-card {
+  background: #ffffff;
+  border: 1px solid rgba(199, 154, 69, 0.28);
+  border-radius: 20px;
+  box-shadow: 0 16px 50px rgba(53, 9, 7, 0.07);
+  overflow: hidden;
+}
+
+.panchang-card-header {
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(199, 154, 69, 0.16);
+  background: linear-gradient(90deg, #fffdf8 0%, #faf3e8 100%);
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.panchang-date-badge {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.panchang-calendar-icon {
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: #fbf6ec;
+  border: 1px solid rgba(199, 154, 69, 0.3);
+  border-radius: 12px;
+}
+
+.panchang-date-badge strong {
+  display: block;
+  font-family: var(--font-cinzel), serif;
+  font-size: 19px;
+  color: var(--wine-3);
+  letter-spacing: 0.5px;
+}
+
+.panchang-date-badge small {
+  display: block;
+  color: #8c7159;
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.panchang-view-full-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--wine-3);
+  color: #fffaf0;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 18px rgba(77, 13, 9, 0.2);
+}
+
+.panchang-view-full-btn:hover {
+  background: var(--wine-2);
+  color: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(77, 13, 9, 0.3);
+}
+
+.panchang-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(199, 154, 69, 0.15);
+  border-bottom: 1px solid rgba(199, 154, 69, 0.15);
+}
+
+.panchang-metric-item {
+  background: #ffffff;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: background 0.25s ease;
+}
+
+.panchang-metric-item:hover {
+  background: #fdfaf4;
+}
+
+.metric-tag {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.tag-good {
+  color: #1a7e43;
+}
+
+.tag-caution {
+  color: #b45309;
+}
+
+.metric-val-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.metric-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.metric-value {
+  font-family: var(--font-cinzel), serif;
+  font-size: 18px;
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.metric-auspicious {
+  background: #fbfefb;
+}
+
+.metric-auspicious .metric-value {
+  color: #156d39;
+}
+
+.metric-caution {
+  background: #fffdf9;
+}
+
+.metric-caution .metric-value {
+  color: #92400e;
+}
+
+.metric-sub {
+  font-size: 12px;
+  color: #8c7462;
+  margin-top: 2px;
+}
+
+.panchang-card-footer {
+  padding: 18px 32px;
+  background: #fcf8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 13.5px;
+}
+
+.panchang-footer-left {
+  color: #5c483a;
+  font-weight: 500;
+}
+
+.panchang-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.panchang-details-link {
+  color: var(--wine-3);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+}
+
+.panchang-details-link:hover {
+  color: var(--gold);
+}
+
+.panchang-whatsapp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #128c7e;
+  font-weight: 600;
+  background: #eaf8f1;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(37, 211, 102, 0.3);
+  transition: all 0.2s ease;
+}
+
+.panchang-whatsapp-link:hover {
+  background: #d7f3e4;
+  transform: translateY(-1px);
+}
+
+/* =========================================
+   PANCHANG RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+  .panchang-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .home-panchang-section {
+    padding: 80px 20px;
+  }
+
+  .panchang-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .panchang-view-full-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .panchang-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .panchang-metric-item {
+    padding: 18px 20px;
+  }
+
+  .panchang-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px 20px;
+  }
+
+  .panchang-footer-right {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .panchang-whatsapp-link {
+    justify-content: center;
+  }
+}

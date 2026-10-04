@@ -1,0 +1,163 @@
+/* =========================================================
+   PHILOSOPHY
+========================================================= */
+
+.philosophy {
+  position: relative;
+  overflow: hidden;
+  padding: 150px 7%;
+  background:
+    radial-gradient(
+      circle at 20% 50%,
+      rgba(170, 87, 39, 0.16),
+      transparent 25%
+    ),
+    linear-gradient(
+      135deg,
+      #300705,
+      #4a0c08 55%,
+      #270403
+    );
+  color: white;
+}
+
+.philosophy-pattern {
+  position: absolute;
+  inset: -30%;
+  border: 1px solid rgba(224, 181, 93, 0.06);
+  border-radius: 50%;
+  transform: rotate(25deg);
+}
+
+.philosophy-inner {
+  position: relative;
+  max-width: 1180px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 0.75fr 1fr;
+  gap: 110px;
+  align-items: center;
+}
+
+.philosophy-symbol {
+  display: flex;
+  justify-content: center;
+}
+
+.big-mandala {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(229, 198, 125, 0.4);
+  border-radius: 50%;
+  box-shadow:
+    0 0 80px rgba(199, 154, 69, 0.04),
+    inset 0 0 60px rgba(199, 154, 69, 0.025);
+}
+
+.big-mandala::before,
+.big-mandala::after {
+  content: "";
+  position: absolute;
+  inset: 25px;
+  border: 1px solid rgba(229, 198, 125, 0.25);
+  transform: rotate(45deg);
+}
+
+.big-mandala::after {
+  transform: rotate(22deg);
+}
+
+.big-mandala span {
+  color: var(--gold-light);
+  font-family: var(--font-cormorant), serif;
+  font-size: 85px;
+}
+
+.philosophy h2 {
+  margin: 20px 0;
+  font-family: var(--font-cinzel), serif;
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.philosophy h2 em {
+  color: var(--gold);
+  font-family: var(--font-cormorant), serif;
+  font-size: 1.15em;
+  font-weight: 500;
+}
+
+.philosophy-content > p {
+  max-width: 590px;
+  color: #c9b5a8;
+  font-family: var(--font-cormorant), serif;
+  font-size: 20px;
+  line-height: 1.7;
+}
+
+.philosophy-values {
+  display: flex;
+  gap: 40px;
+  margin-top: 45px;
+}
+
+.philosophy-values div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.philosophy-values strong {
+  color: var(--gold-light);
+  font-family: var(--font-cormorant), serif;
+  font-size: 24px;
+}
+
+.philosophy-values span {
+  color: #937e73;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+/* =========================================================
+   PHILOSOPHY RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+  .philosophy-inner {
+    grid-template-columns: 1fr;
+    gap: 55px;
+  }
+
+  .philosophy-symbol {
+    order: 2;
+  }
+
+  .philosophy-content {
+    order: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .philosophy {
+    padding: 90px 20px;
+  }
+
+  .philosophy h2 {
+    font-size: 40px;
+  }
+
+  .big-mandala {
+    width: 270px;
+    height: 270px;
+  }
+
+  .philosophy-values {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

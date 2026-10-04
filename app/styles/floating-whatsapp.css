@@ -1,0 +1,37 @@
+/* =========================================================
+   FLOATING WHATSAPP
+========================================================= */
+
+.floating-whatsapp {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  z-index: 100;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  background: #176b3a;
+  color: white;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  font-size: 23px;
+  transition: 0.3s ease;
+  animation: whatsappGlow 3.5s ease-in-out infinite;
+}
+
+.floating-whatsapp:hover {
+  transform: scale(1.1);
+}
+
+/* =========================================================
+   FLOATING WHATSAPP RESPONSIVE
+========================================================= */
+
+@media (max-width: 600px) {
+  .floating-whatsapp {
+    right: 17px;
+    bottom: 17px;
+  }
+}

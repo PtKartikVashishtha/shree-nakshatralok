@@ -1,0 +1,163 @@
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-section {
+  padding: 150px 7%;
+  background: var(--paper);
+}
+
+.contact-heading {
+  max-width: 1180px;
+  margin: auto;
+}
+
+.contact-heading h2 {
+  margin: 20px 0 0;
+  color: var(--wine-3);
+  font-family: var(--font-cinzel), serif;
+  font-size: clamp(38px, 5vw, 65px);
+  line-height: 1.1;
+  font-weight: 500;
+}
+
+.contact-heading h2 em {
+  color: var(--gold);
+  font-family: var(--font-cormorant), serif;
+  font-size: 1.15em;
+  font-weight: 500;
+}
+
+.contact-heading > p:last-child {
+  max-width: 500px;
+  margin-top: 25px;
+  color: var(--muted);
+  font-family: var(--font-cormorant), serif;
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+.contact-box {
+  max-width: 1180px;
+  margin: 70px auto 0;
+  display: grid;
+  grid-template-columns: 0.7fr 1fr;
+  background: var(--wine);
+  border: 1px solid rgba(199, 154, 69, 0.12);
+  box-shadow: 0 30px 80px rgba(55, 11, 6, 0.16);
+}
+
+.contact-side {
+  position: relative;
+  padding: 60px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(202, 153, 67, 0.16),
+      transparent 35%
+    ),
+    var(--wine);
+  color: white;
+}
+
+.contact-symbol {
+  color: var(--gold-light);
+  font-size: 30px;
+}
+
+.contact-side h3 {
+  margin: 20px 0;
+  font-family: var(--font-cinzel), serif;
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.contact-side > p {
+  color: #bda9a0;
+  font-family: var(--font-cormorant), serif;
+  font-size: 18px;
+}
+
+.contact-details {
+  margin-top: 50px;
+  display: grid;
+  gap: 24px;
+}
+
+.contact-details div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-details span {
+  color: #947f73;
+  font-size: 8px;
+  letter-spacing: 3px;
+}
+
+.contact-details a,
+.contact-details strong {
+  color: #e3c477;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.whatsapp-link {
+  display: inline-block;
+  margin-top: 35px;
+  padding-bottom: 6px;
+  color: #dfc174;
+  border-bottom: 1px solid rgba(223, 193, 116, 0.4);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.contact-form-wrap {
+  position: relative;
+  padding: 55px;
+  background: #fffaf2;
+}
+
+.contact-form-wrap::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(199, 154, 69, 0.25),
+    transparent
+  );
+}
+
+/* =========================================================
+   CONTACT RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+  .contact-box {
+    grid-template-columns: 1fr;
+    gap: 55px;
+  }
+
+  .contact-side,
+  .contact-form-wrap {
+    padding: 40px 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-section {
+    padding: 90px 20px;
+  }
+
+  .contact-heading h2 {
+    font-size: 40px;
+  }
+}

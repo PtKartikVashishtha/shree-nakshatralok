@@ -1,0 +1,96 @@
+/* =========================================================
+   INTRO
+========================================================= */
+
+.section-label {
+  color: #9a6d2b;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+.section-label.gold {
+  color: var(--gold-light);
+}
+
+.intro-section {
+  position: relative;
+  padding: 150px 7%;
+  background: var(--paper);
+}
+
+.intro-grid {
+  position: relative;
+  z-index: 2;
+  max-width: 1180px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  gap: 130px;
+  align-items: center;
+}
+
+.intro-section h2 {
+  margin: 20px 0 0;
+  color: var(--wine-3);
+  font-family: var(--font-cinzel), serif;
+  font-size: clamp(38px, 5vw, 65px);
+  line-height: 1.1;
+  font-weight: 500;
+}
+
+.intro-section h2 em {
+  color: var(--gold);
+  font-family: var(--font-cormorant), serif;
+  font-size: 1.15em;
+  font-weight: 500;
+}
+
+.intro-copy {
+  color: var(--muted);
+  font-family: var(--font-cormorant), serif;
+  font-size: 20px;
+  line-height: 1.65;
+}
+
+.intro-copy p + p {
+  margin-top: 22px;
+}
+
+.text-link {
+  display: inline-block;
+  margin-top: 24px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--gold);
+  color: var(--wine-3);
+  font-family: var(--font-inter), sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.text-link span {
+  margin-left: 15px;
+  color: var(--gold);
+}
+
+/* =========================================================
+   INTRO RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+  .intro-grid {
+    grid-template-columns: 1fr;
+    gap: 55px;
+  }
+}
+
+@media (max-width: 600px) {
+  .intro-section {
+    padding: 90px 20px;
+  }
+
+  .intro-section h2 {
+    font-size: 40px;
+  }
+}
