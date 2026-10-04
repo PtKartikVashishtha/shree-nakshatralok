@@ -11,7 +11,7 @@ export default function LocalSeoSection() {
           <h2>
             मुजफ्फरनगर एवं देश-विदेश में
             <br />
-            <em>वैदिक ज्योतिष परामर्श।</em>
+            <em className="pt-2">वैदिक ज्योतिष परामर्श।</em>
           </h2>
 
           <p>

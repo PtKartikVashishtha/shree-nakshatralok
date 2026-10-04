@@ -4,6 +4,7 @@ import { useState } from "react";
 import ContactForm from "@/components/ContactForm";
 import AstrologerSection from "@/components/AstrologerSection";
 import LocalSeoSection from "@/components/LocalSeoSection";
+import TalkToAstrologerSection from "@/components/TalkToAstrologerSection";
 import { site } from "@/lib/site";
 import {
   Cinzel,
@@ -155,6 +156,7 @@ export default function Home() {
           <div className="nav-links">
             <a href="#astrologer">ज्योतिषाचार्य</a>
             <a href="#services">सेवाएं</a>
+            <a href="#talk-to-astrologer">बात करें</a>
             <a href="/blog">ज्योतिष लेख</a>
             <a href="/panchang">दैनिक पंचांग</a>
             <a href="#about">संस्थान दर्शन</a>
@@ -227,6 +229,13 @@ export default function Home() {
             onClick={closeMobileMenu}
           >
             हमारी सेवाएं
+          </a>
+
+          <a
+            href="#talk-to-astrologer"
+            onClick={closeMobileMenu}
+          >
+            ज्योतिषाचार्य से बात करें
           </a>
 
           <a
@@ -527,6 +536,7 @@ export default function Home() {
         </div>
       </section>
       <LocalSeoSection />
+      <TalkToAstrologerSection />
       {/* =====================================================
           PHILOSOPHY
       ===================================================== */}
@@ -707,6 +717,10 @@ export default function Home() {
 
             <a href="#services">
               सेवाएं
+            </a>
+
+            <a href="#talk-to-astrologer">
+              बात करें
             </a>
 
             <a href="/blog">
