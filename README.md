@@ -17,9 +17,7 @@
   <a href="#-editorial-blog-cms">Blog CMS</a> •
   <a href="#-tech-stack">Tech Stack</a> •
   <a href="#-project-structure">Structure</a> •
-  <a href="#-admin-dashboard">Admin Panel</a> •
-  <a href="#-getting-started">Getting Started</a> •
-  <a href="#-environment-variables">Environment</a>
+  <a href="#-admin-dashboard">Admin Panel</a>
 </p>
 
 ---
@@ -156,54 +154,6 @@ shree-nakshatralok/
 │   └── schema.prisma               # MongoDB database schemas
 └── public/                         # Optimized imagery and icons
 ```
-
----
-
-## 🚀 Getting Started
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/PtKartikVashishtha/shree-nakshatralok.git
-cd shree-nakshatralok
-```
-
-### 2. Install Dependencies
-```bash
-npm install
-```
-
-### 3. Setup Environment Variables
-Create a `.env` file in the root directory:
-```env
-# Database (MongoDB connection string)
-DATABASE_URL="mongodb+srv://<username>:<password>@cluster.mongodb.net/shree-nakshatralok?retryWrites=true&w=majority"
-
-# NextAuth Configuration
-NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="your-secure-random-secret"
-
-# Admin Credentials
-ADMIN_EMAIL="admin@shreenakshatralok.com"
-ADMIN_PASSWORD="your-secure-admin-password"
-
-# Notification Mailer (Optional)
-EMAIL_SERVER_HOST="smtp.gmail.com"
-EMAIL_SERVER_PORT="465"
-EMAIL_SERVER_USER="your-email@gmail.com"
-EMAIL_SERVER_PASSWORD="your-app-password"
-EMAIL_TO="recipient@shreenakshatralok.com"
-```
-
-### 4. Push Database Schema
-```bash
-npx prisma db push
-```
-
-### 5. Run Development Server
-```bash
-npm run dev
-```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
