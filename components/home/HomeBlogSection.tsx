@@ -17,7 +17,7 @@ type Props = {
 };
 
 export default function HomeBlogSection({ blogs }: Props) {
-  // If no blogs in database yet, show default curated cards to showcase the topics
+  // If no blogs in database yet, show curated editorial samples
   const displayBlogs = blogs && blogs.length > 0
     ? blogs.slice(0, 3)
     : [
@@ -65,7 +65,7 @@ export default function HomeBlogSection({ blogs }: Props) {
         <div className="home-blog-header">
           <div className="home-blog-header-left">
             <p className="home-blog-eyebrow">
-              <span>✦</span> ज्ञान एवं सनातन परंपरा · ARTICLES & WISDOM <span>✦</span>
+              <span>✦</span> ज्ञान एवं सनातन परंपरा · ARTICLES & VEDIC INSIGHTS <span>✦</span>
             </p>
 
             <h2 className="home-blog-title">
@@ -79,7 +79,7 @@ export default function HomeBlogSection({ blogs }: Props) {
 
           <div className="home-blog-header-right">
             <Link href="/blog" className="home-blog-all-btn">
-              <span>सभी लेख देखें</span>
+              <span>सभी लेख पढ़ें</span>
               <span className="btn-arrow">→</span>
             </Link>
           </div>
@@ -90,7 +90,7 @@ export default function HomeBlogSection({ blogs }: Props) {
           {displayBlogs.map((blog) => (
             <article key={blog.id} className="home-blog-card">
               <Link href={`/blog/${blog.slug}`} className="blog-card-link-wrap">
-                {/* CARD THUMBNAIL (if available) */}
+                {/* CARD THUMBNAIL WITH PROPER RATIO */}
                 <div className="home-blog-thumb">
                   <Image
                     src={blog.featuredImage || "/og-image.jpg"}
@@ -99,14 +99,14 @@ export default function HomeBlogSection({ blogs }: Props) {
                     sizes="(max-width: 768px) 100vw, 380px"
                     className="blog-thumb-img"
                   />
-                  <span className="blog-category-badge">{blog.category}</span>
+                  <span className="blog-category-tag">{blog.category}</span>
                 </div>
 
                 <div className="home-blog-body">
                   <div className="blog-meta-top">
-                    <span className="blog-read-time">⏱ {blog.readingTime} मिनट का पाठ</span>
-                    <span className="blog-date-dot">•</span>
-                    <span className="blog-sansthan-tag">श्री नक्षत्रलोक</span>
+                    <span>{blog.readingTime} मिनट स्वाध्याय</span>
+                    <span className="bullet">✦</span>
+                    <span>श्री नक्षत्रलोक</span>
                   </div>
 
                   <h3 className="home-blog-heading">{blog.title}</h3>
@@ -114,8 +114,9 @@ export default function HomeBlogSection({ blogs }: Props) {
                   <p className="home-blog-excerpt">{blog.excerpt}</p>
 
                   <div className="home-blog-footer">
+                    <span className="author-sig">पं. राधे श्याम शर्मा</span>
                     <span className="read-more-text">
-                      विस्तार से पढ़ें <span className="arrow">↗</span>
+                      पूरा लेख पढ़ें <span className="arrow">→</span>
                     </span>
                   </div>
                 </div>
