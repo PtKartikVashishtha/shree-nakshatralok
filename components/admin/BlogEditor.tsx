@@ -119,6 +119,12 @@ export default function BlogEditor({ initialData, isEditing = false }: Props) {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    if (file.size > 15 * 1024 * 1024) {
+      setErrorMsg("फाइल का साइज़ 15MB से अधिक है। कृपया छोटी फोटो चुनें।");
+      if (contentFileInputRef.current) contentFileInputRef.current.value = "";
+      return;
+    }
+
     setUploadingContentImg(true);
     setErrorMsg("");
 
@@ -131,8 +137,14 @@ export default function BlogEditor({ initialData, isEditing = false }: Props) {
         body: data,
       });
 
-      const json = await res.json();
-      if (!res.ok) {
+      let json: { url?: string; error?: string } = {};
+      try {
+        json = await res.json();
+      } catch {
+        throw new Error(`सर्वर त्रुटि (${res.status})। कृपया पुनः प्रयास करें।`);
+      }
+
+      if (!res.ok || !json.url) {
         throw new Error(json.error || "फोटो अपलोड नहीं हो सकी।");
       }
 
@@ -141,7 +153,7 @@ export default function BlogEditor({ initialData, isEditing = false }: Props) {
       setSuccessMsg("✓ फोटो सफलतापूर्वक लेख में जुड़ गई!");
       setTimeout(() => setSuccessMsg(""), 3500);
     } catch (err: unknown) {
-      setErrorMsg(err instanceof Error ? err.message : "फोटो अपलोड विफल रही। कृपया JPG या PNG फाइल चुनें।");
+      setErrorMsg(err instanceof Error ? err.message : "फोटो अपलोड विफल रही। कृपया JPG, PNG या WEBP फाइल चुनें।");
     } finally {
       setUploadingContentImg(false);
       if (contentFileInputRef.current) contentFileInputRef.current.value = "";
@@ -152,6 +164,12 @@ export default function BlogEditor({ initialData, isEditing = false }: Props) {
   const handleFeaturedImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    if (file.size > 15 * 1024 * 1024) {
+      setErrorMsg("फाइल का साइज़ 15MB से अधिक है। कृपया 15MB से छोटी फोटो चुनें।");
+      if (featuredFileInputRef.current) featuredFileInputRef.current.value = "";
+      return;
+    }
 
     setUploadingFeatured(true);
     setErrorMsg("");
@@ -165,12 +183,19 @@ export default function BlogEditor({ initialData, isEditing = false }: Props) {
         body: data,
       });
 
-      const json = await res.json();
-      if (!res.ok) {
+      let json: { url?: string; error?: string } = {};
+      try {
+        json = await res.json();
+      } catch {
+        throw new Error(`सर्वर त्रुटि (${res.status})। कृपया पुनः प्रयास करें।`);
+      }
+
+      if (!res.ok || !json.url) {
         throw new Error(json.error || "फोटो अपलोड नहीं हो सकी।");
       }
 
-      setFormData((prev) => ({ ...prev, featuredImage: json.url }));
+      const uploadedUrl = json.url;
+      setFormData((prev) => ({ ...prev, featuredImage: uploadedUrl }));
       setSuccessMsg("✓ मुख्य फोटो सफलतापूर्वक अपलोड हो गई!");
       setTimeout(() => setSuccessMsg(""), 3500);
     } catch (err: unknown) {
@@ -277,7 +302,7 @@ export default function BlogEditor({ initialData, isEditing = false }: Props) {
       <input
         type="file"
         ref={contentFileInputRef}
-        accept="image/jpeg,image/png,image/webp,image/jpg"
+        accept="image/jpeg,image/png,image/webp,image/jpg,image/gif,image/avif"
         onChange={handleContentImageUpload}
         className="hidden"
       />
@@ -793,12 +818,12 @@ export default function BlogEditor({ initialData, isEditing = false }: Props) {
               <input
                 type="file"
                 ref={featuredFileInputRef}
-                accept="image/jpeg,image/png,image/webp,image/jpg"
+                accept="image/jpeg,image/png,image/webp,image/jpg,image/gif,image/avif"
                 onChange={handleFeaturedImageUpload}
                 className="hidden"
               />
 
-              <div className="text-3xl mb-2">📁</div>
+              <div className="text-3xl mb-2">{uploadingFeatured ? "⏳" : "📁"}</div>
               <button
                 type="button"
                 onClick={() => featuredFileInputRef.current?.click()}
@@ -808,7 +833,7 @@ export default function BlogEditor({ initialData, isEditing = false }: Props) {
                 {uploadingFeatured ? "फोटो अपलोड हो रही है..." : "कंप्यूटर या मोबाइल से फोटो चुनें (Upload from Device)"}
               </button>
               <p className="mt-2 text-[11px] text-[#8c7462]">
-                JPG, PNG या WEBP फाइलें स्वीकार्य हैं (अधिकतम 5MB)
+                JPG, PNG, WEBP या GIF फाइलें स्वीकार्य हैं (अधिकतम 15MB)
               </p>
             </div>
 

@@ -41,17 +41,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const password = String(credentials.password);
 
         // --------------------------------
-        // ADMIN EMAIL CHECK
-        // --------------------------------
-
-        const adminEmail =
+        const adminEmailEnv =
           process.env.ADMIN_EMAIL
             ?.trim()
             .toLowerCase();
 
-        if (!adminEmail || email !== adminEmail) {
-          return null;
-        }
+        const allowedEmails = adminEmailEnv
+          ? adminEmailEnv.split(",").map((s) => s.trim().toLowerCase())
+          : [];
 
         // --------------------------------
         // FIND USER
@@ -64,6 +61,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         });
 
         if (!user) {
+          return null;
+        }
+
+        // If ADMIN_EMAIL is explicitly specified, enforce match unless user is verified admin
+        if (allowedEmails.length > 0 && !allowedEmails.includes(email)) {
           return null;
         }
 
