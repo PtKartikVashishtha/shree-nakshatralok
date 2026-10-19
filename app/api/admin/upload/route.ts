@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { verifyAdminSession } from "@/lib/adminAuth";
+import { prisma } from "@/lib/prisma";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import crypto from "crypto";
@@ -75,7 +76,10 @@ export async function POST(req: Request) {
   try {
     const session = await verifyAdminSession();
     if (!session) {
-      return NextResponse.json({ error: "Unauthorized. Please log in as admin." }, { status: 401 });
+      return NextResponse.json(
+        { error: "Unauthorized. Please log in as admin." },
+        { status: 401 }
+      );
     }
 
     const formData = await req.formData();
@@ -118,12 +122,33 @@ export async function POST(req: Request) {
 
     // Safe random filename to prevent path traversal
     const safeFilename = `sn_${crypto.randomUUID()}${detected.ext}`;
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
 
-    await mkdir(uploadDir, { recursive: true });
-    const fullPath = path.join(uploadDir, safeFilename);
+    // 1. Persist directly into MongoDB (Atlas) - works 100% reliably in serverless / Vercel
+    await prisma.uploadedImage.upsert({
+      where: { filename: safeFilename },
+      create: {
+        filename: safeFilename,
+        mimeType: detected.mime,
+        data: buffer,
+        size: buffer.length,
+      },
+      update: {
+        mimeType: detected.mime,
+        data: buffer,
+        size: buffer.length,
+      },
+    });
 
-    await writeFile(fullPath, buffer);
+    // 2. Best-effort write to local filesystem (works in local dev, caught gracefully on read-only serverless)
+    try {
+      const uploadDir = path.join(process.cwd(), "public", "uploads");
+      await mkdir(uploadDir, { recursive: true });
+      const fullPath = path.join(uploadDir, safeFilename);
+      await writeFile(fullPath, buffer);
+    } catch {
+      // On Vercel / serverless environments the filesystem is read-only.
+      // The image is already safely stored in MongoDB and served via /uploads/[filename].
+    }
 
     return NextResponse.json({
       success: true,
@@ -132,7 +157,12 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error("Upload error:", error);
     return NextResponse.json(
-      { error: "Image upload failed. Please try again." },
+      {
+        error:
+          error instanceof Error
+            ? error.message
+            : "Image upload failed. Please try again.",
+      },
       { status: 500 }
     );
   }

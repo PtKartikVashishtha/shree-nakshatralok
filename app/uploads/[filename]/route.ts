@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 import { readFile } from "fs/promises";
 import path from "path";
 
@@ -31,20 +32,42 @@ export async function GET(
     return NextResponse.json({ error: "Invalid filename" }, { status: 400 });
   }
 
-  const filePath = path.join(process.cwd(), "public", "uploads", filename);
+  const ext = path.extname(filename).toLowerCase();
+  const defaultContentType = MIME_MAP[ext] || "application/octet-stream";
 
+  // 1. Try reading from local filesystem (fastest on localhost or if cached)
   try {
+    const filePath = path.join(process.cwd(), "public", "uploads", filename);
     const buffer = await readFile(filePath);
-    const ext = path.extname(filename).toLowerCase();
-    const contentType = MIME_MAP[ext] || "application/octet-stream";
 
     return new NextResponse(buffer, {
       headers: {
-        "Content-Type": contentType,
+        "Content-Type": defaultContentType,
         "Cache-Control": "public, max-age=31536000, immutable",
       },
     });
   } catch {
-    return NextResponse.json({ error: "Image not found" }, { status: 404 });
+    // If not on local disk (normal on Vercel serverless), fall through to MongoDB
   }
+
+  // 2. Fallback: Query MongoDB (Atlas) where images are persistently stored
+  try {
+    const record = await prisma.uploadedImage.findUnique({
+      where: { filename },
+      select: { data: true, mimeType: true },
+    });
+
+    if (record && record.data) {
+      return new NextResponse(Buffer.from(record.data), {
+        headers: {
+          "Content-Type": record.mimeType || defaultContentType,
+          "Cache-Control": "public, max-age=31536000, immutable",
+        },
+      });
+    }
+  } catch (dbErr) {
+    console.error("Error retrieving image from database:", dbErr);
+  }
+
+  return NextResponse.json({ error: "Image not found" }, { status: 404 });
 }
