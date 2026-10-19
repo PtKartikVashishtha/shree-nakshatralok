@@ -89,6 +89,7 @@ export default function AdminNav({ userEmail, onLogout }: Props) {
               <Link
                 key={item.href}
                 href={item.href}
+                prefetch={false}
                 className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold tracking-wide transition ${
                   active
                     ? "bg-[#5b130d] text-[#f2d99d] shadow-inner border border-[#d5ae62]/40"

@@ -26,6 +26,18 @@ export default async function AdminBlogPage() {
   }
 
   const posts = await prisma.blogPost.findMany({
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+      category: true,
+      author: true,
+      status: true,
+      publishedAt: true,
+      createdAt: true,
+      updatedAt: true,
+      featuredImage: true,
+    },
     orderBy: { createdAt: "desc" },
   });
 

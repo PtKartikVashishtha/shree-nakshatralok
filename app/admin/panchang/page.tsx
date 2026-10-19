@@ -26,6 +26,20 @@ export default async function AdminPanchangPage() {
   }
 
   const entries = await prisma.panchang.findMany({
+    select: {
+      id: true,
+      date: true,
+      dayName: true,
+      location: true,
+      sunrise: true,
+      sunset: true,
+      tithi: true,
+      nakshatra: true,
+      paksha: true,
+      festivals: true,
+      status: true,
+      createdAt: true,
+    },
     orderBy: { date: "desc" },
   });
 

@@ -202,6 +202,7 @@ export default function PanchangListClient({ initialEntries }: Props) {
 
             <Link
               href="/admin/panchang/new"
+              prefetch={false}
               className="inline-flex items-center gap-2 rounded-xl bg-[#5c130d] px-5 py-3 text-xs font-bold text-[#f2d99d] shadow-sm hover:bg-[#420b08] transition"
             >
               <span>+</span>
@@ -228,6 +229,7 @@ export default function PanchangListClient({ initialEntries }: Props) {
           <div className="mt-6">
             <Link
               href="/admin/panchang/new"
+              prefetch={false}
               className="inline-flex items-center gap-2 rounded-xl bg-[#5c130d] px-6 py-3 text-xs font-bold text-[#f2d99d] shadow-sm hover:bg-[#420b08] transition"
             >
               + Create Today's Panchang
@@ -320,6 +322,7 @@ export default function PanchangListClient({ initialEntries }: Props) {
 
                     <Link
                       href={`/admin/panchang/${item.id}/edit`}
+                      prefetch={false}
                       className="rounded-xl border border-[#d8cbb8] bg-[#fffdf8] px-3.5 py-2 text-xs font-semibold text-[#57120d] hover:bg-[#faf5eb] transition"
                     >
                       Edit
