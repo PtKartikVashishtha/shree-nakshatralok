@@ -291,6 +291,7 @@ export default function BlogEditor({ initialData, isEditing = false }: Props) {
       }, 900);
     } catch (err: unknown) {
       setErrorMsg(err instanceof Error ? err.message : "सुरक्षित करते समय कोई त्रुटि हुई।");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } finally {
       setSaving(false);
     }

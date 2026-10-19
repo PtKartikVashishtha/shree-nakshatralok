@@ -61,9 +61,15 @@ export async function POST(req: Request) {
     const validation = blogPostSchema.safeParse(body);
 
     if (!validation.success) {
+      const issueDetails = validation.error.issues
+        .map((issue) => issue.message)
+        .join(" | ");
+
+      console.error("Blog post validation error:", issueDetails, body);
+
       return NextResponse.json(
         {
-          error: "Validation error",
+          error: issueDetails || "Validation error",
           details: validation.error.format(),
         },
         { status: 400 }

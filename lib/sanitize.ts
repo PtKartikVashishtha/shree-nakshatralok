@@ -38,7 +38,7 @@ const ALLOWED_TAGS = new Set([
   "td",
 ]);
 
-const ALLOWED_SCHEMES = ["http:", "https:", "mailto:", "tel:"];
+const ALLOWED_SCHEMES = ["http:", "https:", "mailto:", "tel:", "data:"];
 
 function isSafeUrl(url: string): boolean {
   const trimmed = url.trim().toLowerCase();

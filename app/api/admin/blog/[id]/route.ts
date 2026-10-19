@@ -65,9 +65,15 @@ export async function PATCH(
     const validation = partialSchema.safeParse(body);
 
     if (!validation.success) {
+      const issueDetails = validation.error.issues
+        .map((issue) => issue.message)
+        .join(" | ");
+
+      console.error("Blog update validation error:", issueDetails, body);
+
       return NextResponse.json(
         {
-          error: "Validation error",
+          error: issueDetails || "Validation error",
           details: validation.error.format(),
         },
         { status: 400 }
@@ -100,7 +106,7 @@ export async function PATCH(
     }
 
     // Handle slug change if provided
-    if (data.slug !== undefined && data.slug.trim() !== "") {
+    if (data.slug && data.slug.trim() !== "") {
       const newSlug = slugify(data.slug);
       if (newSlug !== existing.slug) {
         let finalSlug = newSlug;
