@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { verifyAdminSession } from "@/lib/adminAuth";
 import { prisma } from "@/lib/prisma";
 
@@ -46,6 +47,14 @@ export async function PATCH(
       where: { id },
       data: updateData,
     });
+
+    try {
+      revalidatePath("/blog");
+      revalidatePath("/");
+      if (existing.slug) revalidatePath(`/blog/${existing.slug}`);
+    } catch (revalError) {
+      console.error("Cache revalidation failed:", revalError);
+    }
 
     return NextResponse.json({
       success: true,

@@ -6,6 +6,9 @@ import type { Metadata } from "next";
 
 const siteUrl = "https://shree-nakshatralok.vercel.app";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: "Vedic Astrology & Ayurveda Articles | Shree Nakshatralok",
   description:

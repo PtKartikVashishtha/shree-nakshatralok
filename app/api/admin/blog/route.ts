@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { verifyAdminSession } from "@/lib/adminAuth";
 import { prisma } from "@/lib/prisma";
 import { blogPostSchema } from "@/lib/validations/blog";
@@ -129,6 +130,15 @@ export async function POST(req: Request) {
         canonicalUrl: canonicalUrl || null,
       },
     });
+
+    // Invalidate public caches immediately
+    try {
+      revalidatePath("/blog");
+      revalidatePath("/");
+      revalidatePath(`/blog/${finalSlug}`);
+    } catch (revalError) {
+      console.error("Cache revalidation failed:", revalError);
+    }
 
     return NextResponse.json(
       { success: true, post },

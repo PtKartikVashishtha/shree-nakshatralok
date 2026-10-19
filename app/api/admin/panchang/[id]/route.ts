@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { verifyAdminSession } from "@/lib/adminAuth";
 import { prisma } from "@/lib/prisma";
 import { panchangSchema } from "@/lib/validations/panchang";
@@ -136,6 +137,13 @@ export async function PATCH(
       data: updatePayload,
     });
 
+    try {
+      revalidatePath("/panchang");
+      revalidatePath("/");
+    } catch (revalError) {
+      console.error("Cache revalidation failed:", revalError);
+    }
+
     return NextResponse.json({ success: true, panchang: updated });
   } catch (error) {
     console.error("Update panchang error:", error);
@@ -172,6 +180,13 @@ export async function DELETE(
     await prisma.panchang.delete({
       where: { id },
     });
+
+    try {
+      revalidatePath("/panchang");
+      revalidatePath("/");
+    } catch (revalError) {
+      console.error("Cache revalidation failed:", revalError);
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

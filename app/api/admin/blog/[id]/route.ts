@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { verifyAdminSession } from "@/lib/adminAuth";
 import { prisma } from "@/lib/prisma";
 import { blogPostSchema } from "@/lib/validations/blog";
@@ -140,6 +141,17 @@ export async function PATCH(
       data: updatePayload,
     });
 
+    try {
+      revalidatePath("/blog");
+      revalidatePath("/");
+      if (updated.slug) revalidatePath(`/blog/${updated.slug}`);
+      if (existing.slug && existing.slug !== updated.slug) {
+        revalidatePath(`/blog/${existing.slug}`);
+      }
+    } catch (revalError) {
+      console.error("Cache revalidation failed:", revalError);
+    }
+
     return NextResponse.json({ success: true, post: updated });
   } catch (error) {
     console.error("Update blog post error:", error);
@@ -176,6 +188,14 @@ export async function DELETE(
     await prisma.blogPost.delete({
       where: { id },
     });
+
+    try {
+      revalidatePath("/blog");
+      revalidatePath("/");
+      if (existing.slug) revalidatePath(`/blog/${existing.slug}`);
+    } catch (revalError) {
+      console.error("Cache revalidation failed:", revalError);
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

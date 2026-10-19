@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { verifyAdminSession } from "@/lib/adminAuth";
 import { prisma } from "@/lib/prisma";
 import { panchangSchema } from "@/lib/validations/panchang";
@@ -115,6 +116,13 @@ export async function POST(req: Request) {
         status: data.status,
       },
     });
+
+    try {
+      revalidatePath("/panchang");
+      revalidatePath("/");
+    } catch (revalError) {
+      console.error("Cache revalidation failed:", revalError);
+    }
 
     return NextResponse.json({ success: true, panchang }, { status: 201 });
   } catch (error: unknown) {
